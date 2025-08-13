@@ -171,6 +171,7 @@ MonoBehaviour:
   InternalDynamicOS: 0
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   m_GlyphTable:
   - m_Index: 35
     m_Metrics:
@@ -249,6 +250,10 @@ MonoBehaviour:
     m_Unicode: 122
     m_GlyphIndex: 87
     m_Scale: 1
+=======
+  m_GlyphTable: []
+  m_CharacterTable: []
+>>>>>>> Stashed changes
 =======
   m_GlyphTable: []
   m_CharacterTable: []
