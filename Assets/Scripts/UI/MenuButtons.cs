@@ -3,10 +3,14 @@ using UnityEngine.SceneManagement;
 
 public class MenuButtons : MonoBehaviour
 {
+    [Header("Text")]
+    public GameObject gameText;
+
     [Header("Main Menu Buttons")]
     public GameObject startButton;
     public GameObject tutorialButton;
     public GameObject quitButton;
+    public GameObject settingsButton;
 
     [Header("Dijkstra Choice Buttons")]
     public GameObject standardButton;
@@ -22,12 +26,13 @@ public class MenuButtons : MonoBehaviour
     {
         Debug.Log("Choose Dijkstra Version.");
 
-        
+
         startButton.SetActive(false);
         tutorialButton.SetActive(false);
-        quitButton.SetActive(false);
+        settingsButton.SetActive(false);
+        quitButton.SetActive(true);
 
-        
+
         standardButton.SetActive(true);
         modifiedButton.SetActive(true);
         backButton.SetActive(true);
@@ -57,6 +62,11 @@ public class MenuButtons : MonoBehaviour
         SceneManager.LoadScene("TutorialScene");
     }
 
+    public void SettingsMenu()
+    {
+        ShowSettingsMenu();
+    }
+
     public void QuitGame()
     {
         Debug.Log("Quit Game.");
@@ -67,7 +77,21 @@ public class MenuButtons : MonoBehaviour
     {
         startButton.SetActive(true);
         tutorialButton.SetActive(true);
+        settingsButton.SetActive(true);
         quitButton.SetActive(true);
+
+        standardButton.SetActive(false);
+        modifiedButton.SetActive(false);
+        backButton.SetActive(false);
+    }
+
+    private void ShowSettingsMenu()
+    {
+        startButton.SetActive(false);
+        tutorialButton.SetActive(false);
+        settingsButton.SetActive(false);
+        quitButton.SetActive(true);
+        gameText.SetActive(false);
 
         standardButton.SetActive(false);
         modifiedButton.SetActive(false);
