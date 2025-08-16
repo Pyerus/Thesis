@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class CamMovement : MonoBehaviour
 {
-    float moveSpeed = 5f;
+    float moveSpeed = 10f;
     
 
 
