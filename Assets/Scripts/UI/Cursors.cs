@@ -11,6 +11,9 @@ public class Cursors : MonoBehaviour
 
     private bool menuActivated;
     public GameObject InventoryMenu;
+
+    public SliderMenu sliderMenu;
+
     void Awake()
     {
         ChangeCursor(cursor);
@@ -42,9 +45,13 @@ public class Cursors : MonoBehaviour
         {
             if (hit.collider.CompareTag("Shelf"))
             {
-                Time.timeScale = 0;
                 menuActivated = !menuActivated; // toggle true/false
                 InventoryMenu.SetActive(menuActivated);
+            }
+
+            if (sliderMenu != null)
+            {
+                sliderMenu.ShowHideMenu();
             }
         }
     }
