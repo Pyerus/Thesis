@@ -6,7 +6,6 @@ public class Cursors : MonoBehaviour
     public Texture2D cursorClicked;
 
     private CursorControls controls;
-
     private Camera mainCamera;
 
     private bool menuActivated;
@@ -21,6 +20,7 @@ public class Cursors : MonoBehaviour
         controls = new CursorControls();
         mainCamera = Camera.main;
     }
+
     void Start()
     {
         controls.Mouse.Click.started += _ => StartedClick();
@@ -45,8 +45,7 @@ public class Cursors : MonoBehaviour
         {
             if (hit.collider.CompareTag("Shelf"))
             {
-                menuActivated = !menuActivated; // toggle true/false
-                InventoryMenu.SetActive(menuActivated);
+                ToggleMenu();
             }
 
             if (sliderMenu != null)
@@ -56,18 +55,30 @@ public class Cursors : MonoBehaviour
         }
     }
 
+    
+    public void ToggleMenu()
+    {
+        menuActivated = !menuActivated;
+        InventoryMenu.SetActive(menuActivated);
+    }
+
+    
+    public void CloseMenu()
+    {
+        menuActivated = false;
+        InventoryMenu.SetActive(false);
+    }
+
     private void ChangeCursor(Texture2D cursorType)
     {
-        //Vector2 hotspot = new Vector2(cursorType.width / 2, cursorType.height / 2);
         Cursor.SetCursor(cursorType, Vector2.zero, CursorMode.Auto);
     }
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-   
 
     private void OnEnable()
     {
         controls.Enable();
     }
+
     private void OnDisable()
     {
         controls.Disable();
