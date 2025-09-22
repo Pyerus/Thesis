@@ -5,12 +5,18 @@ using UnityEngine;
 public class PathfindDijkstra : MonoBehaviour
 {
     public Transform seeker, target;
-    
-    public WorldGrid grid;
 
     public List<Node> path;
 
+    private WorldGrid grid;
 
+
+
+    private void Start()
+    {
+        GameObject gridObj = GameObject.FindGameObjectWithTag("Grid");
+        grid = gridObj.GetComponent<WorldGrid>();
+    }
 
     private void Update()
     {

@@ -5,17 +5,24 @@ public class NPCMovement : MonoBehaviour
 {
     [SerializeField] float movementSpeed = 10f;
 
-    [SerializeField] WorldGrid grid;
-
-    [SerializeField] PathfindDijkstra pathfinder;
-
     [SerializeField] Transform seeker;
 
     [SerializeField] Transform target;
 
+    private WorldGrid grid;
+
+    private PathfindDijkstra pathfinder;
+
     private List<Node> path;
 
 
+
+    private void Start()
+    {
+        GameObject gridObj = GameObject.FindGameObjectWithTag("Grid");
+        grid = gridObj.GetComponent<WorldGrid>();
+        pathfinder = gameObject.GetComponent<PathfindDijkstra>();
+    }
 
     private void Update()
     {
