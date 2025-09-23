@@ -7,26 +7,27 @@ public class SliderMenu : MonoBehaviour
     public GameObject PanelMenu;
 
     public void ShowHideMenu()
-{
-    if (PanelMenu != null)
     {
-        Animator animator = PanelMenu.GetComponent<Animator>();
-        if (animator != null)
+        if (PanelMenu != null)
         {
-            bool isOpen = animator.GetBool("show");
-            animator.SetBool("show", !isOpen);
-            Debug.Log("Menu toggled. Is Open: " + !isOpen);
+            Animator animator = PanelMenu.GetComponent<Animator>();
+            if (animator != null)
+            {
+                // Force animator to update in real time (unaffected by Time.timeScale)
+                animator.updateMode = AnimatorUpdateMode.UnscaledTime;
+
+                bool isOpen = animator.GetBool("show");
+                animator.SetBool("show", !isOpen);
+                Debug.Log("Menu toggled. Is Open: " + !isOpen);
+            }
+            else
+            {
+                Debug.LogError("Animator component not found on PanelMenu.");
+            }
         }
         else
         {
-            Debug.LogError("Animator component not found on PanelMenu.");
+            Debug.LogError("PanelMenu is not assigned.");
         }
     }
-    else
-    {
-        Debug.LogError("PanelMenu is not assigned.");
-    }
-}
-
-
 }
