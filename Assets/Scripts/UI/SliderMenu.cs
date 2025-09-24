@@ -13,12 +13,12 @@ public class SliderMenu : MonoBehaviour
             Animator animator = PanelMenu.GetComponent<Animator>();
             if (animator != null)
             {
-                // Force animator to update in real time (unaffected by Time.timeScale)
+                
                 animator.updateMode = AnimatorUpdateMode.UnscaledTime;
 
                 bool isOpen = animator.GetBool("show");
                 animator.SetBool("show", !isOpen);
-                Debug.Log("Menu toggled. Is Open: " + !isOpen);
+                
             }
             else
             {
