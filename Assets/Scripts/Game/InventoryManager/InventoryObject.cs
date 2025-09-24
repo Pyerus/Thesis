@@ -5,6 +5,7 @@ using UnityEngine;
 public class InventoryObject : ScriptableObject
 {
     public List<InventorySlot> Container = new List<InventorySlot>();
+    public int maxSlots = 3;
     public void AddItem(ItemObject _item, int _amount)
     {
         bool hasItem = false;
@@ -21,7 +22,14 @@ public class InventoryObject : ScriptableObject
 
         if (!hasItem)
         {
-            Container.Add(new InventorySlot(_item, _amount));
+            if (Container.Count < maxSlots)
+            {
+                Container.Add(new InventorySlot(_item, _amount));
+            }
+            else
+            {
+                Debug.Log("Full");
+            }
         }
     }
 }
