@@ -152,7 +152,7 @@ GameObject:
   - component: {fileID: 6516668410126193703}
   m_Layer: 0
   m_Name: Target
-  m_TagString: Untagged
+  m_TagString: Target
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -257,7 +257,6 @@ GameObject:
   - component: {fileID: 318020355348019168}
   - component: {fileID: 4397968998994292462}
   - component: {fileID: 338198267905982793}
-  - component: {fileID: 844569598619007904}
   m_Layer: 0
   m_Name: NPC (Dijkstra)
   m_TagString: Untagged
@@ -310,17 +309,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementSpeed: 10
   seeker: {fileID: 4455167432338267119}
-  target: {fileID: 8409919623625568995}
---- !u!114 &844569598619007904
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8622626352161326856}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3f1e01b2e97a7614d995a2092bf74304, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
   target: {fileID: 8409919623625568995}
