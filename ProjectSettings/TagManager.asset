@@ -6,6 +6,7 @@ TagManager:
   tags:
   - NPC
   - Grid
+  - Waypoint
   layers:
   - Default
   - TransparentFX
