@@ -46,13 +46,22 @@ public class NPCMovement : MonoBehaviour
             if (currentNode.worldPosition != targetNode.worldPosition)
             {
                 Node pathNode = path[0];    // first node in the list
-
                 Vector3 nodePosition = pathNode.worldPosition;
                 float move = movementSpeed * Time.deltaTime;
 
-                seeker.transform.position = Vector3.MoveTowards(seeker.position, nodePosition, move);
-            }
+                // Calculate direction to the next node
+                Vector3 direction = (nodePosition - seeker.position).normalized;
 
+                // Rotate towards the direction of movement
+                if (direction != Vector3.zero) // avoid zero direction
+                {
+                    Quaternion targetRotation = Quaternion.LookRotation(direction);
+                    seeker.rotation = Quaternion.Slerp(seeker.rotation, targetRotation, 10f * Time.deltaTime);
+                }
+
+                // Move towards the next node
+                seeker.position = Vector3.MoveTowards(seeker.position, nodePosition, move);
+            }
         }
         else if (!isCoroutineRunning)
         {

@@ -10,6 +10,8 @@ public class Cursors : MonoBehaviour
 
     private bool menuActivated;
     public GameObject InventoryMenu;
+    public GameObject InventoryMenu2;
+
 
     public SliderMenu sliderMenu;
 

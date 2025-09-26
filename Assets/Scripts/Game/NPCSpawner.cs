@@ -7,7 +7,7 @@ public class NPCSpawner : MonoBehaviour
 
     float spawnInterval = 1f;
 
-    int spawnLimit = 5;
+    int spawnLimit = 10;
 
     int spawnCount = 0;
 
@@ -25,7 +25,7 @@ public class NPCSpawner : MonoBehaviour
 
         spawnCount++;
 
-        if (spawnCount <= spawnLimit)
+        if (spawnCount < spawnLimit)
         {
             StartCoroutine(SpawnNPC(interval, npc));
         }

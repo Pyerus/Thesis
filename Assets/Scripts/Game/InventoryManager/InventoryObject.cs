@@ -5,7 +5,7 @@ using UnityEngine;
 public class InventoryObject : ScriptableObject
 {
     public List<InventorySlot> Container = new List<InventorySlot>();
-    public int maxSlots = 3;
+    public int maxSlots = 4;
     public void AddItem(ItemObject _item, int _amount)
     {
         bool hasItem = false;
