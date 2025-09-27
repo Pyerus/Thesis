@@ -81,7 +81,7 @@ public class NPCMovement : MonoBehaviour
 
         Transform waypoint = waypoints[randomIndex].GetComponent<Transform>();
 
-        Debug.Log("Picked waypoint: " + waypoint.name);
+        //Debug.Log("Picked waypoint: " + waypoint.name);
 
         return waypoint;
     }

@@ -1,19 +1,8 @@
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class Player : MonoBehaviour
+public class ShelfInventory : MonoBehaviour
 {
-    public Cursors cursor;
     public InventoryObject inventory;
-
-    private void Update()
-    {
-        if (cursor.GetShelfInventory() != null)
-        {
-            inventory = cursor.GetShelfInventory().GetInventoryObject();
-        }
-    }
 
     public void AddItemToInventory(Item item)
     {
@@ -26,5 +15,10 @@ public class Player : MonoBehaviour
     private void OnApplicationQuit()
     {
         inventory.Container.Clear();
+    }
+
+    public InventoryObject GetInventoryObject()
+    {
+        return inventory;
     }
 }
