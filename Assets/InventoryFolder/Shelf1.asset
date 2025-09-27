@@ -12,10 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c36dfadbc2819884097089f072e2b63a, type: 3}
   m_Name: Shelf1
   m_EditorClassIdentifier: 
-  Container:
-  - item: {fileID: 11400000, guid: 1dcda153808b6774b8c8e0d7a779388c, type: 2}
-    amount: 3
-  - item: {fileID: 11400000, guid: 05d9a5a14f2f3bf41952e11db52a1043, type: 2}
-    amount: 56
-  - item: {fileID: 11400000, guid: 8964474926ac2624297593eea538b677, type: 2}
-    amount: 32
+  Container: []
+  maxSlots: 4

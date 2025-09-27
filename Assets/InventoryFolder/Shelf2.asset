@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: Shelf2
   m_EditorClassIdentifier: 
   Container: []
+  maxSlots: 4

@@ -7,6 +7,9 @@ public class NPCSpawner : MonoBehaviour
 
     float spawnInterval = 1f;
 
+    int spawnLimit = 10;
+
+    int spawnCount = 0;
 
 
     private void Start()
@@ -19,7 +22,12 @@ public class NPCSpawner : MonoBehaviour
         yield return new WaitForSeconds(interval);
 
         GameObject newNPC = Instantiate(npc, new Vector3(0, 0.1f, -5), Quaternion.identity);
-        
-        StartCoroutine(SpawnNPC(interval, npc));
+
+        spawnCount++;
+
+        if (spawnCount < spawnLimit)
+        {
+            StartCoroutine(SpawnNPC(interval, npc));
+        }
     }
 }
