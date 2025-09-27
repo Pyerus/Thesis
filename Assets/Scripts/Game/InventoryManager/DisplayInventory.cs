@@ -1,13 +1,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using Unity.VisualScripting;
 
 public class DisplayInventory : MonoBehaviour
 {
-    public InventoryObject inventory;
+    public Cursors cursor;
     public int xSpaceBetweenItems; //Horizontal Space between items
     public int ySpaceBetweenItems; //Vertical Space between items
     public int numColumns; //Number of columns
+
+    public InventoryObject inventory; //Interchangeable
+    private InventoryObject previousInventory;
 
     Dictionary<InventorySlot, GameObject> itemsDisplayed = new Dictionary<InventorySlot, GameObject>();
     void Start()
@@ -18,7 +22,23 @@ public class DisplayInventory : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        UpdateDisplay();
+        if (cursor.GetShelfInventory() != null)
+        {
+            var newInventory = cursor.GetShelfInventory().GetInventoryObject();
+
+            if (newInventory != inventory)
+            {
+                previousInventory = inventory;
+                inventory = newInventory;
+
+                ClearDisplay();
+                CreateDisplay();
+            }
+            else
+            {
+                UpdateDisplay();
+            }
+        }
     }
 
     public void CreateDisplay()
@@ -50,6 +70,15 @@ public class DisplayInventory : MonoBehaviour
                 itemsDisplayed.Add(inventory.Container[i], obj);
             }
         }
+    }
+
+    public void ClearDisplay()
+    {
+        foreach (var item in itemsDisplayed.Values)
+        {
+            Destroy(item);
+        }
+        itemsDisplayed.Clear();
     }
 
     public Vector3 GetPosition(int i)

@@ -10,6 +10,9 @@ public class Cursors : MonoBehaviour
 
     private bool menuActivated;
     public GameObject InventoryMenu;
+    public DisplayInventory inventorySlots;
+
+    private ShelfInventory shelfInventory;
 
     void Awake()
     {
@@ -43,6 +46,7 @@ public class Cursors : MonoBehaviour
         {
             if (hit.collider.CompareTag("Shelf"))
             {
+                shelfInventory = hit.collider.GetComponent<ShelfInventory>();
                 OpenMenu();
             }
         }
@@ -76,5 +80,10 @@ public class Cursors : MonoBehaviour
     private void OnDisable()
     {
         controls.Disable();
+    }
+
+    public ShelfInventory GetShelfInventory()
+    {
+        return shelfInventory;
     }
 }
