@@ -308,9 +308,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c0e261ce424628498ed118e7ad82e54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 10
+  movementSpeed: 8
   seeker: {fileID: 4455167432338267119}
   target: {fileID: 8409919623625568995}
+  hopHeight: 0.2
+  hopSpeed: 15
 --- !u!1001 &7126783273152244684
 PrefabInstance:
   m_ObjectHideFlags: 0

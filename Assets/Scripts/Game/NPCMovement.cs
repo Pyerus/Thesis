@@ -5,22 +5,21 @@ using UnityEngine;
 public class NPCMovement : MonoBehaviour
 {
     [SerializeField] float movementSpeed = 10f;
-
     [SerializeField] Transform seeker;
-
     [SerializeField] Transform target;
 
     private WorldGrid grid;
-
     private PathfindDijkstra pathfinder;
-
     private List<Node> path;
-
     private GameObject[] waypoints;
-
     private Transform targetWaypoint;
-
     bool isCoroutineRunning = false;
+
+    // hopping settings
+    [SerializeField] float hopHeight = 0.2f;
+    [SerializeField] float hopSpeed = 6f;
+    private float baseY; // starting Y position
+    private bool isHopping = false;
 
     private void Start()
     {
@@ -31,8 +30,9 @@ public class NPCMovement : MonoBehaviour
         waypoints = GameObject.FindGameObjectsWithTag("Waypoint");
 
         targetWaypoint = GetRandomWaypoint();
-        
         target.transform.position = targetWaypoint.position;
+
+        baseY = seeker.position.y; // record starting Y
     }
 
     private void Update()
@@ -42,6 +42,19 @@ public class NPCMovement : MonoBehaviour
             path = pathfinder.path;
             Node currentNode = grid.NodeFromWorldPoint(seeker.position);
             Node targetNode = grid.NodeFromWorldPoint(target.position);
+
+            float distanceToTarget = Vector3.Distance(seeker.position, target.position);
+
+            
+            if (distanceToTarget > 1.0f) 
+            {
+                isHopping = true;
+            }
+            else 
+            {
+                isHopping = false;
+                seeker.position = new Vector3(seeker.position.x, baseY, seeker.position.z); // reset Y
+            }
 
             if (currentNode.worldPosition != targetNode.worldPosition)
             {
@@ -67,6 +80,13 @@ public class NPCMovement : MonoBehaviour
         {
             StartCoroutine(NewTarget(1f));
         }
+
+        // Apply hopping if active
+        if (isHopping)
+        {
+            float hopOffset = Mathf.Sin(Time.time * hopSpeed) * hopHeight;
+            seeker.position = new Vector3(seeker.position.x, baseY + hopOffset, seeker.position.z);
+        }
     }
 
     public Transform GetRandomWaypoint()
@@ -78,24 +98,17 @@ public class NPCMovement : MonoBehaviour
         }
 
         int randomIndex = Random.Range(0, waypoints.Length);
-
         Transform waypoint = waypoints[randomIndex].GetComponent<Transform>();
-
         Debug.Log("Picked waypoint: " + waypoint.name);
-
         return waypoint;
     }
 
     IEnumerator NewTarget(float interval)
     {
         isCoroutineRunning = true;
-
         yield return new WaitForSeconds(interval);
-
         targetWaypoint = GetRandomWaypoint();
-
         target.transform.position = targetWaypoint.position;
-
         isCoroutineRunning = false;
     }
 }

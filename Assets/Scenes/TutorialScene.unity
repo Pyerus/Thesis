@@ -8162,7 +8162,7 @@ GameObject:
   - component: {fileID: 537454443}
   - component: {fileID: 537454442}
   m_Layer: 5
-  m_Name: Can (1)
+  m_Name: Orange
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10909,19 +10909,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 757106dd3855be94298b875588e774c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  countTexts:
-  - {fileID: 1286948701}
-  - {fileID: 1857041518}
-  - {fileID: 719438310}
-  - {fileID: 1630825181}
-  - {fileID: 925864271}
-  - {fileID: 364431034}
-  - {fileID: 986153509}
-  - {fileID: 1884158146}
-  - {fileID: 1005361913}
-  - {fileID: 1315741140}
-  - {fileID: 601490395}
-  - {fileID: 774703786}
+  countTexts: []
 --- !u!1 &648324045
 GameObject:
   m_ObjectHideFlags: 0
@@ -12709,7 +12697,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: efe1cde76e1fddc48a06b73f8f93a3e3, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a6243874c20ee7949b43a2a6fd12ded5, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -16403,7 +16391,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: efe1cde76e1fddc48a06b73f8f93a3e3, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7796f224082509545b6216f0b6dba5ab, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -16471,7 +16459,7 @@ GameObject:
   - component: {fileID: 1033954542}
   - component: {fileID: 1033954541}
   m_Layer: 5
-  m_Name: Can (2)
+  m_Name: Tomato
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28544,7 +28532,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: efe1cde76e1fddc48a06b73f8f93a3e3, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f6db212300672b04abad530a4a630f37, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -31589,7 +31577,7 @@ GameObject:
   - component: {fileID: 1934943441}
   - component: {fileID: 1934943440}
   m_Layer: 5
-  m_Name: Can (3)
+  m_Name: ToiletPaper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
