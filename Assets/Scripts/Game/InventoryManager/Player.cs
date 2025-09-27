@@ -1,22 +1,20 @@
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
     public InventoryObject inventory;
-
-    public void OnTriggerEnter(Collider other)
+   public void AddItemToInventory(Item item)
     {
-        var item = other.GetComponent<Item>();
-        if (item)
+        if (item != null)
         {
             inventory.AddItem(item.item, 1);
-            Destroy(other.gameObject);
         }
     }
 
     private void OnApplicationQuit()
     {
-        //inventory.Container.Clear();
+        inventory.Container.Clear();
     }
 }

@@ -5,7 +5,10 @@ TagManager:
   serializedVersion: 3
   tags:
   - NPC
+  - Grid
+  - Waypoint
   - Shelf
+  - Target
   layers:
   - Default
   - TransparentFX
