@@ -10,10 +10,6 @@ public class Cursors : MonoBehaviour
 
     private bool menuActivated;
     public GameObject InventoryMenu;
-    public GameObject InventoryMenu2;
-
-
-    public SliderMenu sliderMenu;
 
     void Awake()
     {
@@ -47,24 +43,20 @@ public class Cursors : MonoBehaviour
         {
             if (hit.collider.CompareTag("Shelf"))
             {
-                ToggleMenu();
-            }
-
-            if (sliderMenu != null)
-            {
-                sliderMenu.ShowHideMenu();
+                OpenMenu();
             }
         }
     }
 
-    
-    public void ToggleMenu()
+    public void OpenMenu()
     {
-        menuActivated = !menuActivated;
-        InventoryMenu.SetActive(menuActivated);
+        if (!menuActivated)
+        {
+            menuActivated = true;
+            InventoryMenu.SetActive(true);
+        }
     }
 
-    
     public void CloseMenu()
     {
         menuActivated = false;
