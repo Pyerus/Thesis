@@ -16,15 +16,16 @@ public class MenuButtons : MonoBehaviour
     [Header("Dijkstra Choice Buttons")]
     public GameObject standardButton;
     public GameObject modifiedButton;
-    public GameObject backButton; // existing back for Dijkstra choice
+    public GameObject backButton; // for Dijkstra choices
 
     [Header("Settings Menu")]
-    public GameObject settingsPanel;       // assign your small settings panel object here
-    public GameObject settingsBackButton;  // new back button for settings
+    public GameObject settingsPanel;
+    public GameObject settingsBackButton; // for settings panel only
 
     [Header("Camera Settings")]
     public Camera mainCamera;
-    public Transform zoomTarget; // target focus position for settings view
+    public Transform zoomTargetLeft;  // ← add this (left side of cat)
+    public Transform zoomTargetRight; // ← existing one (right side of cat)
     public float zoomFOV = 25f;
     public float zoomDuration = 1.5f;
 
@@ -35,6 +36,7 @@ public class MenuButtons : MonoBehaviour
     private void Start()
     {
         ShowMainMenu();
+
         if (mainCamera != null)
         {
             originalCamPos = mainCamera.transform.position;
@@ -56,21 +58,30 @@ public class MenuButtons : MonoBehaviour
         settingsButton.SetActive(false);
         quitButton.SetActive(false);
 
+        // Zoom in on left side of cat
+        if (mainCamera != null && zoomTargetLeft != null)
+        {
+            StartCoroutine(CameraZoom(zoomTargetLeft.position, zoomFOV));
+            zoomedIn = true;
+        }
         standardButton.SetActive(true);
         modifiedButton.SetActive(true);
         backButton.SetActive(true);
+
     }
+
+
 
     public void PlayStandardDijkstra()
     {
         Debug.Log("Starting Game with Standard Dijkstra.");
-        SceneManager.LoadScene("StandardDijkstra");
+        CircleTransition.Instance.TransitionToScene("StandardDijkstra");
     }
 
     public void PlayModifiedDijkstra()
     {
         Debug.Log("Starting Game with Modified Dijkstra.");
-        SceneManager.LoadScene("ModifiedDijkstra");
+        CircleTransition.Instance.TransitionToScene("ModifiedDijkstra");
     }
 
     public void BackToMainMenu()
@@ -78,25 +89,26 @@ public class MenuButtons : MonoBehaviour
         Debug.Log("Returning to Main Menu.");
         ShowMainMenu();
 
-        // reset camera if zoomed in
         if (zoomedIn)
             StartCoroutine(CameraZoom(originalCamPos, originalFOV));
+        zoomedIn = false;
     }
 
     public void PlayTutorial()
     {
         Debug.Log("Play Tutorial.");
-        SceneManager.LoadScene("TutorialScene");
+        CircleTransition.Instance.TransitionToScene("TutorialScene");
     }
+
 
     public void SettingsMenu()
     {
         Debug.Log("Opening Settings Menu.");
         ShowSettingsMenu();
 
-        if (mainCamera != null && zoomTarget != null)
+        if (mainCamera != null && zoomTargetRight != null)
         {
-            StartCoroutine(CameraZoom(zoomTarget.position, zoomFOV));
+            StartCoroutine(CameraZoom(zoomTargetRight.position, zoomFOV));
             zoomedIn = true;
         }
     }
@@ -108,7 +120,6 @@ public class MenuButtons : MonoBehaviour
         settingsBackButton.SetActive(false);
         ShowMainMenu();
 
-        // reset camera zoom
         if (zoomedIn)
             StartCoroutine(CameraZoom(originalCamPos, originalFOV));
         zoomedIn = false;
@@ -158,6 +169,7 @@ public class MenuButtons : MonoBehaviour
         while (elapsed < zoomDuration)
         {
             float t = elapsed / zoomDuration;
+            t = Mathf.SmoothStep(0, 1, t); // smooth easing
             mainCamera.transform.position = Vector3.Lerp(startPos, targetPos, t);
             mainCamera.fieldOfView = Mathf.Lerp(startFOV, targetFOV, t);
             elapsed += Time.deltaTime;
