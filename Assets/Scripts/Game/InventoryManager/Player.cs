@@ -6,6 +6,7 @@ public class Player : MonoBehaviour
 {
     public Cursors cursor;
     public InventoryObject inventory;
+    
 
     private void Update()
     {
@@ -19,7 +20,7 @@ public class Player : MonoBehaviour
     {
         if (item != null)
         {
-            inventory.AddItem(item.item, 1);
+            inventory.AddItem(item.item, inventory.maxCapacity);
         }
     }
 
