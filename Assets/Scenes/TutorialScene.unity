@@ -13216,6 +13216,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   npcPrefab: {fileID: 8622626352161326856, guid: 846ca939ca7aa904dba42576d57c90c0, type: 3}
+  spawnLimit: 10
 --- !u!1 &613242812
 GameObject:
   m_ObjectHideFlags: 0
@@ -41456,7 +41457,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0c2667e9f9a4534193583c632f8c5c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxTimePerDay: 300
+  maxTimePerDay: 20
   timerText: {fileID: 612141456}
   nextDayWindow: {fileID: 1713113040}
   nextDayButton: {fileID: 679386880}

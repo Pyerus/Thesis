@@ -3,11 +3,11 @@ using UnityEngine;
 
 public class NPCSpawner : MonoBehaviour
 {
-    [SerializeField] GameObject npcPrefab;
+    public GameObject npcPrefab;
 
     float spawnInterval = 1f;
 
-    int spawnLimit = 10;
+    public int spawnLimit = 10;
 
     int spawnCount = 0;
 
@@ -17,7 +17,7 @@ public class NPCSpawner : MonoBehaviour
         StartCoroutine(SpawnNPC(spawnInterval, npcPrefab));
     }
 
-    IEnumerator SpawnNPC(float interval, GameObject npc)
+    public IEnumerator SpawnNPC(float interval, GameObject npc)
     {
         yield return new WaitForSeconds(interval);
 

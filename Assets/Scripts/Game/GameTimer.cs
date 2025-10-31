@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class GameTimer : MonoBehaviour
 {
-    public float maxTimePerDay = 300f;   // 5 minutes per day (in seconds)
+    public float maxTimePerDay = 20f;   // 5 minutes per day (in seconds)
     private float currentTime = 0f;
     public TMP_Text timerText;      // Timer display
     public GameObject nextDayWindow;     // Window that appears when day ends
@@ -14,6 +14,8 @@ public class GameTimer : MonoBehaviour
     private int maxDays = 7;
     private bool gamePaused = false;
     private bool gameOver = false;
+
+    private NPCSpawner npcSpawner;
 
     void Start()
     {
@@ -36,6 +38,8 @@ public class GameTimer : MonoBehaviour
             if (currentTime >= maxTimePerDay)
             {
                 currentTime = maxTimePerDay;
+                if (npcSpawner != null)
+                    npcSpawner.spawnLimit = 0;
                 EndDay();
             }
 
@@ -57,7 +61,7 @@ public class GameTimer : MonoBehaviour
 
     void EndDay()
     {
-        Time.timeScale = 0f;
+        //Time.timeScale = 0f;
         gamePaused = true;
 
         if (nextDayWindow != null)
@@ -78,11 +82,15 @@ public class GameTimer : MonoBehaviour
 
         if (nextDayWindow != null)
             nextDayWindow.SetActive(false);
+            //Start Spawning NPC again
 
-        Time.timeScale = 1f;
+        //Time.timeScale = 1f;
 
-        //if (npcSpawner != null)
-        //    npcSpawner.StartSpawning();
+        if (npcSpawner != null)
+        {
+            npcSpawner.spawnLimit = 10;
+            npcSpawner.StartCoroutine(npcSpawner.SpawnNPC(1f, npcSpawner.npcPrefab));
+        }
     }
 
     private void GameOver()
