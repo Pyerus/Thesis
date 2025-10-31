@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class GameTimer : MonoBehaviour
 {
-    public float maxTimePerDay = 20f;   // 5 minutes per day (in seconds)
+    public float maxTimePerDay = 300f;   // 5 minutes per day (in seconds)
     private float currentTime = 0f;
     public TMP_Text timerText;      // Timer display
     public GameObject nextDayWindow;     // Window that appears when day ends
@@ -15,7 +15,7 @@ public class GameTimer : MonoBehaviour
     private bool gamePaused = false;
     private bool gameOver = false;
 
-    private NPCSpawner npcSpawner;
+    [SerializeField] private NPCSpawner npcSpawner;
 
     void Start()
     {

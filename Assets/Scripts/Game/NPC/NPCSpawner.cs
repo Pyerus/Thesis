@@ -19,15 +19,12 @@ public class NPCSpawner : MonoBehaviour
 
     public IEnumerator SpawnNPC(float interval, GameObject npc)
     {
-        yield return new WaitForSeconds(interval);
-
-        GameObject newNPC = Instantiate(npc, new Vector3(0, 0.1f, -5), Quaternion.identity);
-
-        spawnCount++;
-
-        if (spawnCount < spawnLimit)
+        spawnCount = 0; 
+        while (spawnCount < spawnLimit)
         {
-            StartCoroutine(SpawnNPC(interval, npc));
+            Instantiate(npc, new Vector3(0, 0.1f, -5), Quaternion.identity);
+            spawnCount++;
+            yield return new WaitForSeconds(interval);
         }
     }
 }

@@ -333,7 +333,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NPC
   LifeSpan: 0
-  MaxLifeSpan: 20
+  MaxLifeSpan: 298
 --- !u!1001 &7126783273152244684
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -3,7 +3,7 @@ using UnityEngine;
 public class NPC : MonoBehaviour
 {
     [SerializeField] float LifeSpan = 0f;
-    [SerializeField] float MaxLifeSpan = 20f;
+    [SerializeField] float MaxLifeSpan = 298f;
     void Update()
     {
         LifeSpan += Time.deltaTime;
