@@ -22,7 +22,27 @@ public class Player : MonoBehaviour
         {
             inventory.AddItem(item.item, inventory.maxCapacity);
         }
+
     }
+
+    public void TakeItemFromSlot(int slotIndex)
+{
+    if (slotIndex >= 0 && slotIndex < inventory.Container.Count)
+    {
+        var slot = inventory.Container[slotIndex];
+        if (slot.item != null)
+        {
+            inventory.RemoveItem(slot.item, inventory.maxCapacity);
+            Debug.Log($"Removed 1 {slot.item.name} from slot {slotIndex + 1}");
+            inventory.PrintInventory();
+        }
+        else
+        {
+            Debug.Log($"Slot {slotIndex + 1} is empty!");
+        }
+    }
+}
+
 
     private void OnApplicationQuit()
     {
