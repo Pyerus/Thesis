@@ -15,6 +15,8 @@ public class GameTimer : MonoBehaviour
     private bool gamePaused = false;
     private bool gameOver = false;
 
+    [SerializeField] private NPCSpawner npcSpawner;
+
     void Start()
     {
         // Hide the "Next Day" window initially
@@ -36,6 +38,8 @@ public class GameTimer : MonoBehaviour
             if (currentTime >= maxTimePerDay)
             {
                 currentTime = maxTimePerDay;
+                if (npcSpawner != null)
+                    npcSpawner.spawnLimit = 0;
                 EndDay();
             }
 
@@ -57,7 +61,7 @@ public class GameTimer : MonoBehaviour
 
     void EndDay()
     {
-        Time.timeScale = 0f;
+        //Time.timeScale = 0f;
         gamePaused = true;
 
         if (nextDayWindow != null)
@@ -78,11 +82,15 @@ public class GameTimer : MonoBehaviour
 
         if (nextDayWindow != null)
             nextDayWindow.SetActive(false);
+            //Start Spawning NPC again
 
-        Time.timeScale = 1f;
+        //Time.timeScale = 1f;
 
-        //if (npcSpawner != null)
-        //    npcSpawner.StartSpawning();
+        if (npcSpawner != null)
+        {
+            npcSpawner.spawnLimit = 10;
+            npcSpawner.StartCoroutine(npcSpawner.SpawnNPC(1f, npcSpawner.npcPrefab));
+        }
     }
 
     private void GameOver()
