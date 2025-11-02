@@ -22,19 +22,21 @@ public class GameTimer : MonoBehaviour
     private float legendMoveDistance = 12.2f; 
     private Vector2 legendStartPos;
 
-
     [SerializeField] private NPCSpawner npcSpawner;
+
+    private readonly string[] daysOfWeek = 
+    { 
+        "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" 
+    };
 
     void Start()
     {
-        // Hide the "Next Day" window initially
         if (nextDayWindow != null)
             nextDayWindow.SetActive(false);
         
         if (Calendar != null)
             Calendar.SetActive(false);
 
-        // Assign button listener
         if (nextDayButton != null)
             nextDayButton.onClick.AddListener(StartNextDay);
 
@@ -43,6 +45,8 @@ public class GameTimer : MonoBehaviour
 
         if (legend != null)
             legendStartPos = legend.anchoredPosition;
+
+        UpdateDayText();
     }
     
     void Update()
@@ -109,6 +113,7 @@ public class GameTimer : MonoBehaviour
         }
 
         MoveLegendToNextDay();
+        UpdateDayText();
     }
 
     private void GameOver()
@@ -148,11 +153,19 @@ public class GameTimer : MonoBehaviour
     }
 
     private void MoveLegendToNextDay()
-{
-    if (legend != null)
     {
-        Vector2 newPos = legendStartPos + new Vector2(legendMoveDistance * (currentDay - 1), 0);
-        legend.anchoredPosition = newPos;
+        if (legend != null)
+        {
+            Vector2 newPos = legendStartPos + new Vector2(legendMoveDistance * (currentDay - 1), 0);
+            legend.anchoredPosition = newPos;
+        }
     }
-}
+
+    private void UpdateDayText()
+    {
+        if (DayText != null && currentDay >= 1 && currentDay <= daysOfWeek.Length)
+        {
+            DayText.text = daysOfWeek[currentDay - 1];
+        }
+    }
 }
