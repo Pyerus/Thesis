@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class NPCSpawner : MonoBehaviour
 {
@@ -10,9 +11,16 @@ public class NPCSpawner : MonoBehaviour
     public int spawnLimit = 10;
 
     int spawnCount = 0;
+    public Button OpenStore;
 
 
     private void Start()
+    {
+        if (OpenStore != null)
+            OpenStore.onClick.AddListener(OnOpenStoreClicked);
+    }
+
+    private void OnOpenStoreClicked()
     {
         StartCoroutine(SpawnNPC(spawnInterval, npcPrefab));
     }
