@@ -39,6 +39,8 @@ public void RemoveAllItems()
         }
     }
 
+    tierManager.ClearShelf();
+
     Debug.Log("All items removed from inventory!");
     inventory.PrintInventory();
 }
