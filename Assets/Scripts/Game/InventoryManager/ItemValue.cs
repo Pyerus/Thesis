@@ -39,7 +39,5 @@ public class ItemValue : MonoBehaviour
         {
             totalValue = baseValue;
         }
-
-        Debug.Log(totalValue);
     }
 }
