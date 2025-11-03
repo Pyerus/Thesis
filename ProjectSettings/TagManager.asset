@@ -5,7 +5,12 @@ TagManager:
   serializedVersion: 3
   tags:
   - NPC
+  - Grid
+  - Waypoint
   - Shelf
+  - Target
+  - Fridge
+  - Produce
   layers:
   - Default
   - TransparentFX
@@ -14,7 +19,7 @@ TagManager:
   - Water
   - UI
   - Unwalkable
-  - 
+  - Shelfs
   - 
   - 
   - 

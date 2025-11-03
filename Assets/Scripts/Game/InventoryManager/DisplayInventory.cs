@@ -4,52 +4,96 @@ using TMPro;
 
 public class DisplayInventory : MonoBehaviour
 {
+    public Cursors cursor;
+    public int xSpaceBetweenItems;
+    public int ySpaceBetweenItems;
+    public int numColumns;
+    public GameObject emptySlotPrefab; 
     public InventoryObject inventory;
-    public int xSpaceBetweenItems; //Horizontal Space between items
-    public int ySpaceBetweenItems; //Vertical Space between items
-    public int numColumns; //Number of columns
+    private InventoryObject previousInventory;
+    private Dictionary<int, GameObject> itemsDisplayed = new Dictionary<int, GameObject>();
 
-    Dictionary<InventorySlot, GameObject> itemsDisplayed = new Dictionary<InventorySlot, GameObject>();
     void Start()
     {
         CreateDisplay();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        UpdateDisplay();
+        if (cursor.GetShelfInventory() != null)
+        {
+            var newInventory = cursor.GetShelfInventory().GetInventoryObject();
+
+            if (newInventory != inventory)
+            {
+                previousInventory = inventory;
+                inventory = newInventory;
+
+                ClearDisplay();
+                CreateDisplay();
+            }
+            else
+            {
+                UpdateDisplay();
+            }
+        }
     }
 
     public void CreateDisplay()
     {
         for (int i = 0; i < inventory.Container.Count; i++)
         {
-            var obj = Instantiate(inventory.Container[i].item.prefab, Vector3.zero, Quaternion.identity, transform);
+            var slot = inventory.Container[i];
+            GameObject obj;
+
+            if (slot.item != null)
+            {
+                obj = Instantiate(slot.item.prefab, Vector3.zero, Quaternion.identity, transform);
+                obj.GetComponentInChildren<TextMeshProUGUI>().text = slot.amount.ToString("n0");
+            }
+            else
+            {
+                obj = Instantiate(emptySlotPrefab, Vector3.zero, Quaternion.identity, transform);
+            }
+
             obj.GetComponent<RectTransform>().localPosition = GetPosition(i);
-            obj.GetComponentInChildren<TextMeshProUGUI>().text = inventory.Container[i].amount.ToString("n0");
-            itemsDisplayed.Add(inventory.Container[i], obj);
-
+            itemsDisplayed.Add(i, obj);
         }
-
     }
 
     public void UpdateDisplay()
     {
         for (int i = 0; i < inventory.Container.Count; i++)
         {
-            if (itemsDisplayed.ContainsKey(inventory.Container[i]))
+            var slot = inventory.Container[i];
+
+            if (itemsDisplayed.ContainsKey(i))
             {
-                itemsDisplayed[inventory.Container[i]].GetComponentInChildren<TextMeshProUGUI>().text = inventory.Container[i].amount.ToString("n0");
-            }
-            else
-            {
-                var obj = Instantiate(inventory.Container[i].item.prefab, Vector3.zero, Quaternion.identity, transform);
+                GameObject obj = itemsDisplayed[i];
+                if (slot.item == null)
+                {
+                    Destroy(obj);
+                    obj = Instantiate(emptySlotPrefab, Vector3.zero, Quaternion.identity, transform);
+                }
+                else
+                {
+                    Destroy(obj);
+                    obj = Instantiate(slot.item.prefab, Vector3.zero, Quaternion.identity, transform);
+                    obj.GetComponentInChildren<TextMeshProUGUI>().text = slot.amount.ToString("n0");
+                }
                 obj.GetComponent<RectTransform>().localPosition = GetPosition(i);
-                obj.GetComponentInChildren<TextMeshProUGUI>().text = inventory.Container[i].amount.ToString("n0");
-                itemsDisplayed.Add(inventory.Container[i], obj);
+                itemsDisplayed[i] = obj;
             }
         }
+    }
+
+    public void ClearDisplay()
+    {
+        foreach (var item in itemsDisplayed.Values)
+        {
+            Destroy(item);
+        }
+        itemsDisplayed.Clear();
     }
 
     public Vector3 GetPosition(int i)
@@ -57,3 +101,6 @@ public class DisplayInventory : MonoBehaviour
         return new Vector3(xSpaceBetweenItems * (i % numColumns), (-ySpaceBetweenItems * (i / numColumns)), 0f);
     }
 }
+
+
+
