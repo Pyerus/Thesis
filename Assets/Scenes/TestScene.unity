@@ -14990,6 +14990,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1974439411905456353, guid: a44ede2177637334c9b8f1a0b3b7c754, type: 3}
+      propertyPath: inventory
+      value: 
+      objectReference: {fileID: 11400000, guid: 71724668b1f1cf143b634f663796e572, type: 2}
     - target: {fileID: 5649451119117878920, guid: a44ede2177637334c9b8f1a0b3b7c754, type: 3}
       propertyPath: m_Name
       value: Produce Prefab
