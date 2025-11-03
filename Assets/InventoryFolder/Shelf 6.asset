@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c36dfadbc2819884097089f072e2b63a, type: 3}
   m_Name: Shelf 6
   m_EditorClassIdentifier: 
-  Container: []
   maxSlots: 4
+  maxCapacity: 10
+  Container: []

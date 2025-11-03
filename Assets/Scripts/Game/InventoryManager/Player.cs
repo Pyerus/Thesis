@@ -25,5 +25,27 @@ public class Player : MonoBehaviour
             inventory.AddItem(item.item, inventory.maxCapacity);
             tierManager.StockItems(item);
         }
+
+    }
+
+public void RemoveAllItems()
+{
+    for (int i = 0; i < inventory.Container.Count; i++)
+    {
+        var slot = inventory.Container[i];
+        if (slot.item != null)
+        {
+            Debug.Log($"Removed {slot.item.name} from slot {i + 1}");
+            inventory.RemoveItem(slot.item, inventory.maxCapacity);
+        }
+    }
+
+    Debug.Log("All items removed from inventory!");
+    inventory.PrintInventory();
+}
+
+    private void OnApplicationQuit()
+    {
+        inventory.Container.Clear();
     }
 }

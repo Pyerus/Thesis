@@ -5,63 +5,84 @@ using UnityEngine;
 public class InventoryObject : ScriptableObject
 {
     public List<InventorySlot> Container = new List<InventorySlot>();
-    public int maxSlots = 4;      // total number of slots allowed
-    public int maxCapacity = 10;  // max number of items per slot
+    public int maxSlots = 4;
+    public int maxCapacity = 10;
+
+    private void OnEnable()
+    {
+        // Initialize exactly 4 empty slots
+        if (Container.Count < maxSlots)
+        {
+            for (int i = Container.Count; i < maxSlots; i++)
+            {
+                Container.Add(new InventorySlot(null, 0));
+            }
+        }
+    }
 
     public void AddItem(ItemObject _item, int _amount)
     {
         int remaining = _amount;
 
-        // 1️⃣ Fill existing slots first
+        //Try to find existing slot with the same item that has space
         foreach (var slot in Container)
         {
-            if (slot.item == _item)
+            if (slot.item == _item && slot.amount < maxCapacity)
             {
                 int spaceLeft = maxCapacity - slot.amount;
-                if (spaceLeft > 0)
-                {
-                    int amountToAdd = Mathf.Min(remaining, spaceLeft);
-                    slot.AddAmount(amountToAdd);
-                    remaining -= amountToAdd;
-                }
+                int addAmount = Mathf.Min(remaining, spaceLeft);
+                slot.AddAmount(addAmount);
+                remaining -= addAmount;
 
                 if (remaining <= 0)
                     return;
             }
         }
 
-        // 2️⃣ If no existing stack had space, make new slots
-        while (remaining > 0)
+        //Try to fill empty slot
+        foreach (var slot in Container)
         {
-            if (Container.Count >= maxSlots)
+            if (slot.item == null)
             {
-                Debug.Log("Inventory full — no more slots available.");
-                return;
-            }
+                int addAmount = Mathf.Min(remaining, maxCapacity);
+                slot.item = _item;
+                slot.amount = addAmount;
+                remaining -= addAmount;
 
-            int amountToAdd = Mathf.Min(remaining, maxCapacity);
-            Container.Add(new InventorySlot(_item, amountToAdd));
-            remaining -= amountToAdd;
+                if (remaining <= 0)
+                    return;
+            }
+        }
+
+        if (remaining > 0)
+        {
+            Debug.Log("No empty slots left in inventory!");
         }
     }
 
-    // Check if inventory has an item (used for probability calculation)
-    public bool HasItem(ItemObject item)
+    public void RemoveItem(ItemObject _item, int _amount)
     {
         foreach (var slot in Container)
         {
-            if (slot.item == item)
-                return true;
+            if (slot.item == _item)
+            {
+                slot.amount -= _amount;
+                if (slot.amount <= 0)
+                {
+                    slot.item = null;
+                    slot.amount = 0;
+                }
+                return;
+            }
         }
-        return false;
     }
 
-    // 🧹 Optional helper for debugging:
     public void PrintInventory()
     {
         for (int i = 0; i < Container.Count; i++)
         {
-            Debug.Log($"Slot {i + 1}: {Container[i].item.name} x{Container[i].amount}");
+            string itemName = Container[i].item != null ? Container[i].item.name : "Empty";
+            Debug.Log($"Slot {i + 1}: {itemName} x{Container[i].amount}");
         }
     }
 }
@@ -80,6 +101,6 @@ public class InventorySlot
 
     public void AddAmount(int value)
     {
-        amount = Mathf.Min(amount + value, 9999); // safety cap
+        amount = Mathf.Min(amount + value, 9999);
     }
 }
