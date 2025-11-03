@@ -3338,7 +3338,7 @@ GameObject:
   - component: {fileID: 2871681323682437310}
   - component: {fileID: 7772002939884921184}
   - component: {fileID: 6846931889940893689}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Fridge Prefab
   m_TagString: Fridge
   m_Icon: {fileID: 0}

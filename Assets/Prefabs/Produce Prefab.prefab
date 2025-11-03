@@ -3000,9 +3000,9 @@ GameObject:
   - component: {fileID: 1974439411905456353}
   - component: {fileID: 1492441947725418876}
   - component: {fileID: 6739077672284218484}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Produce Prefab
-  m_TagString: Untagged
+  m_TagString: Produce
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
