@@ -3086,9 +3086,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9c681fbd33ce9d48974a1230c35c0b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TierManager
-  tier1: {fileID: 0}
-  tier2: {fileID: 0}
-  tier3: {fileID: 0}
+  tier1: {fileID: 2062491005836488464}
+  tier2: {fileID: 1464983068729848734}
+  tier3: {fileID: 5341103799329871501}
   tier4: {fileID: 0}
   tier1Item: {fileID: 0}
   tier2Item: {fileID: 0}

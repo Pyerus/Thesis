@@ -25,7 +25,6 @@ public class Player : MonoBehaviour
             inventory.AddItem(item.item, inventory.maxCapacity);
             tierManager.StockItems(item);
         }
-
     }
 
 public void RemoveAllItems()
