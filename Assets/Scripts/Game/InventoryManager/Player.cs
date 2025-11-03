@@ -25,24 +25,21 @@ public class Player : MonoBehaviour
 
     }
 
-    public void TakeItemFromSlot(int slotIndex)
+public void RemoveAllItems()
 {
-    if (slotIndex >= 0 && slotIndex < inventory.Container.Count)
+    for (int i = 0; i < inventory.Container.Count; i++)
     {
-        var slot = inventory.Container[slotIndex];
+        var slot = inventory.Container[i];
         if (slot.item != null)
         {
+            Debug.Log($"Removed {slot.item.name} from slot {i + 1}");
             inventory.RemoveItem(slot.item, inventory.maxCapacity);
-            Debug.Log($"Removed 1 {slot.item.name} from slot {slotIndex + 1}");
-            inventory.PrintInventory();
-        }
-        else
-        {
-            Debug.Log($"Slot {slotIndex + 1} is empty!");
         }
     }
-}
 
+    Debug.Log("All items removed from inventory!");
+    inventory.PrintInventory();
+}
 
     private void OnApplicationQuit()
     {
