@@ -3,13 +3,11 @@ using UnityEngine;
 public class ShelfInventory : MonoBehaviour
 {
     public InventoryObject inventory;
+    private TierManager tierManager;
 
-    public void AddItemToInventory(Item item)
+    private void Start()
     {
-        if (item != null)
-        {
-            inventory.AddItem(item.item, 1);
-        }
+        tierManager = GetComponent<TierManager>();
     }
 
     private void OnApplicationQuit()
@@ -20,5 +18,10 @@ public class ShelfInventory : MonoBehaviour
     public InventoryObject GetInventoryObject()
     {
         return inventory;
+    }
+
+    public TierManager GetTierManager()
+    {
+        return tierManager;
     }
 }
