@@ -60,6 +60,17 @@ public class InventoryObject : ScriptableObject
         }
     }
 
+    // Check if inventory has an item (used for probability calculation)
+    public bool HasItem(ItemObject item)
+    {
+        foreach (var slot in Container)
+        {
+            if (slot.item == item)
+                return true;
+        }
+        return false;
+    }
+
     public void RemoveItem(ItemObject _item, int _amount)
     {
         foreach (var slot in Container)
