@@ -10,13 +10,18 @@ public class InventoryObject : ScriptableObject
 
     private void OnEnable()
     {
-        // Initialize exactly 4 empty slots
+        // Initialize exactly 'maxSlots' empty slots
         if (Container.Count < maxSlots)
         {
             for (int i = Container.Count; i < maxSlots; i++)
             {
                 Container.Add(new InventorySlot(null, 0));
             }
+        }
+        // If there are too many slots (e.g., from editor changes), trim them
+        else if (Container.Count > maxSlots)
+        {
+            Container.RemoveRange(maxSlots, Container.Count - maxSlots);
         }
     }
 
@@ -60,19 +65,33 @@ public class InventoryObject : ScriptableObject
         }
     }
 
+    // UPDATED RemoveItem Method
     public void RemoveItem(ItemObject _item, int _amount)
     {
-        foreach (var slot in Container)
+        int amountToRemove = _amount;
+
+        // Loop backwards to remove from the "last" stacks first
+        for (int i = Container.Count - 1; i >= 0; i--)
         {
+            var slot = Container[i];
             if (slot.item == _item)
             {
-                slot.amount -= _amount;
+                int amountInSlot = slot.amount;
+                int removeThisSlot = Mathf.Min(amountToRemove, amountInSlot);
+
+                slot.amount -= removeThisSlot;
+                amountToRemove -= removeThisSlot;
+
                 if (slot.amount <= 0)
                 {
                     slot.item = null;
                     slot.amount = 0;
                 }
-                return;
+
+                if (amountToRemove <= 0)
+                {
+                    return; // We've removed the full amount
+                }
             }
         }
     }
@@ -90,17 +109,18 @@ public class InventoryObject : ScriptableObject
 [System.Serializable]
 public class InventorySlot
 {
-    public ItemObject item;
-    public int amount;
+    public ItemObject item;
+    public int amount;
 
-    public InventorySlot(ItemObject _item, int _amount)
-    {
-        item = _item;
-        amount = _amount;
-    }
+    public InventorySlot(ItemObject _item, int _amount)
+    {
+        item = _item;
+        amount = _amount;
+    }
 
-    public void AddAmount(int value)
-    {
-        amount = Mathf.Min(amount + value, 9999);
-    }
+    public void AddAmount(int value)
+    {
+        // You can change this max value if you want
+        amount = Mathf.Min(amount + value, 9999); 
+    }
 }
