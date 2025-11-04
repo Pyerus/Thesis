@@ -24,7 +24,7 @@ public class InventoryObject : ScriptableObject
     {
         int remaining = _amount;
 
-        // 1️⃣ Try to find existing slot with the same item that has space
+        //Try to find existing slot with the same item that has space
         foreach (var slot in Container)
         {
             if (slot.item == _item && slot.amount < maxCapacity)
@@ -39,7 +39,7 @@ public class InventoryObject : ScriptableObject
             }
         }
 
-        // 2️⃣ Try to fill empty slot
+        //Try to fill empty slot
         foreach (var slot in Container)
         {
             if (slot.item == null)
@@ -58,6 +58,17 @@ public class InventoryObject : ScriptableObject
         {
             Debug.Log("No empty slots left in inventory!");
         }
+    }
+
+    // Check if inventory has an item (used for probability calculation)
+    public bool HasItem(ItemObject item)
+    {
+        foreach (var slot in Container)
+        {
+            if (slot.item == item)
+                return true;
+        }
+        return false;
     }
 
     public void RemoveItem(ItemObject _item, int _amount)

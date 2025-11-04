@@ -9,6 +9,8 @@ TagManager:
   - Waypoint
   - Shelf
   - Target
+  - Fridge
+  - Produce
   layers:
   - Default
   - TransparentFX

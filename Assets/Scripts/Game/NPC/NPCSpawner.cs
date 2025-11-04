@@ -1,33 +1,38 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class NPCSpawner : MonoBehaviour
 {
-    [SerializeField] GameObject npcPrefab;
+    public GameObject npcPrefab;
 
     float spawnInterval = 1f;
 
-    int spawnLimit = 10;
+    public int spawnLimit = 10;
 
     int spawnCount = 0;
+    public Button OpenStore;
 
 
     private void Start()
     {
+        if (OpenStore != null)
+            OpenStore.onClick.AddListener(OnOpenStoreClicked);
+    }
+
+    private void OnOpenStoreClicked()
+    {
         StartCoroutine(SpawnNPC(spawnInterval, npcPrefab));
     }
 
-    IEnumerator SpawnNPC(float interval, GameObject npc)
+    public IEnumerator SpawnNPC(float interval, GameObject npc)
     {
-        yield return new WaitForSeconds(interval);
-
-        GameObject newNPC = Instantiate(npc, new Vector3(0, 0.1f, -5), Quaternion.identity);
-
-        spawnCount++;
-
-        if (spawnCount < spawnLimit)
+        spawnCount = 0; 
+        while (spawnCount < spawnLimit)
         {
-            StartCoroutine(SpawnNPC(interval, npc));
+            Instantiate(npc, new Vector3(0, 0.1f, -5), Quaternion.identity);
+            spawnCount++;
+            yield return new WaitForSeconds(interval);
         }
     }
 }

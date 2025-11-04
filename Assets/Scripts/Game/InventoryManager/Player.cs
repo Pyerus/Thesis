@@ -6,6 +6,7 @@ public class Player : MonoBehaviour
 {
     public Cursors cursor;
     public InventoryObject inventory;
+    public TierManager tierManager;
     
 
     private void Update()
@@ -13,6 +14,7 @@ public class Player : MonoBehaviour
         if (cursor.GetShelfInventory() != null)
         {
             inventory = cursor.GetShelfInventory().GetInventoryObject();
+            tierManager = cursor.GetShelfInventory().GetTierManager();
         }
     }
 
@@ -21,8 +23,8 @@ public class Player : MonoBehaviour
         if (item != null)
         {
             inventory.AddItem(item.item, inventory.maxCapacity);
+            tierManager.StockItems(item);
         }
-
     }
 
 public void RemoveAllItems()
@@ -36,6 +38,8 @@ public void RemoveAllItems()
             inventory.RemoveItem(slot.item, inventory.maxCapacity);
         }
     }
+
+    tierManager.ClearShelf();
 
     Debug.Log("All items removed from inventory!");
     inventory.PrintInventory();

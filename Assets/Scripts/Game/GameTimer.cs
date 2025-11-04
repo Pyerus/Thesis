@@ -7,23 +7,46 @@ public class GameTimer : MonoBehaviour
     public float maxTimePerDay = 300f;   // 5 minutes per day (in seconds)
     private float currentTime = 0f;
     public TMP_Text timerText;      // Timer display
+    public TMP_Text DayText;
     public GameObject nextDayWindow;     // Window that appears when day ends
+    public GameObject Calendar;
     public Button nextDayButton;         // Button inside that window
+    public Button CalendarButton; 
 
     private int currentDay = 1;
     private int maxDays = 7;
     private bool gamePaused = false;
-    private bool gameOver = false;
+    private bool CalendarOpen = false;
+
+    [SerializeField] private RectTransform legend;  
+    private float legendMoveDistance = 12.2f; 
+    private Vector2 legendStartPos;
+
+    [SerializeField] private NPCSpawner npcSpawner;
+
+    private readonly string[] daysOfWeek = 
+    { 
+        "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" 
+    };
 
     void Start()
     {
-        // Hide the "Next Day" window initially
         if (nextDayWindow != null)
             nextDayWindow.SetActive(false);
+        
+        if (Calendar != null)
+            Calendar.SetActive(false);
 
-        // Assign button listener
         if (nextDayButton != null)
             nextDayButton.onClick.AddListener(StartNextDay);
+
+        if (CalendarButton != null)
+            CalendarButton.onClick.AddListener(ShowCalendar);
+
+        if (legend != null)
+            legendStartPos = legend.anchoredPosition;
+
+        UpdateDayText();
     }
     
     void Update()
@@ -36,8 +59,11 @@ public class GameTimer : MonoBehaviour
             if (currentTime >= maxTimePerDay)
             {
                 currentTime = maxTimePerDay;
+                if (npcSpawner != null)
+                    npcSpawner.spawnLimit = 0;
                 EndDay();
             }
+
 
             DisplayTime(currentTime);
         }
@@ -57,7 +83,7 @@ public class GameTimer : MonoBehaviour
 
     void EndDay()
     {
-        Time.timeScale = 0f;
+        //Time.timeScale = 0f;
         gamePaused = true;
 
         if (nextDayWindow != null)
@@ -79,15 +105,19 @@ public class GameTimer : MonoBehaviour
         if (nextDayWindow != null)
             nextDayWindow.SetActive(false);
 
-        Time.timeScale = 1f;
+        //Time.timeScale = 1f;
 
-        //if (npcSpawner != null)
-        //    npcSpawner.StartSpawning();
+        if (npcSpawner != null)
+        {
+            npcSpawner.spawnLimit = 10;
+        }
+
+        MoveLegendToNextDay();
+        UpdateDayText();
     }
 
     private void GameOver()
     {
-        gameOver = true;
         gamePaused = true;
         Time.timeScale = 0f;
 
@@ -101,5 +131,41 @@ public class GameTimer : MonoBehaviour
 
         if (nextDayButton != null)
             nextDayButton.gameObject.SetActive(false);
+    }
+
+    private void ShowCalendar()
+    {
+        if (Calendar != null)
+        {
+            if (CalendarOpen == false)
+            {
+                Calendar.SetActive(true);
+                CalendarOpen = true;
+                return;
+            }
+
+            else if (CalendarOpen == true)
+            {
+                Calendar.SetActive(false);
+                CalendarOpen = false;
+            }
+        }
+    }
+
+    private void MoveLegendToNextDay()
+    {
+        if (legend != null)
+        {
+            Vector2 newPos = legendStartPos + new Vector2(legendMoveDistance * (currentDay - 1), 0);
+            legend.anchoredPosition = newPos;
+        }
+    }
+
+    private void UpdateDayText()
+    {
+        if (DayText != null && currentDay >= 1 && currentDay <= daysOfWeek.Length)
+        {
+            DayText.text = daysOfWeek[currentDay - 1];
+        }
     }
 }
