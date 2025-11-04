@@ -10,7 +10,7 @@ public class InventoryObject : ScriptableObject
 
     private void OnEnable()
     {
-        // Initialize exactly 'maxSlots' empty slots
+        // Initialize exactly 4 empty slots
         if (Container.Count < maxSlots)
         {
             for (int i = Container.Count; i < maxSlots; i++)
@@ -18,18 +18,13 @@ public class InventoryObject : ScriptableObject
                 Container.Add(new InventorySlot(null, 0));
             }
         }
-        // If there are too many slots (e.g., from editor changes), trim them
-        else if (Container.Count > maxSlots)
-        {
-            Container.RemoveRange(maxSlots, Container.Count - maxSlots);
-        }
     }
 
     public void AddItem(ItemObject _item, int _amount)
     {
         int remaining = _amount;
 
-        // 1️⃣ Try to find existing slot with the same item that has space
+        //Try to find existing slot with the same item that has space
         foreach (var slot in Container)
         {
             if (slot.item == _item && slot.amount < maxCapacity)
@@ -44,7 +39,7 @@ public class InventoryObject : ScriptableObject
             }
         }
 
-        // 2️⃣ Try to fill empty slot
+        //Try to fill empty slot
         foreach (var slot in Container)
         {
             if (slot.item == null)
@@ -65,33 +60,30 @@ public class InventoryObject : ScriptableObject
         }
     }
 
-    // UPDATED RemoveItem Method
+    // Check if inventory has an item (used for probability calculation)
+    public bool HasItem(ItemObject item)
+    {
+        foreach (var slot in Container)
+        {
+            if (slot.item == item)
+                return true;
+        }
+        return false;
+    }
+
     public void RemoveItem(ItemObject _item, int _amount)
     {
-        int amountToRemove = _amount;
-
-        // Loop backwards to remove from the "last" stacks first
-        for (int i = Container.Count - 1; i >= 0; i--)
+        foreach (var slot in Container)
         {
-            var slot = Container[i];
             if (slot.item == _item)
             {
-                int amountInSlot = slot.amount;
-                int removeThisSlot = Mathf.Min(amountToRemove, amountInSlot);
-
-                slot.amount -= removeThisSlot;
-                amountToRemove -= removeThisSlot;
-
+                slot.amount -= _amount;
                 if (slot.amount <= 0)
                 {
                     slot.item = null;
                     slot.amount = 0;
                 }
-
-                if (amountToRemove <= 0)
-                {
-                    return; // We've removed the full amount
-                }
+                return;
             }
         }
     }
@@ -109,18 +101,17 @@ public class InventoryObject : ScriptableObject
 [System.Serializable]
 public class InventorySlot
 {
-    public ItemObject item;
-    public int amount;
+    public ItemObject item;
+    public int amount;
 
-    public InventorySlot(ItemObject _item, int _amount)
-    {
-        item = _item;
-        amount = _amount;
-    }
+    public InventorySlot(ItemObject _item, int _amount)
+    {
+        item = _item;
+        amount = _amount;
+    }
 
-    public void AddAmount(int value)
-    {
-        // You can change this max value if you want
-        amount = Mathf.Min(amount + value, 9999); 
-    }
+    public void AddAmount(int value)
+    {
+        amount = Mathf.Min(amount + value, 9999);
+    }
 }
