@@ -1992,7 +1992,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   item: {fileID: 11400000, guid: edd684d1af48bdd4e94e0afd14e398e2, type: 2}
   itemPrefab: {fileID: 3084750761974125924, guid: a3acec50dfa532e4d81a47128083589b, type: 3}
-  itemSize: 0
 --- !u!114 &101356091
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3236,7 +3235,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   item: {fileID: 11400000, guid: 474bceaec9a3efd4d8df7c16fdd38805, type: 2}
   itemPrefab: {fileID: 8190592708625898432, guid: a3ba604efed20c640a1cf6a3ecd8e8bb, type: 3}
-  itemSize: 0
 --- !u!114 &169093961
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4084,7 +4082,7 @@ GameObject:
   - component: {fileID: 218656759}
   - component: {fileID: 218656758}
   m_Layer: 5
-  m_Name: Button
+  m_Name: Exit Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7478,7 +7476,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   item: {fileID: 11400000, guid: fb97b28f58234774092a1c81d17f0547, type: 2}
   itemPrefab: {fileID: 739812295469958568, guid: 17f1da7b862bfe04681c574f8c40d0fe, type: 3}
-  itemSize: 0
 --- !u!114 &399338335
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9566,7 +9563,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   item: {fileID: 11400000, guid: 807d35df0f6466646aba396c56a50773, type: 2}
   itemPrefab: {fileID: 2790633999803073258, guid: 32873425ce08255498336a4eaab55161, type: 3}
-  itemSize: 0
 --- !u!114 &452950874
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9881,7 +9877,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   item: {fileID: 11400000, guid: 1dcda153808b6774b8c8e0d7a779388c, type: 2}
   itemPrefab: {fileID: 3316543297068947673, guid: 0fd76c2e82994b64087c59163fe68072, type: 3}
-  itemSize: 0
 --- !u!114 &462653379
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10887,7 +10882,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   item: {fileID: 11400000, guid: 924baf10ffc7de44dbedd64eb7e0562c, type: 2}
   itemPrefab: {fileID: 6712906772590738399, guid: 6f19ff6b2684a34459e01799476c1cf0, type: 3}
-  itemSize: 0
 --- !u!114 &520696163
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10997,6 +10991,10 @@ PrefabInstance:
     - target: {fileID: 3008241940679536190, guid: 470a3f867f2320b4e97db4869eb56ccc, type: 3}
       propertyPath: m_Name
       value: Fridge Prefab
+      objectReference: {fileID: 0}
+    - target: {fileID: 3008241940679536190, guid: 470a3f867f2320b4e97db4869eb56ccc, type: 3}
+      propertyPath: m_TagString
+      value: Shelf
       objectReference: {fileID: 0}
     - target: {fileID: 7772002939884921184, guid: 470a3f867f2320b4e97db4869eb56ccc, type: 3}
       propertyPath: idealItem
@@ -12055,7 +12053,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   item: {fileID: 11400000, guid: a9debba54510a8e41a14a843f4aee08c, type: 2}
   itemPrefab: {fileID: 2097384914406134085, guid: 66acf304ad521104eb2a51ab32a6283e, type: 3}
-  itemSize: 0
 --- !u!114 &590191117
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14840,7 +14837,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   item: {fileID: 11400000, guid: 19c25f425d0e88a41812de229e6cdc98, type: 2}
   itemPrefab: {fileID: 6496171083258354668, guid: 8da4c88c7381b9344a45bc8a52bd7f50, type: 3}
-  itemSize: 0
 --- !u!114 &746069209
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15796,7 +15792,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   item: {fileID: 11400000, guid: 0ac0eff8ce084314e8054588fe0bbccb, type: 2}
   itemPrefab: {fileID: 2494239606302239921, guid: d5a7e8d7e267cb9468ba79d5aa4810b2, type: 3}
-  itemSize: 0
 --- !u!114 &786106756
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19276,7 +19271,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   item: {fileID: 11400000, guid: eff38140462ac914aa29db7b7cbd91f0, type: 2}
   itemPrefab: {fileID: 6881991040766365050, guid: 996f863cd929aa04bb7b7205a5683309, type: 3}
-  itemSize: 0
 --- !u!114 &950658395
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24277,7 +24271,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   item: {fileID: 11400000, guid: 05d9a5a14f2f3bf41952e11db52a1043, type: 2}
   itemPrefab: {fileID: 2998182326874433466, guid: ce1fe70e661335e4295be50a7e07a338, type: 3}
-  itemSize: 0
 --- !u!114 &1242216161
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26589,7 +26582,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   item: {fileID: 11400000, guid: d3ca3f784c2e31048a49c183189b0b9a, type: 2}
   itemPrefab: {fileID: 6841939895524787998, guid: 61da1194e01497544a8bb3dd5c40028e, type: 3}
-  itemSize: 0
 --- !u!114 &1338046215
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27861,7 +27853,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   item: {fileID: 11400000, guid: 2719d55bc08a5a1429e41983f44940a5, type: 2}
   itemPrefab: {fileID: 5146964988401532354, guid: 0cde941ae49ca1d4dadbde0e7fc3ba99, type: 3}
-  itemSize: 0
 --- !u!114 &1379615828
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30128,7 +30119,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   item: {fileID: 11400000, guid: 6e2bbe257743fe249be406772376d20c, type: 2}
   itemPrefab: {fileID: 8263469578470240362, guid: 3864b861c7b59704a8a87d9c51edda89, type: 3}
-  itemSize: 0
 --- !u!114 &1438932912
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38080,6 +38070,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Produce Prefab
       objectReference: {fileID: 0}
+    - target: {fileID: 5649451119117878920, guid: a44ede2177637334c9b8f1a0b3b7c754, type: 3}
+      propertyPath: m_TagString
+      value: Shelf
+      objectReference: {fileID: 0}
     - target: {fileID: 5756131161714227208, guid: a44ede2177637334c9b8f1a0b3b7c754, type: 3}
       propertyPath: m_LocalPosition.x
       value: -12.777222
@@ -39320,7 +39314,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: X
+  m_text: Clear Shelf
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -39526,8 +39520,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 368982261}
   m_HandleRect: {fileID: 368982260}
   m_Direction: 2
-  m_Value: 1
-  m_Size: 0.849094
+  m_Value: 0.99999946
+  m_Size: 0.84909385
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -42545,7 +42539,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   item: {fileID: 11400000, guid: 3f38e6c9ff367ba41b941d6869de81e7, type: 2}
   itemPrefab: {fileID: 8676441268917678786, guid: 0205eb5b98e288b4194ced7a2d09bb7f, type: 3}
-  itemSize: 0
 --- !u!114 &1984558822
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -42674,7 +42667,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   item: {fileID: 11400000, guid: 80f8236decf4262468ab31b9f1907c37, type: 2}
   itemPrefab: {fileID: 4791531677902582660, guid: 6da9ccf1963c9014abfd5caca5b79bc3, type: 3}
-  itemSize: 0
 --- !u!114 &1985463634
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -42899,7 +42891,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   item: {fileID: 11400000, guid: 8964474926ac2624297593eea538b677, type: 2}
   itemPrefab: {fileID: 1436279327300687856, guid: 78bb2b93175614e478ed008e99ba9f70, type: 3}
-  itemSize: 0
 --- !u!114 &1994814761
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -43164,7 +43155,7 @@ GameObject:
   - component: {fileID: 2008357980}
   - component: {fileID: 2008357979}
   m_Layer: 5
-  m_Name: Button (1)
+  m_Name: Clear Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -43187,8 +43178,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 139.84584, y: -402.4467}
-  m_SizeDelta: {x: 56.75, y: 34.188}
+  m_AnchoredPosition: {x: 148.18626, y: -399.91556}
+  m_SizeDelta: {x: 150, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2008357979
 MonoBehaviour:
@@ -43339,7 +43330,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   item: {fileID: 11400000, guid: d98b2e0b701597944a45958994de84f5, type: 2}
   itemPrefab: {fileID: 8994044252134412889, guid: 835304a42f609c14f8ec54a7dec05e4c, type: 3}
-  itemSize: 0
 --- !u!114 &2011247914
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -43602,7 +43592,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   item: {fileID: 11400000, guid: a54baabe31c539c45a25590055ae2827, type: 2}
   itemPrefab: {fileID: 3112590503303970359, guid: 89350b3ca141ee640b082106e72c9cc0, type: 3}
-  itemSize: 0
 --- !u!114 &2015336398
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -44635,7 +44624,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   item: {fileID: 11400000, guid: 180086c9474e81243b3eedf6c72eb304, type: 2}
   itemPrefab: {fileID: 5533504572148164533, guid: 098ed4990bf1170499c60d28b9c6c419, type: 3}
-  itemSize: 0
 --- !u!114 &2075931154
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -45005,7 +44993,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   item: {fileID: 11400000, guid: bf39761e93db10f4ea6690ab66889c38, type: 2}
   itemPrefab: {fileID: 1758024754396029557, guid: 7707b4286f884074f85f0a95a6a3be7e, type: 3}
-  itemSize: 2
 --- !u!114 &2086394768
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -45270,7 +45257,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   item: {fileID: 11400000, guid: 0c36802abdeb77844977451064fa9890, type: 2}
   itemPrefab: {fileID: 3687807986407778587, guid: 827bb1ca3db303f42a1effb3bdaed27c, type: 3}
-  itemSize: 0
 --- !u!114 &2112064223
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -45865,7 +45851,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   item: {fileID: 11400000, guid: 1dcda153808b6774b8c8e0d7a779388c, type: 2}
   itemPrefab: {fileID: 0}
-  itemSize: 0
 --- !u!114 &2125647556
 MonoBehaviour:
   m_ObjectHideFlags: 0

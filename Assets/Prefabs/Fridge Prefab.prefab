@@ -3340,7 +3340,7 @@ GameObject:
   - component: {fileID: 6846931889940893689}
   m_Layer: 6
   m_Name: Fridge Prefab
-  m_TagString: Fridge
+  m_TagString: Shelf
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3424,14 +3424,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9c681fbd33ce9d48974a1230c35c0b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TierManager
+  shelfType: 1
   tier1: {fileID: 6785232946514960295}
   tier2: {fileID: 1068671300953731241}
   tier3: {fileID: 87525632366396022}
   tier4: {fileID: 1194344702147214283}
-  tier1Item: {fileID: 0}
-  tier2Item: {fileID: 0}
-  tier3Item: {fileID: 0}
-  tier4Item: {fileID: 0}
 --- !u!1 &3057447995135619717
 GameObject:
   m_ObjectHideFlags: 0
