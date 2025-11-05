@@ -12,9 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cdd71fa53ac20264fb4a76d29b205b58, type: 3}
   m_Name: CatCookies
   m_EditorClassIdentifier: 
-  itemName: Cookies
   prefab: {fileID: 7738347509151267748, guid: 16657647486de0047baa8b37093ba477, type: 3}
-  type: 0
+  type: 2
   description: Shit
-  buyPrice: 80
-  sellPrice: 99

@@ -12,9 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cdd71fa53ac20264fb4a76d29b205b58, type: 3}
   m_Name: Tomato
   m_EditorClassIdentifier: 
-  itemName: Tomato
   prefab: {fileID: 7738347509151267748, guid: 6ba78b7fecb65ee4d8cb66fa22296799, type: 3}
   type: 2
   description: Shit
-  buyPrice: 20
-  sellPrice: 30

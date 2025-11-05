@@ -8,21 +8,18 @@ public class ItemCounter : MonoBehaviour
     
     [Header("Link to Game Systems")]
     public Cursors cursor; // Drag your Cursor manager GameObject here
-    public ItemObject[] itemsForSale; // MUST BE IN SAME ORDER AS TEXTS
-
-    [Header("Buying Settings")]
-    public int incrementAmount = 50; // 50 or 100
-    public TextMeshProUGUI totalCostText; // optional, shows total ₱
+    public ItemObject[] itemsForSale; // MUST BE IN THE SAME ORDER AS TEXTS
 
     private int[] counts;
 
     void Start()
     {
         counts = new int[countTexts.Length];
-
+        
+        
         if (itemsForSale.Length != countTexts.Length)
         {
-            Debug.LogError("ItemCounter Error: itemsForSale and countTexts length mismatch.");
+            Debug.LogError("ItemCounter Error: The 'itemsForSale' array and 'countTexts' array MUST have the same number of elements.");
         }
 
         UpdateAllTexts();
@@ -31,83 +28,72 @@ public class ItemCounter : MonoBehaviour
     public void Increase(int index)
     {
         if (index >= counts.Length) return;
-        counts[index] += incrementAmount;
+        counts[index]++;
         UpdateText(index);
-        UpdateTotalCost();
     }
 
     public void Decrease(int index)
     {
         if (index >= counts.Length) return;
-        if (counts[index] >= incrementAmount)
-            counts[index] -= incrementAmount;
-        else
-            counts[index] = 0;
-
-        UpdateText(index);
-        UpdateTotalCost();
+        if (counts[index] > 0)
+        {
+            counts[index]--;
+            UpdateText(index);
+        }
     }
 
-    // ✅ One button for buying all selected items
-    public void BuyAll()
+    // This is the "Order Stock" button
+    public void Buy(int index)
     {
+        if (index >= counts.Length) return;
+
+        int amountToBuy = counts[index];
+        if (amountToBuy <= 0)
+        {
+            Debug.Log("Select an amount greater than 0 to buy.");
+            return;
+        }
+
+        // 1. Find the shelf inventory
         if (cursor.GetShelfInventory() == null)
         {
             Debug.LogWarning("Cannot buy: No shelf selected.");
             return;
         }
-
         InventoryObject shelfInventory = cursor.GetShelfInventory().GetInventoryObject();
 
-        float totalSpent = 0f;
-        int totalItems = 0;
-
-        for (int i = 0; i < counts.Length; i++)
+        // 2. Get the item data
+        ItemObject itemToBuy = itemsForSale[index];
+        if (itemToBuy == null)
         {
-            int amount = counts[i];
-            if (amount > 0 && itemsForSale[i] != null)
-            {
-                shelfInventory.AddItem(itemsForSale[i], amount);
-                totalSpent += amount * itemsForSale[i].buyPrice;
-                totalItems += amount;
-                counts[i] = 0;
-                UpdateText(i);
-            }
+             Debug.LogError($"ItemCounter Error: No ItemObject assigned at index {index} in 'itemsForSale' array.");
+             return;
         }
 
-        UpdateTotalCost();
+        // 3. Add item(s) to the shelf inventory
+        shelfInventory.AddItem(itemToBuy, amountToBuy);
+        Debug.Log($"Stocked {amountToBuy} of {itemToBuy.name} to the shelf.");
 
-        if (totalItems > 0)
-            Debug.Log($"🛒 Bought {totalItems} items for ₱{totalSpent:F2}");
-        else
-            Debug.Log("No items selected to buy.");
+        counts[index] = 0;
+        UpdateText(index);
     }
 
     private void UpdateText(int index)
     {
         if (index < countTexts.Length && countTexts[index] != null)
+        {
             countTexts[index].text = counts[index].ToString();
+        }
     }
 
     private void UpdateAllTexts()
     {
         for (int i = 0; i < countTexts.Length; i++)
-            countTexts[i].text = counts[i].ToString();
-
-        UpdateTotalCost();
-    }
-
-    private void UpdateTotalCost()
-    {
-        if (totalCostText == null) return;
-
-        float total = 0f;
-        for (int i = 0; i < counts.Length; i++)
         {
-            if (itemsForSale[i] != null)
-                total += counts[i] * itemsForSale[i].buyPrice;
+            if (i < counts.Length)
+            {
+                countTexts[i].text = counts[i].ToString();
+            }
         }
-
-        totalCostText.text = $"Total: ₱{total:F2}";
     }
 }

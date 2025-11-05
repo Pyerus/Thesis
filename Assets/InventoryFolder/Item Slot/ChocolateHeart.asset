@@ -12,9 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cdd71fa53ac20264fb4a76d29b205b58, type: 3}
   m_Name: ChocolateHeart
   m_EditorClassIdentifier: 
-  itemName: ChocolateHeart
   prefab: {fileID: 7738347509151267748, guid: 1cd42d7d5c842bc41ad9950566aa777c, type: 3}
-  type: 0
+  type: 2
   description: 
-  buyPrice: 160
-  sellPrice: 200
