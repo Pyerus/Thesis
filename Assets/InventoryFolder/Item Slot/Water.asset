@@ -12,9 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cdd71fa53ac20264fb4a76d29b205b58, type: 3}
   m_Name: Water
   m_EditorClassIdentifier: 
-  itemName: Water
   prefab: {fileID: 7738347509151267748, guid: 41fc8ddf819f07d4d8a7cae4f36b53f0, type: 3}
   type: 2
   description: Shit
-  buyPrice: 25
-  sellPrice: 30

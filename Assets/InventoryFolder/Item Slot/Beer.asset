@@ -12,9 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cdd71fa53ac20264fb4a76d29b205b58, type: 3}
   m_Name: Beer
   m_EditorClassIdentifier: 
-  itemName: Beer
   prefab: {fileID: 7738347509151267748, guid: 349350f19c2b81849820b3a1fb524098, type: 3}
-  type: 0
+  type: 2
   description: 
-  buyPrice: 50
-  sellPrice: 59

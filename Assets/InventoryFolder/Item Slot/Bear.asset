@@ -12,9 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cdd71fa53ac20264fb4a76d29b205b58, type: 3}
   m_Name: Bear
   m_EditorClassIdentifier: 
-  itemName: Bear
   prefab: {fileID: 7738347509151267748, guid: b0d271e7aa437984a8d8b87c6a3392c1, type: 3}
-  type: 1
+  type: 2
   description: 
-  buyPrice: 390
-  sellPrice: 499

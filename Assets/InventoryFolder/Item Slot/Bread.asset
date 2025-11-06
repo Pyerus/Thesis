@@ -12,9 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cdd71fa53ac20264fb4a76d29b205b58, type: 3}
   m_Name: Bread
   m_EditorClassIdentifier: 
-  itemName: Bread
   prefab: {fileID: 7738347509151267748, guid: b88169ab521f78642a2ac43108b06c1b, type: 3}
-  type: 0
+  type: 2
   description: 
-  buyPrice: 45
-  sellPrice: 60
