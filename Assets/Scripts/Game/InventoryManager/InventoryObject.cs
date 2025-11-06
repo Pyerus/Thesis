@@ -20,6 +20,16 @@ public class InventoryObject : ScriptableObject
         }
     }
 
+    public int FindEmptySlot() // Utilized in Player script and passed to TierManager
+    {
+        for (int i = 0; i < Container.Count; i++)
+        {
+            if (Container[i].item == null)
+                return i;
+        }
+        return -1; // No empty slot found
+    }
+
     public void AddItem(ItemObject _item, int _amount)
     {
         int remaining = _amount;

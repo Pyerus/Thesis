@@ -26,6 +26,8 @@ public class Cursors : MonoBehaviour
     {
         controls.Mouse.Click.started += _ => StartedClick();
         controls.Mouse.Click.performed += _ => EndedClick();
+
+        InventoryMenu.SetActive(false);
     }
 
     public void StartedClick() {
