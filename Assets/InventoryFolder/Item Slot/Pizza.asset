@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cdd71fa53ac20264fb4a76d29b205b58, type: 3}
   m_Name: Pizza
   m_EditorClassIdentifier: 
+  itemName: 
   prefab: {fileID: 7738347509151267748, guid: ffdd58d6dbb76bf41928622ec0a8c1bb, type: 3}
   type: 2
   description: 
+  buyPrice: 120
+  sellPrice: 149

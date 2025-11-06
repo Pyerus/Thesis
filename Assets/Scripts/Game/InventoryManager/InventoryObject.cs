@@ -7,8 +7,6 @@ public class InventoryObject : ScriptableObject
     public List<InventorySlot> Container = new List<InventorySlot>();
     public int maxSlots = 4;
     public int maxCapacity = 10;
-    public int currentStock;
-    public int maxStock = 99;
 
     private void OnEnable()
     {
@@ -20,22 +18,6 @@ public class InventoryObject : ScriptableObject
                 Container.Add(new InventorySlot(null, 0));
             }
         }
-    }
-
-    public void AddStock()
-    {
-        //If the current stock exceeds it will return nothing and will 
-        //just print out 
-        //"Cannot Add more to Stock"
-        if (currentStock > maxStock)
-        {
-            Debug.Log("Max Stock Cannot Add More");
-        }
-    }
-    
-    public void StockToSlot()
-    {
-        //Decrease Current Stock present when adding to slot
     }
 
     public void AddItem(ItemObject _item, int _amount)
@@ -104,8 +86,6 @@ public class InventoryObject : ScriptableObject
                 return;
             }
         }
-
-        //Create method for bringing back item to stock after removing
     }
 
     public void PrintInventory()

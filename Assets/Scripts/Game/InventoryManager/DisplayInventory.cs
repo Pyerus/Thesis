@@ -12,7 +12,7 @@ public class DisplayInventory : MonoBehaviour
     public InventoryObject inventory;
     private InventoryObject previousInventory;
     private Dictionary<int, GameObject> itemsDisplayed = new Dictionary<int, GameObject>();
-    
+
     void Start()
     {
         CreateDisplay();
