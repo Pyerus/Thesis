@@ -2,11 +2,12 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class Tutorial : MonoBehaviour
 {
     [SerializeField] private GameObject[] dialogues;
-    [SerializeField] private float typingSpeed = 0.03f;
+    private float typingSpeed = 0.04f;
     [SerializeField] private AudioSource audioSource;  
     [SerializeField] private AudioClip[] typingSounds;
 
@@ -76,7 +77,7 @@ public class Tutorial : MonoBehaviour
         }
         else
         {
-            Debug.Log("Tutorial finished!");
+            CircleTransition.Instance.TransitionToScene("MainMenuScene");
         }
     }
 }
