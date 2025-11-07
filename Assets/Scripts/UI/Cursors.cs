@@ -5,17 +5,19 @@ using UnityEngine.UI;
 
 public class Cursors : MonoBehaviour
 {
+    [Header("Cursor Textures")]
     public Texture2D cursor;
     public Texture2D cursorClicked;
 
     private CursorControls controls;
     private Camera mainCamera;
 
-    private bool menuActivated;
-    public GameObject InventoryMenu;
+    [Header("Inventory Menu (Shelf UI)")]
+    public GameObject InventoryMenu;     // The one that toggles active on shelf click
     public DisplayInventory inventorySlots;
 
     private ShelfInventory shelfInventory;
+    private bool menuActivated;
 
     void Awake()
     {
@@ -42,10 +44,10 @@ public class Cursors : MonoBehaviour
         DetectObject();
     }
 
-    public void DetectObject()
+    private void DetectObject()
     {
-
-        if (IsPointerOverUIButton())
+        // Stop clicking shelves if UI button is under cursor or if the shelf menu is active
+        if (IsPointerOverUIButton() || (InventoryMenu != null && InventoryMenu.activeInHierarchy))
             return;
 
         Ray ray = mainCamera.ScreenPointToRay(controls.Mouse.Position.ReadValue<Vector2>());
@@ -73,7 +75,6 @@ public class Cursors : MonoBehaviour
         {
             var go = result.gameObject;
 
-            
             if (go.GetComponent<Button>() != null ||
                 go.GetComponent<Toggle>() != null ||
                 go.GetComponent<Slider>() != null ||
@@ -87,15 +88,12 @@ public class Cursors : MonoBehaviour
                 go.GetComponentInParent<Scrollbar>() != null ||
                 go.GetComponentInParent<InputField>() != null)
             {
-                return true; // mouse is over a clickable UI element
+                return true;
             }
         }
 
         return false;
     }
-
-
-
 
     public void OpenMenu()
     {
