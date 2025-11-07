@@ -1,4 +1,7 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
+using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class Cursors : MonoBehaviour
 {
@@ -30,7 +33,8 @@ public class Cursors : MonoBehaviour
         InventoryMenu.SetActive(false);
     }
 
-    public void StartedClick() {
+    public void StartedClick()
+    {
         ChangeCursor(cursorClicked);
     }
 
@@ -42,8 +46,13 @@ public class Cursors : MonoBehaviour
 
     public void DetectObject()
     {
+
+        if (IsPointerOverUIButton())
+            return;
+
         Ray ray = mainCamera.ScreenPointToRay(controls.Mouse.Position.ReadValue<Vector2>());
         RaycastHit hit;
+
         if (Physics.Raycast(ray, out hit))
         {
             if (hit.collider.CompareTag("Shelf"))
@@ -53,6 +62,42 @@ public class Cursors : MonoBehaviour
             }
         }
     }
+
+    private bool IsPointerOverUIButton()
+    {
+        PointerEventData eventData = new PointerEventData(EventSystem.current);
+        eventData.position = controls.Mouse.Position.ReadValue<Vector2>();
+
+        List<RaycastResult> results = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(eventData, results);
+
+        foreach (var result in results)
+        {
+            var go = result.gameObject;
+
+            
+            if (go.GetComponent<Button>() != null ||
+                go.GetComponent<Toggle>() != null ||
+                go.GetComponent<Slider>() != null ||
+                go.GetComponent<Dropdown>() != null ||
+                go.GetComponent<Scrollbar>() != null ||
+                go.GetComponent<InputField>() != null ||
+                go.GetComponentInParent<Button>() != null ||
+                go.GetComponentInParent<Toggle>() != null ||
+                go.GetComponentInParent<Slider>() != null ||
+                go.GetComponentInParent<Dropdown>() != null ||
+                go.GetComponentInParent<Scrollbar>() != null ||
+                go.GetComponentInParent<InputField>() != null)
+            {
+                return true; // mouse is over a clickable UI element
+            }
+        }
+
+        return false;
+    }
+
+
+
 
     public void OpenMenu()
     {
