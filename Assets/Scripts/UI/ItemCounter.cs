@@ -7,7 +7,7 @@ public class ItemCounter : MonoBehaviour
     public TextMeshProUGUI[] countTexts; // drag all the "0" texts here
     
     [Header("Link to Game Systems")]
-    public Cursors cursor; // Drag your Cursor manager GameObject here
+    public InventoryObject stockInventory; // where the store inventory is placed
     public ItemObject[] itemsForSale; // MUST BE IN SAME ORDER AS TEXTS
 
     [Header("Buying Settings")]
@@ -51,14 +51,6 @@ public class ItemCounter : MonoBehaviour
     // ✅ One button for buying all selected items
     public void BuyAll()
     {
-        if (cursor.GetShelfInventory() == null)
-        {
-            Debug.LogWarning("Cannot buy: No shelf selected.");
-            return;
-        }
-
-        InventoryObject shelfInventory = cursor.GetShelfInventory().GetInventoryObject();
-
         float totalSpent = 0f;
         int totalItems = 0;
 
@@ -67,7 +59,7 @@ public class ItemCounter : MonoBehaviour
             int amount = counts[i];
             if (amount > 0 && itemsForSale[i] != null)
             {
-                shelfInventory.AddItem(itemsForSale[i], amount);
+                stockInventory.AddItem(itemsForSale[i], stockInventory.maxCapacity, amount);
                 totalSpent += amount * itemsForSale[i].buyPrice;
                 totalItems += amount;
                 counts[i] = 0;
