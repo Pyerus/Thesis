@@ -6,11 +6,17 @@ public enum ItemType
     Equipment,
     Default
 }
+
+[CreateAssetMenu(fileName = "New Item", menuName = "Inventory/Item")]
 public class ItemObject : ScriptableObject
 {
+    [Header("Basic Info")]
+    public string itemName;
     public GameObject prefab;
     public ItemType type;
-    [TextArea(15, 20)]
-    public string description;
-    internal ItemObject item;
+    [TextArea(5, 10)] public string description;
+
+    [Header("Economy Settings")]
+    public float buyPrice;
+    public float sellPrice;
 }

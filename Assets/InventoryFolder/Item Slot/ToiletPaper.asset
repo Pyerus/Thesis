@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cdd71fa53ac20264fb4a76d29b205b58, type: 3}
   m_Name: ToiletPaper
   m_EditorClassIdentifier: 
-  prefab: {fileID: 7738347509151267748, guid: d13d0f2823a66e544adbd2aae12c0db6, type: 3}
-  type: 2
+  itemName: ToiletPaper
+  prefab: {fileID: 7738347509151267748, guid: 72d916de909b8954e88a12d67100c278, type: 3}
+  type: 1
   description: 
+  buyPrice: 30
+  sellPrice: 40

@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cdd71fa53ac20264fb4a76d29b205b58, type: 3}
   m_Name: PeanutButter
   m_EditorClassIdentifier: 
+  itemName: PeanutButter
   prefab: {fileID: 7738347509151267748, guid: be6cf4ced8cba1a4bb64c893e669f86a, type: 3}
-  type: 2
+  type: 0
   description: 
+  buyPrice: 50
+  sellPrice: 70

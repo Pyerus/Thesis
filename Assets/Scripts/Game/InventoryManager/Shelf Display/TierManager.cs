@@ -1,23 +1,20 @@
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor.Rendering.LookDev;
 using UnityEngine;
 using static Unity.VisualScripting.Metadata;
 
 public class TierManager : MonoBehaviour
 {
+    public ShelfType shelfType; // this doesn't do anything lol
+    
     [Header("Shelf Tier")] 
     public GameObject tier1;
     public GameObject tier2;
     public GameObject tier3;
     public GameObject tier4;
 
-    [Header("Item Prefabs")]
-    public GameObject tier1Item;
-    public GameObject tier2Item;
-    public GameObject tier3Item;
-    public GameObject tier4Item;
-
-    // slot arrangement
+    [Header("Slot Arrangements")]
     GameObject[] tier1Slots;
     GameObject[] tier2Slots;
     GameObject[] tier3Slots;
@@ -25,42 +22,78 @@ public class TierManager : MonoBehaviour
 
 
 
-    public void StockItems(Item item) // method called outside to initialize stocking
+    public void StockItems(Item item, int tierIndex)
     {
-        // check tier level and set prefab (default to tier 1 for now)
-        tier1Item = item.itemPrefab;
+        // Declare variables to hold the references
+        GameObject tier;
+        GameObject[] tierSlots;
 
-        // check item size and decide slot arrangement
-        string itemSize = CheckItemSize(item);
+        // Check tier level and assign slots
+        CheckTier(tierIndex, out tier);
 
-        // get slots
-        tier1Slots = SetTierArrangement(tier1, itemSize);
+        Debug.Log("StockItems() invoked. Index: " + tierIndex.ToString() + ". Tier: " + tier);
 
-        // place items on the shelf
-        PlaceItems(tier1Slots, tier1Item);
+        if (tier != null)
+        {
+            // check item size and decide slot arrangement
+            string itemSize = CheckItemSize(item.itemPrefab);
+
+            // set item arrangement based on size
+            tierSlots = SetTierArrangement(tier, itemSize);
+
+            // place items on the shelf
+            PlaceItems(tierSlots, item.itemPrefab);
+
+            // Update the tier array after modification
+            if (tierIndex == 0)
+                tier1Slots = tierSlots;
+            else if (tierIndex == 1)
+                tier2Slots = tierSlots;
+            else if (tierIndex == 2)
+                tier3Slots = tierSlots;
+            else if (tierIndex == 3)
+                tier4Slots = tierSlots;
+        }
     }
 
     public void ClearShelf()
     {
+        Debug.Log("ClearShelf() invoked.");
         RemoveAllItems(tier1Slots);
+        RemoveAllItems(tier2Slots);
+        RemoveAllItems(tier3Slots);
+        RemoveAllItems(tier4Slots);
     }
 
 
 
-    private string CheckItemSize(Item item)
+    private void CheckTier(int tierIndex, out GameObject tier)
+    {
+        tier = tierIndex switch
+        {
+            0 => tier1,
+            1 => tier2,
+            2 => tier3,
+            3 => tier4,
+            _ => null
+        };
+    }
+
+    private string CheckItemSize(GameObject itemPrefab)
     {
         // check item size to decide slot arrangement
+        ItemCategory category = itemPrefab.GetComponent<ItemCategory>();
         string size = "";
 
-        if (item.itemSize == ItemSize.Small)
+        if (category.category == ItemCategory.Category.Small)
         {
             size = "Small Items";
         }
-        else if (item.itemSize == ItemSize.Medium)
+        else if (category.category == ItemCategory.Category.Medium)
         {
             size = "Medium Items";
         }
-        else if (item.itemSize == ItemSize.Large)
+        else if (category.category == ItemCategory.Category.Big)
         {
             size = "Large Items";
         }
@@ -119,5 +152,12 @@ public class TierManager : MonoBehaviour
                 }
             }
         }
+    }
+
+    public enum ShelfType
+    {
+        Shelf,
+        Fridge,
+        Produce
     }
 }
