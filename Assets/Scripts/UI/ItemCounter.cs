@@ -4,15 +4,16 @@ using TMPro;
 public class ItemCounter : MonoBehaviour
 {
     [Header("Assign all number texts in order")]
-    public TextMeshProUGUI[] countTexts; // drag all the "0" texts here
+    public TextMeshProUGUI[] countTexts; 
     
     [Header("Link to Game Systems")]
-    public Cursors cursor; // Drag your Cursor manager GameObject here
-    public ItemObject[] itemsForSale; // MUST BE IN SAME ORDER AS TEXTS
+    public Cursors cursor;
+    public ItemObject[] itemsForSale; 
+    public MoneyManager moneyManager; 
 
     [Header("Buying Settings")]
-    public int incrementAmount = 50; // 50 or 100
-    public TextMeshProUGUI totalCostText; // optional, shows total ₱
+    public int incrementAmount = 50; 
+    public TextMeshProUGUI totalCostText; 
 
     private int[] counts;
 
@@ -57,18 +58,45 @@ public class ItemCounter : MonoBehaviour
             return;
         }
 
+        if (moneyManager == null)
+        {
+            Debug.LogError("MoneyManager is not assigned!");
+            return;
+        }
+
+        // Calculate total cost
+        float totalSpent = 0f;
+        for (int i = 0; i < counts.Length; i++)
+        {
+            if (itemsForSale[i] != null)
+                totalSpent += counts[i] * itemsForSale[i].buyPrice;
+        }
+
+        
+        if (totalSpent > 0f)
+        {
+            if (!moneyManager.SpendMoney(totalSpent))
+            {
+                Debug.Log("Not enough money.");
+                return;
+            }
+        }
+        else
+        {
+            Debug.Log("No items selected to buy.");
+            return;
+        }
+
+        // Proceed with buying
         InventoryObject shelfInventory = cursor.GetShelfInventory().GetInventoryObject();
 
-        float totalSpent = 0f;
         int totalItems = 0;
-
         for (int i = 0; i < counts.Length; i++)
         {
             int amount = counts[i];
             if (amount > 0 && itemsForSale[i] != null)
             {
                 shelfInventory.AddItem(itemsForSale[i], amount);
-                totalSpent += amount * itemsForSale[i].buyPrice;
                 totalItems += amount;
                 counts[i] = 0;
                 UpdateText(i);
@@ -76,11 +104,7 @@ public class ItemCounter : MonoBehaviour
         }
 
         UpdateTotalCost();
-
-        if (totalItems > 0)
-            Debug.Log($"🛒 Bought {totalItems} items for ₱{totalSpent:F2}");
-        else
-            Debug.Log("No items selected to buy.");
+        Debug.Log($"Bought {totalItems} items for ₱{totalSpent:F2}");
     }
 
     private void UpdateText(int index)
