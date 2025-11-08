@@ -8,7 +8,6 @@ public class Tutorial : MonoBehaviour
 {
     [SerializeField] private GameObject[] dialogues;
     private float typingSpeed = 0.04f;
-    [SerializeField] private AudioSource audioSource;  
     [SerializeField] private AudioClip[] typingSounds;
 
     private int currentDialogueIndex = 0;
@@ -49,15 +48,20 @@ public class Tutorial : MonoBehaviour
 
     private IEnumerator TypeText(string textToType)
     {
-        if (audioSource != null && typingSounds.Length > 0)
-        {
-            AudioClip randomClip = typingSounds[Random.Range(0, typingSounds.Length)];
-            audioSource.PlayOneShot(randomClip, 0.8f);
-        }
+        // Use AudioManager's SFX source (if available)
+        AudioSource sfxSource = AudioManager.Instance != null ? AudioManager.Instance.sfxSource : null;
 
         foreach (char c in textToType)
         {
             currentText.text += c;
+
+            // Play typing sound with correct SFX volume
+            if (sfxSource != null && typingSounds.Length > 0)
+            {
+                AudioClip randomClip = typingSounds[Random.Range(0, typingSounds.Length)];
+                sfxSource.PlayOneShot(randomClip, sfxSource.volume);
+            }
+
             yield return new WaitForSeconds(typingSpeed);
         }
     }
