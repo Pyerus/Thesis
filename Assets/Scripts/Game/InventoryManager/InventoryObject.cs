@@ -20,47 +20,45 @@ public class InventoryObject : ScriptableObject
         }
     }
 
-    public int FindEmptySlot() // Utilized in Player script and passed to TierManager
-    {
-        for (int i = 0; i < Container.Count; i++)
-        {
-            if (Container[i].item == null)
-                return i;
-        }
-        return -1; // No empty slot found
-    }
-
-    public void AddItem(ItemObject _item, int _amount)
+    public (ItemObject item, int amountAdded, int slotIndex) AddItem(ItemObject _item, int maxAmount, int _amount)
     {
         int remaining = _amount;
+        int itemsAdded = 0;
+        int slotIndex = -1; // -1 means no slot used (inventory full)
 
-        //Try to find existing slot with the same item that has space
-        foreach (var slot in Container)
+        // Try to find existing slot with the same item that has space
+        for (int i = 0; i < Container.Count; i++)
         {
-            if (slot.item == _item && slot.amount < maxCapacity)
+            var slot = Container[i];
+            if (slot.item == _item && slot.amount < maxAmount)
             {
-                int spaceLeft = maxCapacity - slot.amount;
+                int spaceLeft = maxAmount - slot.amount;
                 int addAmount = Mathf.Min(remaining, spaceLeft);
                 slot.AddAmount(addAmount);
                 remaining -= addAmount;
+                itemsAdded += addAmount;
+                slotIndex = i;
 
                 if (remaining <= 0)
-                    return;
+                    return (_item, itemsAdded, slotIndex);
             }
         }
 
-        //Try to fill empty slot
-        foreach (var slot in Container)
+        // Try to fill an empty slot
+        for (int i = 0; i < Container.Count; i++)
         {
+            var slot = Container[i];
             if (slot.item == null)
             {
-                int addAmount = Mathf.Min(remaining, maxCapacity);
+                int addAmount = Mathf.Min(remaining, maxAmount);
                 slot.item = _item;
                 slot.amount = addAmount;
                 remaining -= addAmount;
+                itemsAdded += addAmount;
+                slotIndex = i;
 
                 if (remaining <= 0)
-                    return;
+                    return (_item, itemsAdded, slotIndex);
             }
         }
 
@@ -68,6 +66,8 @@ public class InventoryObject : ScriptableObject
         {
             Debug.Log("No empty slots left in inventory!");
         }
+
+        return (_item, itemsAdded, slotIndex);
     }
 
     // Check if inventory has an item (used for probability calculation)
@@ -81,21 +81,42 @@ public class InventoryObject : ScriptableObject
         return false;
     }
 
-    public void RemoveItem(ItemObject _item, int _amount)
+    public int GetItemCount(ItemObject item)
+    {
+        int total = 0;
+
+        foreach (var slot in Container)
+        {
+            if (slot.item == item)
+            {
+                total += slot.amount;
+            }
+        }
+
+        return total;
+    }
+
+    public (ItemObject item, int amount) RemoveItem(ItemObject _item, int _amount)
     {
         foreach (var slot in Container)
         {
             if (slot.item == _item)
             {
-                slot.amount -= _amount;
+                int removedAmount = Mathf.Min(_amount, slot.amount);
+                slot.amount -= removedAmount;
+
                 if (slot.amount <= 0)
                 {
                     slot.item = null;
                     slot.amount = 0;
                 }
-                return;
+
+                return (_item, removedAmount);
             }
         }
+
+        // Item not found
+        return (null, 0);
     }
 
     public void PrintInventory()

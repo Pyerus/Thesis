@@ -5,7 +5,8 @@ using UnityEngine.UI;
 public class Player : MonoBehaviour
 {
     public Cursors cursor;
-    public InventoryObject inventory;
+    public InventoryObject stockInventory;
+    public InventoryObject shelfInventory;
     public TierManager tierManager;
     
 
@@ -13,7 +14,7 @@ public class Player : MonoBehaviour
     {
         if (cursor.GetShelfInventory() != null)
         {
-            inventory = cursor.GetShelfInventory().GetInventoryObject();
+            shelfInventory = cursor.GetShelfInventory().GetInventoryObject();
             tierManager = cursor.GetShelfInventory().GetTierManager();
         }
     }
@@ -22,8 +23,22 @@ public class Player : MonoBehaviour
     {
         if (item != null)
         {
-            tierManager.StockItems(item, inventory.FindEmptySlot());
-            inventory.AddItem(item.item, inventory.maxCapacity);
+            int addAmount = 0;
+            
+            // get the current amount in stock
+            int stock = stockInventory.GetItemCount(item.item);
+            int max = tierManager.GetMaxAmount(item);
+
+            // if there are less than the maximum capacity in stock, add only the amount available
+            if (stock < max)
+                addAmount = stock;
+            else
+                addAmount = max;
+
+            var added = shelfInventory.AddItem(item.item, max, addAmount);
+            tierManager.StockItems(item, added.slotIndex, added.amountAdded);
+            // remove the added item from the store inventory
+            stockInventory.RemoveItem(added.item, added.amountAdded);
         }
     }
 
@@ -31,22 +46,19 @@ public class Player : MonoBehaviour
     {
         tierManager.ClearShelf();
 
-        for (int i = 0; i < inventory.Container.Count; i++)
+        for (int i = 0; i < shelfInventory.Container.Count; i++)
         {
-            var slot = inventory.Container[i];
+            var slot = shelfInventory.Container[i];
             if (slot.item != null)
             {
                 Debug.Log($"Removed {slot.item.name} from slot {i + 1}");
-                inventory.RemoveItem(slot.item, inventory.maxCapacity);
+                var removed = shelfInventory.RemoveItem(slot.item, 100);
+                // add the items back to store inventory
+                stockInventory.AddItem(removed.item, stockInventory.maxCapacity, removed.amount);
             }
         }
 
         Debug.Log("All items removed from inventory!");
-        inventory.PrintInventory();
-    }
-
-    private void OnApplicationQuit()
-    {
-        inventory.Container.Clear();
+        shelfInventory.PrintInventory();
     }
 }
