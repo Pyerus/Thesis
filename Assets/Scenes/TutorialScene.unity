@@ -20564,7 +20564,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cursor: {fileID: 1242056016}
-  inventory: {fileID: 11400000, guid: 151a8b9badefef243b86cedc03f30591, type: 2}
+  stockInventory: {fileID: 0}
+  shelfInventory: {fileID: 0}
   tierManager: {fileID: 0}
 --- !u!4 &657182325
 Transform:
@@ -24206,8 +24207,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 291582877}
   m_HandleRect: {fileID: 291582876}
   m_Direction: 2
-  m_Value: 1.0000001
-  m_Size: 0.35276273
+  m_Value: 1
+  m_Size: 0.3527627
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -29087,7 +29088,7 @@ MonoBehaviour:
   - {fileID: 1288768007}
   - {fileID: 237778250}
   - {fileID: 1642504817}
-  cursor: {fileID: 1242056016}
+  stockInventory: {fileID: 11400000, guid: 151a8b9badefef243b86cedc03f30591, type: 2}
   itemsForSale:
   - {fileID: 11400000, guid: d3ca3f784c2e31048a49c183189b0b9a, type: 2}
   - {fileID: 11400000, guid: 180086c9474e81243b3eedf6c72eb304, type: 2}
@@ -29111,6 +29112,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 0ac0eff8ce084314e8054588fe0bbccb, type: 2}
   - {fileID: 11400000, guid: 807d35df0f6466646aba396c56a50773, type: 2}
   - {fileID: 11400000, guid: d98b2e0b701597944a45958994de84f5, type: 2}
+  moneyManager: {fileID: 1515530485}
   incrementAmount: 50
   totalCostText: {fileID: 1490675581}
 --- !u!114 &995385309
@@ -43761,6 +43763,52 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1504638839}
   m_CullTransparentMesh: 1
+--- !u!1 &1515530484
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1515530486}
+  - component: {fileID: 1515530485}
+  m_Layer: 0
+  m_Name: MoneyManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1515530485
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1515530484}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc102c352ad8eaf44abb217a994ad0d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MoneyManager
+  startingMoney: 100000
+  moneyText: {fileID: 2096761349}
+--- !u!4 &1515530486
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1515530484}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 586.4956, y: 468.57004, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1516719181
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -45978,7 +46026,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.000061035156, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0.00036621, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1600968541
@@ -53794,9 +53842,33 @@ MonoBehaviour:
   m_GameObject: {fileID: 1864787766}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 40b531a4de8f995408724f30c1cc7c42, type: 3}
+  m_Script: {fileID: 11500000, guid: 053a9f0e1d571ac448a467d619fb2478, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StockManager
+  stockInventory: {fileID: 11400000, guid: 151a8b9badefef243b86cedc03f30591, type: 2}
+  counterTexts:
+  - {fileID: 531422188}
+  - {fileID: 1380217464}
+  - {fileID: 548408807}
+  - {fileID: 1153973890}
+  - {fileID: 1897367108}
+  - {fileID: 535670122}
+  - {fileID: 1466335069}
+  - {fileID: 1208990910}
+  - {fileID: 1371006061}
+  - {fileID: 18426710}
+  - {fileID: 412151004}
+  - {fileID: 1925018500}
+  - {fileID: 1320409519}
+  - {fileID: 691410122}
+  - {fileID: 1655774939}
+  - {fileID: 1924780394}
+  - {fileID: 1291154171}
+  - {fileID: 173552287}
+  - {fileID: 496087345}
+  - {fileID: 972087385}
+  - {fileID: 452694551}
+  - {fileID: 1982611024}
 --- !u!4 &1864787768
 Transform:
   m_ObjectHideFlags: 0
@@ -61801,7 +61873,7 @@ GameObject:
   - component: {fileID: 2096761350}
   - component: {fileID: 2096761349}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Player Money
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -61823,8 +61895,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -132, y: 0}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchoredPosition: {x: -0.00075531006, y: 0}
+  m_SizeDelta: {x: 482.93, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2096761349
 MonoBehaviour:
@@ -63100,3 +63172,4 @@ SceneRoots:
   - {fileID: 1821870505}
   - {fileID: 1864787768}
   - {fileID: 1025649276}
+  - {fileID: 1515530486}
