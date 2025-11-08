@@ -3,28 +3,19 @@ using TMPro;
 
 public class ItemCounter : MonoBehaviour
 {
-    [Header("Assign all number texts in order")]
-    public TextMeshProUGUI[] countTexts; // drag all the "0" texts here
-    
-    [Header("Link to Game Systems")]
-    public InventoryObject stockInventory; // where the store inventory is placed
-    public ItemObject[] itemsForSale; // MUST BE IN SAME ORDER AS TEXTS
+    public TextMeshProUGUI[] countTexts;
+    public InventoryObject stockInventory;
+    public ItemObject[] itemsForSale;
+    public MoneyManager moneyManager;
 
-    [Header("Buying Settings")]
-    public int incrementAmount = 50; // 50 or 100
-    public TextMeshProUGUI totalCostText; // optional, shows total ₱
+    public int incrementAmount = 50;
+    public TextMeshProUGUI totalCostText;
 
     private int[] counts;
 
     void Start()
     {
         counts = new int[countTexts.Length];
-
-        if (itemsForSale.Length != countTexts.Length)
-        {
-            Debug.LogError("ItemCounter Error: itemsForSale and countTexts length mismatch.");
-        }
-
         UpdateAllTexts();
     }
 
@@ -48,7 +39,6 @@ public class ItemCounter : MonoBehaviour
         UpdateTotalCost();
     }
 
-    // ✅ One button for buying all selected items
     public void BuyAll()
     {
         float totalSpent = 0f;
@@ -56,11 +46,22 @@ public class ItemCounter : MonoBehaviour
 
         for (int i = 0; i < counts.Length; i++)
         {
+            if (itemsForSale[i] != null)
+                totalSpent += counts[i] * itemsForSale[i].buyPrice;
+        }
+
+        if (moneyManager != null && !moneyManager.SpendMoney(totalSpent))
+        {
+            Debug.Log("Not enough money to complete the purchase.");
+            return;
+        }
+
+        for (int i = 0; i < counts.Length; i++)
+        {
             int amount = counts[i];
             if (amount > 0 && itemsForSale[i] != null)
             {
                 stockInventory.AddItem(itemsForSale[i], stockInventory.maxCapacity, amount);
-                totalSpent += amount * itemsForSale[i].buyPrice;
                 totalItems += amount;
                 counts[i] = 0;
                 UpdateText(i);
@@ -70,9 +71,7 @@ public class ItemCounter : MonoBehaviour
         UpdateTotalCost();
 
         if (totalItems > 0)
-            Debug.Log($"🛒 Bought {totalItems} items for ₱{totalSpent:F2}");
-        else
-            Debug.Log("No items selected to buy.");
+            Debug.Log($"Bought {totalItems} items for ₱{totalSpent:F2}");
     }
 
     private void UpdateText(int index)
