@@ -22,28 +22,28 @@ public class Player : MonoBehaviour
     {
         if (item != null)
         {
+            tierManager.StockItems(item, inventory.FindEmptySlot());
             inventory.AddItem(item.item, inventory.maxCapacity);
-            tierManager.StockItems(item);
         }
     }
 
-public void RemoveAllItems()
-{
-    for (int i = 0; i < inventory.Container.Count; i++)
+    public void RemoveAllItems()
     {
-        var slot = inventory.Container[i];
-        if (slot.item != null)
+        tierManager.ClearShelf();
+
+        for (int i = 0; i < inventory.Container.Count; i++)
         {
-            Debug.Log($"Removed {slot.item.name} from slot {i + 1}");
-            inventory.RemoveItem(slot.item, inventory.maxCapacity);
+            var slot = inventory.Container[i];
+            if (slot.item != null)
+            {
+                Debug.Log($"Removed {slot.item.name} from slot {i + 1}");
+                inventory.RemoveItem(slot.item, inventory.maxCapacity);
+            }
         }
+
+        Debug.Log("All items removed from inventory!");
+        inventory.PrintInventory();
     }
-
-    tierManager.ClearShelf();
-
-    Debug.Log("All items removed from inventory!");
-    inventory.PrintInventory();
-}
 
     private void OnApplicationQuit()
     {
