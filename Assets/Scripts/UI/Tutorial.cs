@@ -51,17 +51,15 @@ public class Tutorial : MonoBehaviour
         // Use AudioManager's SFX source (if available)
         AudioSource sfxSource = AudioManager.Instance != null ? AudioManager.Instance.sfxSource : null;
 
+        if (sfxSource != null && typingSounds.Length > 0)
+        {
+            AudioClip randomClip = typingSounds[Random.Range(0, typingSounds.Length)];
+            sfxSource.PlayOneShot(randomClip, sfxSource.volume);
+        }
+
         foreach (char c in textToType)
         {
             currentText.text += c;
-
-            // Play typing sound with correct SFX volume
-            if (sfxSource != null && typingSounds.Length > 0)
-            {
-                AudioClip randomClip = typingSounds[Random.Range(0, typingSounds.Length)];
-                sfxSource.PlayOneShot(randomClip, sfxSource.volume);
-            }
-
             yield return new WaitForSeconds(typingSpeed);
         }
     }
@@ -82,6 +80,7 @@ public class Tutorial : MonoBehaviour
         else
         {
             CircleTransition.Instance.TransitionToScene("MainMenuScene");
+            Debug.Log("Teleporting to MainMenuScene");
         }
     }
 }
