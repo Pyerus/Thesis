@@ -12,7 +12,7 @@ public class ShelfInventory : MonoBehaviour
 
     private void OnApplicationQuit()
     {
-        inventory.Container.Clear();
+        //inventory.Container.Clear();
     }
 
     public InventoryObject GetInventoryObject()

@@ -22,7 +22,7 @@ public class TierManager : MonoBehaviour
 
 
 
-    public void StockItems(Item item, int tierIndex)
+    public void StockItems(Item item, int tierIndex, int amount)
     {
         // Declare variables to hold the references
         GameObject tier;
@@ -42,7 +42,7 @@ public class TierManager : MonoBehaviour
             tierSlots = SetTierArrangement(tier, itemSize);
 
             // place items on the shelf
-            PlaceItems(tierSlots, item.itemPrefab);
+            PlaceItems(tierSlots, item.itemPrefab, amount);
 
             // Update the tier array after modification
             if (tierIndex == 0)
@@ -54,6 +54,27 @@ public class TierManager : MonoBehaviour
             else if (tierIndex == 3)
                 tier4Slots = tierSlots;
         }
+    }
+
+    public int GetMaxAmount(Item item)
+    {
+        // check item size and return max amount
+        ItemCategory category = item.itemPrefab.GetComponent<ItemCategory>();
+
+        if (category.category == ItemCategory.Category.Small)
+        {
+            return 18;
+        }
+        if (category.category == ItemCategory.Category.Medium)
+        {
+            return 10;
+        }
+        if (category.category == ItemCategory.Category.Big)
+        {
+            return 5;
+        }
+
+        return 0;
     }
 
     public void ClearShelf()
@@ -114,14 +135,28 @@ public class TierManager : MonoBehaviour
         return tierSlots;
     }
 
-    private void PlaceItems(GameObject[] slots, GameObject item)
+    private void PlaceItems(GameObject[] slots, GameObject item, int amount)
     {
+        if (amount < 1)
+            return;
+        
+        int placed = 0;
+
         foreach (GameObject slot in slots)
         {
             if (slot.transform.childCount == 0)
             {
-                GameObject newItem = Instantiate(item, slot.transform);
+                Instantiate(item, slot.transform);
+                placed++;
+
+                if (placed >= amount)
+                    break; // Stop once we've placed the desired amount
             }
+        }
+
+        if (placed < amount)
+        {
+            Debug.LogWarning($"Only placed {placed}/{amount} items — not enough empty slots!");
         }
     }
 
