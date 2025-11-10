@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Cola
   prefab: {fileID: 7738347509151267748, guid: 271428621ca75d142959297193aacd61, type: 3}
-  type: 2
+  type: 0
   description: 
   buyPrice: 30
   sellPrice: 35

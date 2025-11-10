@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Cereal
   prefab: {fileID: 7738347509151267748, guid: 9e50e5a84505c44409983a5c5937ae8e, type: 3}
-  type: 2
+  type: 0
   description: 
   buyPrice: 20
   sellPrice: 30

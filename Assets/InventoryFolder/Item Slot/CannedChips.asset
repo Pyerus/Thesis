@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cdd71fa53ac20264fb4a76d29b205b58, type: 3}
   m_Name: CannedChips
   m_EditorClassIdentifier: 
-  itemName: CannedChips
+  itemName: Canned Chips
   prefab: {fileID: 7738347509151267748, guid: 5d306bdf4e1132640be344e24574f1ea, type: 3}
   type: 0
   description: 

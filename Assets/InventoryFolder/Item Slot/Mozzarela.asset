@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Mozzarella
   prefab: {fileID: 7738347509151267748, guid: d9a9f2bda912e05488893f3d5dcc428f, type: 3}
-  type: 2
+  type: 0
   description: 
   buyPrice: 200
   sellPrice: 249

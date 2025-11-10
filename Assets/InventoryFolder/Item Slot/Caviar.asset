@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cdd71fa53ac20264fb4a76d29b205b58, type: 3}
   m_Name: Caviar
   m_EditorClassIdentifier: 
-  itemName: 
+  itemName: Caviar
   prefab: {fileID: 7738347509151267748, guid: e10a5f0b7c6f65047a1a2d15bdf23ff2, type: 3}
-  type: 2
+  type: 0
   description: 
   buyPrice: 860
   sellPrice: 999
