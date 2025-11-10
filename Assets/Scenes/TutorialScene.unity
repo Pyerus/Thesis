@@ -25124,28 +25124,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::StockManager
   stockInventory: {fileID: 11400000, guid: 151a8b9badefef243b86cedc03f30591, type: 2}
   counterTexts:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 531422188}
+  - {fileID: 1380217464}
+  - {fileID: 548408807}
+  - {fileID: 1153973890}
+  - {fileID: 1897367108}
+  - {fileID: 535670122}
+  - {fileID: 1466335069}
+  - {fileID: 1208990910}
+  - {fileID: 1371006061}
+  - {fileID: 18426710}
+  - {fileID: 412151004}
+  - {fileID: 1925018500}
+  - {fileID: 1320409519}
+  - {fileID: 691410122}
+  - {fileID: 1655774939}
+  - {fileID: 1924780394}
+  - {fileID: 1291154171}
+  - {fileID: 173552287}
+  - {fileID: 496087345}
+  - {fileID: 972087385}
+  - {fileID: 452694551}
+  - {fileID: 1982611024}
 --- !u!1 &1003561725
 GameObject:
   m_ObjectHideFlags: 0

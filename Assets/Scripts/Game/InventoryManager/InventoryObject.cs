@@ -119,6 +119,14 @@ public class InventoryObject : ScriptableObject
         return (null, 0);
     }
 
+    public void ClearInventory()
+    {
+        for (int i = 0; i < Container.Count; i++)
+        {
+            Container[i].amount = 0;
+        }
+    }
+
     public void PrintInventory()
     {
         for (int i = 0; i < Container.Count; i++)
