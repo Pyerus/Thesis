@@ -17867,7 +17867,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cursor: {fileID: 1242056016}
-  inventory: {fileID: 11400000, guid: 151a8b9badefef243b86cedc03f30591, type: 2}
+  stockInventory: {fileID: 11400000, guid: 151a8b9badefef243b86cedc03f30591, type: 2}
+  shelfInventory: {fileID: 0}
   tierManager: {fileID: 0}
 --- !u!4 &657182325
 Transform:
@@ -17896,7 +17897,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9d6238e12ec09b488f4aadf49b8f7d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  inventory: {fileID: 0}
+  inventory: {fileID: 11400000, guid: 151a8b9badefef243b86cedc03f30591, type: 2}
 --- !u!1 &660745787
 GameObject:
   m_ObjectHideFlags: 0
@@ -20532,7 +20533,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 291582876}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.35276273
+  m_Size: 0.3527627
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -24363,7 +24364,6 @@ MonoBehaviour:
   - {fileID: 737385321}
   - {fileID: 1028418141}
   - {fileID: 198068450}
-  audioSource: {fileID: 0}
   typingSounds: []
 --- !u!1 &964963140
 GameObject:
@@ -24831,7 +24831,7 @@ GameObject:
   - component: {fileID: 995385309}
   - component: {fileID: 995385308}
   m_Layer: 5
-  m_Name: SliderMenu
+  m_Name: SliderMenu (Store UI)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -24895,7 +24895,7 @@ MonoBehaviour:
   - {fileID: 1288768007}
   - {fileID: 237778250}
   - {fileID: 1642504817}
-  cursor: {fileID: 1242056016}
+  stockInventory: {fileID: 11400000, guid: 151a8b9badefef243b86cedc03f30591, type: 2}
   itemsForSale:
   - {fileID: 11400000, guid: d3ca3f784c2e31048a49c183189b0b9a, type: 2}
   - {fileID: 11400000, guid: 180086c9474e81243b3eedf6c72eb304, type: 2}
@@ -25007,8 +25007,9 @@ GameObject:
   - component: {fileID: 1001625221}
   - component: {fileID: 1001625223}
   - component: {fileID: 1001625224}
+  - component: {fileID: 1001625225}
   m_Layer: 5
-  m_Name: Inventory Count
+  m_Name: Inventory Count (Stock UI)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -25109,6 +25110,42 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1001625225
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1001625219}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 053a9f0e1d571ac448a467d619fb2478, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::StockManager
+  stockInventory: {fileID: 11400000, guid: 151a8b9badefef243b86cedc03f30591, type: 2}
+  counterTexts:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!1 &1003561725
 GameObject:
   m_ObjectHideFlags: 0
