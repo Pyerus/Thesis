@@ -9,6 +9,7 @@ public class Settings : MonoBehaviour
     public GameObject settingsButton;
     public GameObject settingsPanel;
     public GameObject settingsBackButton;
+    public GameObject MainMenuButton;
 
     private bool isMenuOpen = false;
 
@@ -74,6 +75,15 @@ public class Settings : MonoBehaviour
 
         settingsPanel.SetActive(false);
         settingsBackButton.SetActive(false);
+        Time.timeScale = 1f;
+        isMenuOpen = false;
+    }
+
+    public void BackToMainMenu()
+    {
+        CircleTransition.Instance.TransitionToScene("MainMenuScene");
+
+        settingsPanel.SetActive(false);
         Time.timeScale = 1f;
         isMenuOpen = false;
     }
