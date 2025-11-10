@@ -27,6 +27,7 @@ public class CircleTransition : MonoBehaviour
 
         // Load next scene
         SceneManager.LoadScene(sceneName);
+        Debug.Log("This is the next scene " + sceneName);
     }
 
     private IEnumerator FillCircle(float target)
