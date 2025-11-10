@@ -14,6 +14,9 @@ public class Tutorial : MonoBehaviour
     private TMP_Text currentText;
     private Coroutine typingCoroutine;
 
+    private string fullText; 
+    private bool isTyping = false;
+
     void Start()
     {
         foreach (var d in dialogues)
@@ -33,7 +36,7 @@ public class Tutorial : MonoBehaviour
 
         if (currentText != null)
         {
-            string fullText = currentText.text;
+            fullText = currentText.text;
             currentText.text = "";
             typingCoroutine = StartCoroutine(TypeText(fullText));
         }
@@ -42,12 +45,13 @@ public class Tutorial : MonoBehaviour
         if (nextButton != null)
         {
             nextButton.onClick.RemoveAllListeners();
-            nextButton.onClick.AddListener(StartNextDialogue);
+            nextButton.onClick.AddListener(OnClickDialogue);
         }
     }
 
     private IEnumerator TypeText(string textToType)
     {
+        isTyping = true;
         // Use AudioManager's SFX source (if available)
         AudioSource sfxSource = AudioManager.Instance != null ? AudioManager.Instance.sfxSource : null;
 
@@ -56,11 +60,28 @@ public class Tutorial : MonoBehaviour
             AudioClip randomClip = typingSounds[Random.Range(0, typingSounds.Length)];
             sfxSource.PlayOneShot(randomClip, sfxSource.volume);
         }
-
         foreach (char c in textToType)
         {
             currentText.text += c;
             yield return new WaitForSeconds(typingSpeed);
+        }
+        
+        isTyping = false;
+    }
+
+    private void OnClickDialogue()
+    {
+        if (isTyping)
+        {
+            if (typingCoroutine != null)
+                StopCoroutine(typingCoroutine);
+
+            currentText.text = fullText;
+            isTyping = false;
+        }
+        else
+        {
+            StartNextDialogue();
         }
     }
 
