@@ -18,10 +18,14 @@ public class MenuButtons : MonoBehaviour
     public GameObject modifiedButton;
     public GameObject backButton; // for Dijkstra choices
 
+    [Header("Settings Menu")]
+    public GameObject settingsPanel;
+    public GameObject settingsBackButton; // for settings panel only
 
     [Header("Camera Settings")]
     public Camera mainCamera;
     public Transform zoomTargetLeft;  // ← add this (left side of cat)
+    public Transform zoomTargetRight; // ← existing one (right side of cat)
     public float zoomFOV = 25f;
     public float zoomDuration = 1.5f;
 
@@ -38,6 +42,11 @@ public class MenuButtons : MonoBehaviour
             originalCamPos = mainCamera.transform.position;
             originalFOV = mainCamera.fieldOfView;
         }
+
+        if (settingsPanel != null)
+            settingsPanel.SetActive(false);
+        if (settingsBackButton != null)
+            settingsBackButton.SetActive(false);
     }
 
     public void StartGame()
@@ -91,6 +100,31 @@ public class MenuButtons : MonoBehaviour
         CircleTransition.Instance.TransitionToScene("TutorialScene");
     }
 
+
+    public void SettingsMenu()
+    {
+        Debug.Log("Opening Settings Menu.");
+        ShowSettingsMenu();
+
+        if (mainCamera != null && zoomTargetRight != null)
+        {
+            StartCoroutine(CameraZoom(zoomTargetRight.position, zoomFOV));
+            zoomedIn = true;
+        }
+    }
+
+    public void SettingsBack()
+    {
+        Debug.Log("Back from Settings Menu.");
+        settingsPanel.SetActive(false);
+        settingsBackButton.SetActive(false);
+        ShowMainMenu();
+
+        if (zoomedIn)
+            StartCoroutine(CameraZoom(originalCamPos, originalFOV));
+        zoomedIn = false;
+    }
+
     public void QuitGame()
     {
         Debug.Log("Quit Game.");
@@ -121,6 +155,9 @@ public class MenuButtons : MonoBehaviour
         standardButton.SetActive(false);
         modifiedButton.SetActive(false);
         backButton.SetActive(false);
+
+        settingsPanel.SetActive(true);
+        settingsBackButton.SetActive(true);
     }
 
     private IEnumerator CameraZoom(Vector3 targetPos, float targetFOV)

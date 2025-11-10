@@ -15,7 +15,6 @@ public class AudioManager : MonoBehaviour
     public AudioClip testSFX; // Assign a short sound cue in Inspector
 
     private static AudioManager instance;
-    public static AudioManager Instance => instance;
 
     private const string MusicPref = "MusicVolume";
     private const string SFXPref = "SFXVolume";
@@ -81,16 +80,5 @@ public class AudioManager : MonoBehaviour
     {
         if (musicSource != null) musicSource.volume = music;
         if (sfxSource != null) sfxSource.volume = sfx;
-    }
-
-    public void ChangeMusic(AudioClip newMusic, bool loop = true)
-    {
-        //if (musicSource == null) return;
-        if (musicSource.clip == newMusic) return;
-
-        musicSource.Stop();
-        musicSource.clip = newMusic;
-        musicSource.loop = loop;
-        musicSource.Play();
     }
 }

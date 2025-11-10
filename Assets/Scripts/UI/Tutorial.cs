@@ -8,14 +8,12 @@ public class Tutorial : MonoBehaviour
 {
     [SerializeField] private GameObject[] dialogues;
     private float typingSpeed = 0.04f;
+    [SerializeField] private AudioSource audioSource;  
     [SerializeField] private AudioClip[] typingSounds;
 
     private int currentDialogueIndex = 0;
     private TMP_Text currentText;
     private Coroutine typingCoroutine;
-
-    private string fullText; 
-    private bool isTyping = false;
 
     void Start()
     {
@@ -36,7 +34,7 @@ public class Tutorial : MonoBehaviour
 
         if (currentText != null)
         {
-            fullText = currentText.text;
+            string fullText = currentText.text;
             currentText.text = "";
             typingCoroutine = StartCoroutine(TypeText(fullText));
         }
@@ -45,43 +43,22 @@ public class Tutorial : MonoBehaviour
         if (nextButton != null)
         {
             nextButton.onClick.RemoveAllListeners();
-            nextButton.onClick.AddListener(OnClickDialogue);
+            nextButton.onClick.AddListener(StartNextDialogue);
         }
     }
 
     private IEnumerator TypeText(string textToType)
     {
-        isTyping = true;
-        // Use AudioManager's SFX source (if available)
-        AudioSource sfxSource = AudioManager.Instance != null ? AudioManager.Instance.sfxSource : null;
-
-        if (sfxSource != null && typingSounds.Length > 0)
+        if (audioSource != null && typingSounds.Length > 0)
         {
             AudioClip randomClip = typingSounds[Random.Range(0, typingSounds.Length)];
-            sfxSource.PlayOneShot(randomClip, sfxSource.volume);
+            audioSource.PlayOneShot(randomClip, 0.8f);
         }
+
         foreach (char c in textToType)
         {
             currentText.text += c;
             yield return new WaitForSeconds(typingSpeed);
-        }
-        
-        isTyping = false;
-    }
-
-    private void OnClickDialogue()
-    {
-        if (isTyping)
-        {
-            if (typingCoroutine != null)
-                StopCoroutine(typingCoroutine);
-
-            currentText.text = fullText;
-            isTyping = false;
-        }
-        else
-        {
-            StartNextDialogue();
         }
     }
 
@@ -101,7 +78,6 @@ public class Tutorial : MonoBehaviour
         else
         {
             CircleTransition.Instance.TransitionToScene("MainMenuScene");
-            Debug.Log("Teleporting to MainMenuScene");
         }
     }
 }
