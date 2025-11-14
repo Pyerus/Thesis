@@ -6216,6 +6216,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventory: {fileID: 0}
+  tierManager: {fileID: 3677370470587054647}
 --- !u!114 &4953823191962835212
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6243,14 +6244,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9c681fbd33ce9d48974a1230c35c0b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shelfType: 0
   tier1: {fileID: 1196860851959364151}
   tier2: {fileID: 2804584540166171872}
   tier3: {fileID: 4862457285234120610}
   tier4: {fileID: 5859589183725400338}
-  tier1Item: {fileID: 0}
-  tier2Item: {fileID: 0}
-  tier3Item: {fileID: 0}
-  tier4Item: {fileID: 0}
 --- !u!1 &5000714956522541963
 GameObject:
   m_ObjectHideFlags: 0

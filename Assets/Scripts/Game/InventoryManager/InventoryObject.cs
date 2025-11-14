@@ -96,10 +96,12 @@ public class InventoryObject : ScriptableObject
         return total;
     }
 
-    public (ItemObject item, int amount) RemoveItem(ItemObject _item, int _amount)
+    public (ItemObject item, int amount, int slotIndex) RemoveItem(ItemObject _item, int _amount)
     {
-        foreach (var slot in Container)
+        for (int i = 0; i < Container.Count; i++)
         {
+            var slot = Container[i];
+
             if (slot.item == _item)
             {
                 int removedAmount = Mathf.Min(_amount, slot.amount);
@@ -111,13 +113,14 @@ public class InventoryObject : ScriptableObject
                     slot.amount = 0;
                 }
 
-                return (_item, removedAmount);
+                return (_item, removedAmount, i);
             }
         }
 
         // Item not found
-        return (null, 0);
+        return (null, 0, -1); // -1 means "not found"
     }
+
 
     public void ClearInventory()
     {

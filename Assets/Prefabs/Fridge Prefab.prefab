@@ -3925,6 +3925,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ShelfInventory
   inventory: {fileID: 0}
+  tierManager: {fileID: 6846931889940893689}
 --- !u!114 &7772002939884921184
 MonoBehaviour:
   m_ObjectHideFlags: 0
