@@ -1184,8 +1184,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1342226496}
   m_HandleRect: {fileID: 1342226495}
   m_Direction: 2
-  m_Value: 1
-  m_Size: 0.3527627
+  m_Value: 1.0000001
+  m_Size: 0.35276267
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -27438,8 +27438,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 291582877}
   m_HandleRect: {fileID: 291582876}
   m_Direction: 2
-  m_Value: 1
-  m_Size: 0.3527627
+  m_Value: 1.0000001
+  m_Size: 0.35276267
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -58076,7 +58076,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnPoint: {fileID: 2095468927}
-  npcPrefab: {fileID: 8622626352161326856, guid: 846ca939ca7aa904dba42576d57c90c0, type: 3}
+  npcPrefabs:
+  - {fileID: 8622626352161326856, guid: 846ca939ca7aa904dba42576d57c90c0, type: 3}
+  - {fileID: 8622626352161326856, guid: 2d2658135dcf4a84cb12fffb1990c066, type: 3}
+  - {fileID: 8622626352161326856, guid: 0c42b5e44f1d92a49864ce03f9d98e15, type: 3}
   spawnLimit: 10
   OpenStore: {fileID: 225373268}
   buttonText: {fileID: 445806255}
