@@ -9,12 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cdd71fa53ac20264fb4a76d29b205b58, type: 3}
-  m_Name: Mozzarela
-  m_EditorClassIdentifier: 
-  itemName: Mozzarella
-  prefab: {fileID: 7738347509151267748, guid: d9a9f2bda912e05488893f3d5dcc428f, type: 3}
-  type: 0
+  m_Script: {fileID: 11500000, guid: f569e2bf1c07fe44ab426747fa6215c4, type: 3}
+  m_Name: Poster3
+  m_EditorClassIdentifier: Assembly-CSharp::ItemObject
+  itemName: Poster 3
+  prefab: {fileID: 1478526370816987531, guid: 742792477dd9c4d4baeb77d623977b52, type: 3}
+  type: 2
   description: 
   buyPrice: 200
-  sellPrice: 249
+  sellPrice: 0
