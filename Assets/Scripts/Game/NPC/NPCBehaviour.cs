@@ -5,13 +5,13 @@ using UnityEngine;
 public class NPCBehaviour : MonoBehaviour
 {
     ShoppingList shoppingList;
-    MoneyCounter moneyCounter;
+    MoneyManager moneyManager;
 
     private void Start()
     {
         shoppingList = gameObject.GetComponent<ShoppingList>();
 
-        moneyCounter = GameObject.FindGameObjectWithTag("GameManager").GetComponent<MoneyCounter>();
+        moneyManager = GameObject.FindGameObjectWithTag("MoneyManager").GetComponent<MoneyManager>();
     }
 
 
@@ -60,6 +60,6 @@ public class NPCBehaviour : MonoBehaviour
         }
 
         Debug.Log($"Bought {shoppingList.cart.Count} products for ${totalCost}");
-        moneyCounter.AddMoney(totalCost);
+        moneyManager.AddMoney(totalCost);
     }
 }

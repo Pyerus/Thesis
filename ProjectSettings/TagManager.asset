@@ -11,7 +11,7 @@ TagManager:
   - Target
   - Checkout
   - Exit
-  - GameManager
+  - MoneyManager
   layers:
   - Default
   - TransparentFX

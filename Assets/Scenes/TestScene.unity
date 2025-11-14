@@ -6277,6 +6277,7 @@ MonoBehaviour:
   npcPrefab: {fileID: 8622626352161326856, guid: 846ca939ca7aa904dba42576d57c90c0, type: 3}
   spawnLimit: 10
   OpenStore: {fileID: 1990987673}
+  buttonText: {fileID: 96107889}
 --- !u!4 &267095832
 Transform:
   m_ObjectHideFlags: 0
@@ -50339,7 +50340,6 @@ MonoBehaviour:
   - {fileID: 290525535}
   - {fileID: 1413523646}
   - {fileID: 1039461866}
-  moneyCounter: {fileID: 311517485}
   stockInventory: {fileID: 11400000, guid: 151a8b9badefef243b86cedc03f30591, type: 2}
   itemsForSale:
   - {fileID: 11400000, guid: d3ca3f784c2e31048a49c183189b0b9a, type: 2}
@@ -50364,6 +50364,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 0ac0eff8ce084314e8054588fe0bbccb, type: 2}
   - {fileID: 11400000, guid: 807d35df0f6466646aba396c56a50773, type: 2}
   - {fileID: 11400000, guid: d98b2e0b701597944a45958994de84f5, type: 2}
+  moneyManager: {fileID: 0}
   incrementAmount: 50
   totalCostText: {fileID: 2019638977}
 --- !u!114 &1969063395
