@@ -10,8 +10,12 @@ public class Settings : MonoBehaviour
     public GameObject settingsPanel;
     public GameObject settingsBackButton;
     public GameObject MainMenuButton;
+    public GameObject CreditsButton;
+    public GameObject CloseCreditsButton;
+    public GameObject creditsImage;
 
     private bool isMenuOpen = false;
+    private bool isCreditsOpen = false;
 
     private void Awake()
     {
@@ -32,12 +36,19 @@ public class Settings : MonoBehaviour
             settingsPanel.SetActive(false);
         if (settingsBackButton != null)
             settingsBackButton.SetActive(false);
+        if (creditsImage != null)
+            creditsImage.SetActive(false);
     }
 
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
+            if (isCreditsOpen)
+            {
+                SettingsBack();
+                Debug.Log("Close Settings");
+            }
             if (isMenuOpen)
             {
                 SettingsBack();
@@ -75,8 +86,10 @@ public class Settings : MonoBehaviour
 
         settingsPanel.SetActive(false);
         settingsBackButton.SetActive(false);
+        creditsImage.SetActive(false);
         Time.timeScale = 1f;
         isMenuOpen = false;
+        isCreditsOpen = false;
     }
 
     public void BackToMainMenu()
@@ -86,5 +99,21 @@ public class Settings : MonoBehaviour
         settingsPanel.SetActive(false);
         Time.timeScale = 1f;
         isMenuOpen = false;
+    }
+
+    public void Credits()
+    {
+        if (creditsImage != null)
+            creditsImage.SetActive(true);
+            isCreditsOpen = true;
+        Time.timeScale = 0f;
+    }
+
+    public void CloseCredits()
+    {
+        if (creditsImage != null)
+            creditsImage.SetActive(false);
+            isCreditsOpen = false;
+        Time.timeScale = 1f;
     }
 }
