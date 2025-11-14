@@ -5,6 +5,8 @@ using TMPro;
 
 public class NPCSpawner : MonoBehaviour
 {
+    public GameObject spawnPoint;
+
     public GameObject npcPrefab;
 
     float spawnInterval = 1f;
@@ -16,9 +18,13 @@ public class NPCSpawner : MonoBehaviour
     [SerializeField] TMP_Text buttonText;
     bool storeOpen = false;
 
+    private Vector3 spawnLocation;
+
 
     private void Start()
     {
+        spawnLocation = spawnPoint.transform.position;
+
         if (OpenStore != null)
             OpenStore.onClick.AddListener(OnOpenStoreClicked);
     }
@@ -45,7 +51,7 @@ public class NPCSpawner : MonoBehaviour
         spawnCount = GameObject.FindGameObjectsWithTag("NPC").Length;
         while (spawnCount < spawnLimit)
         {
-            Instantiate(npc, new Vector3(0, 0.1f, -5), Quaternion.identity);
+            Instantiate(npc, spawnLocation, Quaternion.identity);
             yield return new WaitForSeconds(interval);
         }
     }
