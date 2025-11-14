@@ -9,6 +9,9 @@ TagManager:
   - Waypoint
   - Shelf
   - Target
+  - Checkout
+  - Exit
+  - GameManager
   layers:
   - Default
   - TransparentFX

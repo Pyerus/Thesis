@@ -27,11 +27,10 @@ public class NPCSpawner : MonoBehaviour
 
     public IEnumerator SpawnNPC(float interval, GameObject npc)
     {
-        spawnCount = 0; 
+        spawnCount = GameObject.FindGameObjectsWithTag("NPC").Length;
         while (spawnCount < spawnLimit)
         {
             Instantiate(npc, new Vector3(0, 0.1f, -5), Quaternion.identity);
-            spawnCount++;
             yield return new WaitForSeconds(interval);
         }
     }

@@ -7,6 +7,7 @@ public class ItemCounter : MonoBehaviour
     public TextMeshProUGUI[] countTexts; // drag all the "0" texts here
     
     [Header("Link to Game Systems")]
+    public MoneyCounter moneyCounter; // update when buying
     public InventoryObject stockInventory; // where the store inventory is placed
     public ItemObject[] itemsForSale; // MUST BE IN SAME ORDER AS TEXTS
 
@@ -67,6 +68,7 @@ public class ItemCounter : MonoBehaviour
             }
         }
 
+        moneyCounter.SubtractMoney(totalSpent);
         UpdateTotalCost();
 
         if (totalItems > 0)
