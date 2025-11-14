@@ -35085,8 +35085,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ba5b106589eb1742ba53f005e7b3c46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cursor: {fileID: 2800000, guid: 3d58bab59c4c7dd40acfccd806403088, type: 3}
-  cursorClicked: {fileID: 2800000, guid: f9baa5939a03c294b9073d2d3982fe59, type: 3}
+  cursor: {fileID: 2800000, guid: 25dd4915305546449a6f0bf9aa331781, type: 3}
+  cursorClicked: {fileID: 2800000, guid: a5b3f7909a92abe439efc7f41de3537e, type: 3}
   InventoryMenu: {fileID: 372860457}
   inventorySlots: {fileID: 0}
 --- !u!4 &1242056017
