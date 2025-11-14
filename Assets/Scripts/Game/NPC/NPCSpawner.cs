@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class NPCSpawner : MonoBehaviour
 {
@@ -11,7 +12,9 @@ public class NPCSpawner : MonoBehaviour
     public int spawnLimit = 10;
 
     int spawnCount = 0;
-    public Button OpenStore;
+    [SerializeField] Button OpenStore;
+    [SerializeField] TMP_Text buttonText;
+    bool storeOpen = false;
 
 
     private void Start()
@@ -22,7 +25,19 @@ public class NPCSpawner : MonoBehaviour
 
     private void OnOpenStoreClicked()
     {
-        StartCoroutine(SpawnNPC(spawnInterval, npcPrefab));
+        storeOpen = !storeOpen; // Toggle
+
+        if (storeOpen)
+        {
+            buttonText.text = "Close";
+            StartCoroutine(SpawnNPC(spawnInterval, npcPrefab));
+        }
+        else
+        {
+            buttonText.text = "Open";
+            StopAllCoroutines(); 
+            NPC.KillNPCs();
+        }
     }
 
     public IEnumerator SpawnNPC(float interval, GameObject npc)

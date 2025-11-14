@@ -8,12 +8,20 @@ public class NPC : MonoBehaviour
     {
         LifeSpan += Time.deltaTime;
 
-            if (LifeSpan >= MaxLifeSpan)
-            {
-                LifeSpan = MaxLifeSpan;
-                Destroy(gameObject);
-                //There should be a code here to kill all current alive NPC
-            }
+        if (LifeSpan >= MaxLifeSpan)
+        {
+            LifeSpan = MaxLifeSpan;
+            Destroy(gameObject);
+            //There should be a code here to kill all current alive NPC
+        }
+    }
 
+    public static void KillNPCs()
+    {
+        NPC[] allNPCs = FindObjectsOfType<NPC>();
+        foreach (NPC npc in allNPCs)
+        {
+            Destroy(npc.gameObject);
+        }
     }
 }
