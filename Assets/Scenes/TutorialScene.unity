@@ -18093,6 +18093,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Fridge Prefab
       objectReference: {fileID: 0}
+    - target: {fileID: 3008241940679536190, guid: 470a3f867f2320b4e97db4869eb56ccc, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7772002939884921184, guid: 470a3f867f2320b4e97db4869eb56ccc, type: 3}
       propertyPath: idealItem
       value: 
@@ -37091,8 +37095,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ba5b106589eb1742ba53f005e7b3c46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cursor: {fileID: 2800000, guid: 3d58bab59c4c7dd40acfccd806403088, type: 3}
-  cursorClicked: {fileID: 2800000, guid: f9baa5939a03c294b9073d2d3982fe59, type: 3}
+  cursor: {fileID: 2800000, guid: 25dd4915305546449a6f0bf9aa331781, type: 3}
+  cursorClicked: {fileID: 2800000, guid: a5b3f7909a92abe439efc7f41de3537e, type: 3}
   InventoryMenu: {fileID: 372860457}
   inventorySlots: {fileID: 1843780292}
 --- !u!4 &1242056017
@@ -42852,6 +42856,10 @@ PrefabInstance:
     - target: {fileID: 4997580564494144642, guid: 0ddf2556922c04841a179cdab06f49bd, type: 3}
       propertyPath: m_Name
       value: Shelf Prefab
+      objectReference: {fileID: 0}
+    - target: {fileID: 4997580564494144642, guid: 0ddf2556922c04841a179cdab06f49bd, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5544165431791506259, guid: 0ddf2556922c04841a179cdab06f49bd, type: 3}
       propertyPath: m_Enabled
@@ -52931,6 +52939,7 @@ MonoBehaviour:
   npcPrefab: {fileID: 8622626352161326856, guid: 846ca939ca7aa904dba42576d57c90c0, type: 3}
   spawnLimit: 10
   OpenStore: {fileID: 225373268}
+  buttonText: {fileID: 445806255}
 --- !u!4 &1720379934
 Transform:
   m_ObjectHideFlags: 0
@@ -55560,6 +55569,10 @@ PrefabInstance:
     - target: {fileID: 5649451119117878920, guid: a44ede2177637334c9b8f1a0b3b7c754, type: 3}
       propertyPath: m_Name
       value: Produce Prefab
+      objectReference: {fileID: 0}
+    - target: {fileID: 5649451119117878920, guid: a44ede2177637334c9b8f1a0b3b7c754, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5756131161714227208, guid: a44ede2177637334c9b8f1a0b3b7c754, type: 3}
       propertyPath: m_LocalPosition.x
