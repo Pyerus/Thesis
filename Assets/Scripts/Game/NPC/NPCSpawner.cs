@@ -5,6 +5,8 @@ using TMPro;
 
 public class NPCSpawner : MonoBehaviour
 {
+    public TextMeshProUGUI npcCounter;
+
     public GameObject spawnPoint;
 
     public GameObject[] npcPrefabs;
@@ -29,6 +31,11 @@ public class NPCSpawner : MonoBehaviour
             OpenStore.onClick.AddListener(OnOpenStoreClicked);
     }
 
+    private void Update()
+    {
+        npcCounter.text = "NPC: " + spawnCount;
+    }
+
     private void OnOpenStoreClicked()
     {
         storeOpen = !storeOpen; // Toggle
@@ -48,11 +55,16 @@ public class NPCSpawner : MonoBehaviour
 
     public IEnumerator SpawnNPC(float interval, GameObject[] npcPrefabs)
     {
-        spawnCount = GameObject.FindGameObjectsWithTag("NPC").Length;
-        while (spawnCount < spawnLimit)
+        while (storeOpen)
         {
-            GameObject npc = npcPrefabs[Random.Range(0, npcPrefabs.Length)];
-            Instantiate(npc, spawnLocation, Quaternion.identity);
+            spawnCount = GameObject.FindGameObjectsWithTag("NPC").Length;
+
+            if (spawnCount < spawnLimit)
+            {
+                GameObject npc = npcPrefabs[Random.Range(0, npcPrefabs.Length)];
+                Instantiate(npc, spawnLocation, Quaternion.identity);
+            }
+            
             yield return new WaitForSeconds(interval);
         }
     }

@@ -24,7 +24,10 @@ public class NPCMovement : MonoBehaviour
     private int currentIndex = 0;
     private bool goingToCheckout = false;
 
-    // NPC behavior
+    // If store is closed
+    private bool isClosed = false; // this doesn't toggle yet
+
+    // NPC behavior script
     private NPCBehaviour npcBehaviour;
 
     // hopping settings
@@ -37,26 +40,31 @@ public class NPCMovement : MonoBehaviour
 
     private void Start()
     {
+        // Pathfinding
         GameObject gridObj = GameObject.FindGameObjectWithTag("Grid");
         grid = gridObj.GetComponent<WorldGrid>();
         pathfinder = gameObject.GetComponent<PathfindDijkstra>();
 
+        // Waypoints and shelves
         shoppingList = gameObject.GetComponent<ShoppingList>();
         shopList = shoppingList.generatedList;
         waypoints = shoppingList.GetWaypoints();
         shelves = shoppingList.GetShelves();
 
+        // Destination
         targetWaypoint = GetNewWaypoint();
         target.transform.position = targetWaypoint.position;
 
+        // Hopping
         baseY = seeker.position.y; // record starting Y
 
-
+        // NPC behaviour (add to cart and check out methods)
         npcBehaviour = gameObject.GetComponent<NPCBehaviour>();
     }
 
     private void Update()
     {
+        // Continuously goes to the target
         if (pathfinder.path != null && pathfinder.path.Count > 0)
         {
             path = pathfinder.path;
@@ -76,6 +84,7 @@ public class NPCMovement : MonoBehaviour
                 seeker.position = new Vector3(seeker.position.x, baseY, seeker.position.z); // reset Y
             }
 
+            // If the npc hasn't arrived to the destination
             if (currentNode.worldPosition != targetNode.worldPosition)
             {
                 Node pathNode = path[0];    // first node in the list
@@ -114,6 +123,7 @@ public class NPCMovement : MonoBehaviour
 
     
 
+    // This method returns the next waypoint location
     private Transform GetNewWaypoint()
     {
         // If there are no waypoints or all are invalid
@@ -123,32 +133,10 @@ public class NPCMovement : MonoBehaviour
             return null;
         }
 
-        // If we've reached the end of the shopping list, go to checkout
-        if (currentIndex >= waypoints.Length)
+        // If we've reached the end of the shopping list or the store is closed, go to checkout
+        if (currentIndex >= waypoints.Length || isClosed)
         {
-            if (!goingToCheckout)
-            {
-                goingToCheckout = true;
-                GameObject checkout = GameObject.FindGameObjectWithTag("Checkout");
-
-                if (checkout != null)
-                {
-                    Debug.Log("All items collected � heading to checkout!");
-                    return checkout.transform;
-                }
-                else
-                {
-                    Debug.LogWarning("Checkout not found in scene.");
-                    return null;
-                }
-            }
-            else
-            {
-                // Proceed to exit after checking out
-                GameObject exit = GameObject.FindGameObjectWithTag("Exit");
-                Debug.Log("Heading to exit.");
-                return exit.transform;
-            }
+            return GetCheckoutWaypoint();
         }
 
         // Otherwise, continue through the waypoints list
@@ -165,6 +153,41 @@ public class NPCMovement : MonoBehaviour
             Debug.LogWarning($"Waypoint {currentIndex} is null, skipping.");
             return GetNewWaypoint(); // recursively skip nulls
         }
+    }
+
+
+    private Transform GetCheckoutWaypoint()
+    {
+        // Check out if the npc has items in the cart, else go straight to exit
+        if (!goingToCheckout && (shoppingList.cart.Count > 0))
+        {
+            goingToCheckout = true;
+            GameObject checkout = GameObject.FindGameObjectWithTag("Checkout");
+
+            if (checkout != null)
+            {
+                Debug.Log("All items collected � heading to checkout!");
+                return checkout.transform;
+            }
+            else
+            {
+                Debug.LogWarning("Checkout not found in scene.");
+                return null;
+            }
+        }
+        else
+        {
+            // Proceed to exit after checking out
+            return GetExitWaypoint();
+        }
+    }
+
+
+    private Transform GetExitWaypoint()
+    {
+        GameObject exit = GameObject.FindGameObjectWithTag("Exit");
+        Debug.Log("Heading to exit.");
+        return exit.transform;
     }
 
 
@@ -188,6 +211,7 @@ public class NPCMovement : MonoBehaviour
     IEnumerator NewTarget(float interval)
     {
         isCoroutineRunning = true;
+
         AddItemToCart();
 
         yield return new WaitForSeconds(interval);
