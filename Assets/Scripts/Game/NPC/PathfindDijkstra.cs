@@ -56,14 +56,14 @@ public class PathfindDijkstra : MonoBehaviour
 
             foreach (Node neighbour in grid.GetNeighbors(currentNode))
             {
+                // if node is unwalkable or already visited
                 if (!neighbour.walkable || closedSet.Contains(neighbour)) 
                     { continue; }
 
-                int newMoveCost = currentNode.gCost + GetDistance(currentNode, neighbour);
+                int newMoveCost = currentNode.gCost + GetDistance(currentNode, neighbour) + neighbour.addedWeight;
                 if (newMoveCost < neighbour.gCost || !openSet.Contains(neighbour))
                 {
                     neighbour.gCost = newMoveCost;
-                    //neighbour.hCost = GetDistance(neighbour, targetNode);
 
                     neighbour.parent = currentNode;
 

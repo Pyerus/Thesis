@@ -3925,7 +3925,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ShelfInventory
   inventory: {fileID: 0}
-  tierManager: {fileID: 6846931889940893689}
 --- !u!114 &7772002939884921184
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3938,7 +3937,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1fffb0288546e842bf4a2297579324b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ItemValue
-  idealItem: {fileID: 0}
+  idealItems: []
   baseValue: 10
   additionalValue: 10
 --- !u!114 &6846931889940893689
@@ -9014,6 +9013,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3720833302239134167}
+  - component: {fileID: 1722869620123896880}
   m_Layer: 0
   m_Name: Waypoint
   m_TagString: Waypoint
@@ -9036,6 +9036,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 8727875294694182100}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1722869620123896880
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7533336241700214071}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9f2e69a71ac28a4db9cb88a904347fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Waypoint
 --- !u!1 &7623936947331516789
 GameObject:
   m_ObjectHideFlags: 0

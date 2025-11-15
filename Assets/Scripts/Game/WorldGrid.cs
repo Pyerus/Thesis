@@ -10,8 +10,9 @@ public class WorldGrid : MonoBehaviour
 
     float nodeDiameter;
     int gridSizeX, gridSizeY;
+    int defaultCost = 10;
 
-    private void Start()
+    private void Awake()
     {
         nodeDiameter = nodeRadius * 2;
         gridSizeX = Mathf.RoundToInt(gridWorldSize.x / nodeDiameter);
@@ -19,7 +20,6 @@ public class WorldGrid : MonoBehaviour
         CreateGrid();
     }
 
-    //public List<Node> path;
     private void OnDrawGizmos()
     {
         Gizmos.DrawWireCube(transform.position, new Vector3(gridWorldSize.x, 1, gridWorldSize.y));
@@ -28,15 +28,14 @@ public class WorldGrid : MonoBehaviour
         {
             foreach (Node n in grid)
             {
-                Gizmos.color = (n.walkable) ? Color.white : Color.red;
-
-                //if (path != null)
-                //{
-                //    if (path.Contains(n))
-                //    {
-                //        Gizmos.color = Color.black;
-                //    }
-                //}
+                if (!n.walkable)
+                {
+                    Gizmos.color = Color.red;
+                }
+                else
+                {
+                    Gizmos.color = (n.addedWeight < defaultCost) ? Color.green : Color.white;
+                }
 
                 Gizmos.DrawCube(n.worldPosition, Vector3.one * (nodeDiameter - 0.1f));
             }
@@ -55,7 +54,7 @@ public class WorldGrid : MonoBehaviour
                 Vector3 worldPoint = worldBottomLeft + Vector3.right * (x * nodeDiameter + nodeRadius) + Vector3.forward * (y * nodeDiameter + nodeRadius);
                 bool walkable = !(Physics.CheckSphere(worldPoint, nodeRadius, unwalkableMask));
 
-                grid[x, y] = new Node(walkable, worldPoint, x, y);
+                grid[x, y] = new Node(walkable, worldPoint, x, y, defaultCost);
             }
         }
     }
@@ -96,5 +95,53 @@ public class WorldGrid : MonoBehaviour
         }
 
         return neighbours;
+    }
+
+    public List<Node> GetNodesInRadius(Node centerNode, float radius)
+    {
+        List<Node> nodes = new List<Node>();
+        int rad = Mathf.CeilToInt(radius);
+
+        for (int x = -rad; x <= rad; x++)
+        {
+            for (int y = -rad; y <= rad; y++)
+            {
+                int checkX = centerNode.gridX + x;
+                int checkY = centerNode.gridY + y;
+
+                // check bounds
+                if (checkX >= 0 && checkX < gridSizeX &&
+                    checkY >= 0 && checkY < gridSizeY)
+                {
+                    Node node = grid[checkX, checkY];
+
+                    // ensure circular radius, not square
+                    float dist = Vector2.Distance(
+                        new Vector2(centerNode.gridX, centerNode.gridY),
+                        new Vector2(checkX, checkY)
+                    );
+
+                    if (dist <= radius)
+                    {
+                        nodes.Add(node);
+                    }
+                }
+            }
+        }
+
+        return nodes;
+    }
+
+    public void UpdateCostsAround(Vector3 worldPos, float radius, int newValue)
+    {
+        Node center = NodeFromWorldPoint(worldPos);
+
+        List<Node> nodes = GetNodesInRadius(center, radius);
+
+        foreach (Node n in nodes)
+        {
+            //n.gCost += costIncrease;      // Add penalty
+            n.addedWeight = newValue;     // Set cost directly
+        }
     }
 }

@@ -105,7 +105,7 @@ public class TierManager : MonoBehaviour
             case ItemCategory.Category.Big:
                 return shelfType switch
                 {
-                    ShelfType.Shelf => 10,
+                    ShelfType.Shelf => 5,
                     ShelfType.Fridge => 4,
                     _ => 0
                 };
