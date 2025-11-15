@@ -53,7 +53,6 @@ public class GameTimer : MonoBehaviour
     {
         if (!gamePaused)
         {
-            // Timer advances according to game speed
             currentTime += Time.deltaTime;
 
             if (currentTime >= maxTimePerDay)
@@ -63,7 +62,6 @@ public class GameTimer : MonoBehaviour
                     npcSpawner.spawnLimit = 0;
                 EndDay();
             }
-
 
             DisplayTime(currentTime);
         }
@@ -78,12 +76,11 @@ public class GameTimer : MonoBehaviour
 
     public void SetSpeed(float speed)
     {
-        Time.timeScale = speed;  
+        Time.timeScale = speed;   
     }
 
     void EndDay()
     {
-        //Time.timeScale = 0f;
         gamePaused = true;
 
         if (nextDayWindow != null)
@@ -104,11 +101,16 @@ public class GameTimer : MonoBehaviour
 
         if (nextDayWindow != null)
             nextDayWindow.SetActive(false);
-
+        
         //Time.timeScale = 1f;
 
         if (npcSpawner != null)
         {
+            // --- MODIFIED ---
+            // This will close the store and stop all spawns
+            npcSpawner.CloseStore();
+            // --- END MODIFIED ---
+            
             npcSpawner.spawnLimit = 10;
         }
 

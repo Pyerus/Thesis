@@ -6,22 +6,16 @@ using TMPro;
 public class NPCSpawner : MonoBehaviour
 {
     public TextMeshProUGUI npcCounter;
-
     public GameObject spawnPoint;
-
     public GameObject[] npcPrefabs;
-
     float spawnInterval = 1f;
-
     public int spawnLimit = 10;
-
     int spawnCount = 0;
     [SerializeField] Button OpenStore;
     [SerializeField] TMP_Text buttonText;
     bool storeOpen = false;
 
     private Vector3 spawnLocation;
-
 
     private void Start()
     {
@@ -42,16 +36,29 @@ public class NPCSpawner : MonoBehaviour
 
         if (storeOpen)
         {
+            // Logic to OPEN the store
             buttonText.text = "Close";
             StartCoroutine(SpawnNPC(spawnInterval, npcPrefabs));
         }
         else
         {
-            buttonText.text = "Open";
-            StopAllCoroutines(); 
-            NPC.KillNPCs();
+            // --- MODIFIED ---
+            // Logic to CLOSE the store (now uses the public function)
+            CloseStore();
+            // --- END MODIFIED ---
         }
     }
+
+    // --- NEW PUBLIC FUNCTION ---
+    // This can be called from other scripts (like GameTimer)
+    public void CloseStore()
+    {
+        storeOpen = false;
+        buttonText.text = "Open";
+        StopAllCoroutines(); 
+        NPC.KillNPCs(); // Assuming this is a static function you have
+    }
+    // --- END NEW FUNCTION ---
 
     public IEnumerator SpawnNPC(float interval, GameObject[] npcPrefabs)
     {
