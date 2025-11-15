@@ -29,6 +29,14 @@ public class GameTimer : MonoBehaviour
         "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" 
     };
 
+    public static GameTimer Instance;
+    public int CurrentDay => currentDay;
+
+    void Awake()
+    {
+        Instance = this;
+    }
+
     void Start()
     {
         if (nextDayWindow != null)
