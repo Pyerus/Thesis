@@ -7,7 +7,7 @@ public class ItemValue : MonoBehaviour
     int totalValue = 0;
     
     //public TMP_Text displayText;
-    public ItemObject idealItem;
+    public ItemObject[] idealItems;
     public int baseValue = 10;
     public int additionalValue = 10;
 
@@ -26,18 +26,26 @@ public class ItemValue : MonoBehaviour
 
     public void UpdateShelfValue()
     {
-        if (inventory == null || idealItem == null)
+        if (inventory == null || idealItems == null || idealItems.Length == 0)
         {
             return;
         }
         
-        if (inventory.HasItem(idealItem))
+        bool hasAnyIdealItem = false;
+
+        // Check if inventory contains ANY ideal item
+        foreach (var item in idealItems)
         {
+            if (item != null && inventory.HasItem(item))
+            {
+                hasAnyIdealItem = true;
+                break;
+            }
+        }
+
+        if (hasAnyIdealItem)
             totalValue = baseValue + additionalValue;
-        }
         else
-        {
             totalValue = baseValue;
-        }
     }
 }

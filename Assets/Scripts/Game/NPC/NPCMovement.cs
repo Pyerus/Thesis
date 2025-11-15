@@ -133,7 +133,7 @@ public class NPCMovement : MonoBehaviour
 
                 if (checkout != null)
                 {
-                    Debug.Log("All items collected — heading to checkout!");
+                    Debug.Log("All items collected ï¿½ heading to checkout!");
                     return checkout.transform;
                 }
                 else
@@ -200,7 +200,7 @@ public class NPCMovement : MonoBehaviour
         }
         else
         {
-            Debug.Log("No more waypoints — NPC is done shopping.");
+            Debug.Log("No more waypoints ï¿½ NPC is done shopping.");
         }
 
         isCoroutineRunning = false;
