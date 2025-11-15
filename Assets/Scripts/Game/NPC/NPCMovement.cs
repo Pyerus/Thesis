@@ -25,7 +25,7 @@ public class NPCMovement : MonoBehaviour
     private bool goingToCheckout = false;
 
     // If store is closed
-    private bool isClosed = false; // this doesn't toggle yet
+    public bool isClosed = false; // this doesn't toggle yet
 
     // NPC behavior script
     private NPCBehaviour npcBehaviour;
@@ -134,9 +134,10 @@ public class NPCMovement : MonoBehaviour
         }
 
         // If we've reached the end of the shopping list or the store is closed, go to checkout
-        if (currentIndex >= waypoints.Length || isClosed)
+        if (currentIndex >= waypoints.Length || NPC.StoreClosed || isClosed)
         {
             return GetCheckoutWaypoint();
+            isClosed = false;
         }
 
         // Otherwise, continue through the waypoints list
