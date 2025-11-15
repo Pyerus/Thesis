@@ -245,7 +245,7 @@ public class TierManager : MonoBehaviour
 
         if (placed < amount)
         {
-            Debug.LogWarning($"Only placed {placed}/{amount} items — not enough empty slots!");
+            Debug.LogWarning($"Only placed {placed}/{amount} items ï¿½ not enough empty slots!");
         }
     }
 
@@ -290,7 +290,7 @@ public class TierManager : MonoBehaviour
         }
 
         if (removed < amountToRemove)
-            Debug.LogWarning($"Only removed {removed}/{amountToRemove} items — not enough stocked items.");
+            Debug.LogWarning($"Only removed {removed}/{amountToRemove} items ï¿½ not enough stocked items.");
     }
 
     public enum ShelfType

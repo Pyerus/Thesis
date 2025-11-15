@@ -20593,7 +20593,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3008241940679536190, guid: 470a3f867f2320b4e97db4869eb56ccc, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7772002939884921184, guid: 470a3f867f2320b4e97db4869eb56ccc, type: 3}
       propertyPath: idealItem
@@ -50432,7 +50432,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4997580564494144642, guid: 0ddf2556922c04841a179cdab06f49bd, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5544165431791506259, guid: 0ddf2556922c04841a179cdab06f49bd, type: 3}
       propertyPath: m_Enabled
@@ -56602,7 +56602,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0c2667e9f9a4534193583c632f8c5c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxTimePerDay: 180
+  maxTimePerDay: 20
   timerText: {fileID: 371207094}
   DayText: {fileID: 1528689230}
   nextDayWindow: {fileID: 943139925}
@@ -65630,7 +65630,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5649451119117878920, guid: a44ede2177637334c9b8f1a0b3b7c754, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5756131161714227208, guid: a44ede2177637334c9b8f1a0b3b7c754, type: 3}
       propertyPath: m_LocalPosition.x

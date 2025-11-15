@@ -40,6 +40,13 @@ public class ShoppingList : MonoBehaviour
 
     public void GenerateRandomList()
     {
+        // Boost item chance automatically on Day 4
+        if (GameTimer.Instance != null && GameTimer.Instance.CurrentDay == 4)
+        {
+            Debug.LogWarning("ITEMS BOOSTED");
+            ApplyDay4ItemBoost();
+        }
+
         generatedList.Clear();
 
         if (products == null || products.Count == 0)
@@ -125,6 +132,22 @@ public class ShoppingList : MonoBehaviour
         }
     }
 
+    public void ApplyDay4ItemBoost()
+{
+    foreach (var wp in products)
+    {
+        if (wp.product == null) continue;
+
+        if (wp.product.name == "Bear" ||
+            wp.product.name == "Chocolate Heart" ||
+            wp.product.name == "Chocolate Bar")
+        {
+            wp.weight = 1f; 
+        }
+    }
+
+    Debug.Log("[Day 4] Boost applied to NPC Shopping List!");
+}
 
 
 
@@ -133,7 +156,7 @@ public class ShoppingList : MonoBehaviour
     {
         if (generatedList == null || generatedList.Count == 0)
         {
-            Debug.LogWarning("Shopping generatedList is empty — no shelves to find.");
+            Debug.LogWarning("Shopping generatedList is empty ï¿½ no shelves to find.");
             return;
         }
 
