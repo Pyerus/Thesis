@@ -3,20 +3,24 @@ using TMPro;
 
 public class ItemCounter : MonoBehaviour
 {
+    [Header("Shop References")]
     public TextMeshProUGUI[] countTexts;
     public InventoryObject stockInventory;
     public ItemObject[] itemsForSale;
     public MoneyManager moneyManager;
-
-    public int incrementAmount = 50;
     public TextMeshProUGUI totalCostText;
 
-    private int[] counts;
+    [Header("Settings")]
+    public int incrementAmount = 50;
 
-    // --- NEW VARIABLES ---
-    private bool isItemMode = true; // true = item list, false = single item
+    [Header("Purchase Tracking")]
+    
+    public PurchasedPosters purchasedPosters;
+   
+
+    private int[] counts;
+    private bool isItemMode = true; 
     private ItemObject singleItemToBuy;
-    // --- END NEW VARIABLES ---
 
     void Start()
     {
@@ -26,11 +30,8 @@ public class ItemCounter : MonoBehaviour
 
     public void Increase(int index)
     {
-        // --- MODIFIED ---
-        // When you click +/-, switch to item mode
         isItemMode = true;
         singleItemToBuy = null;
-        // --- END MODIFIED ---
 
         if (index >= counts.Length) return;
         counts[index] += incrementAmount;
@@ -40,11 +41,8 @@ public class ItemCounter : MonoBehaviour
 
     public void Decrease(int index)
     {
-        // --- MODIFIED ---
-        // When you click +/-, switch to item mode
         isItemMode = true;
         singleItemToBuy = null;
-        // --- END MODIFIED ---
 
         if (index >= counts.Length) return;
         if (counts[index] >= incrementAmount)
@@ -56,14 +54,17 @@ public class ItemCounter : MonoBehaviour
         UpdateTotalCost();
     }
 
-    // --- NEW PUBLIC FUNCTION ---
-    // This is what your poster buttons will call
     public void SelectSingleItem(ItemObject itemToBuy)
     {
+        
+        if (purchasedPosters.IsPurchased(itemToBuy))
+        {
+            return;
+        }
+
         isItemMode = false;
         singleItemToBuy = itemToBuy;
 
-        // Clear all item counts so we're not buying both
         for (int i = 0; i < counts.Length; i++)
         {
             if (counts[i] > 0)
@@ -75,14 +76,12 @@ public class ItemCounter : MonoBehaviour
         
         UpdateTotalCost();
     }
-    // --- END NEW FUNCTION ---
 
     public void BuyAll()
     {
-        // --- MODIFIED ---
         if (isItemMode)
         {
-            // This is your original 'BuyAll' logic for items
+            
             float totalSpent = 0f;
             int totalItems = 0;
 
@@ -117,7 +116,7 @@ public class ItemCounter : MonoBehaviour
         }
         else
         {
-            // This is the new logic for buying a single poster
+            
             if (singleItemToBuy == null)
             {
                 Debug.Log("No item selected to buy.");
@@ -131,16 +130,18 @@ public class ItemCounter : MonoBehaviour
                 return;
             }
 
-            // Add the single item to inventory (assuming 1 poster)
             stockInventory.AddItem(singleItemToBuy, stockInventory.maxCapacity, 1);
             Debug.Log($"Bought {singleItemToBuy.name} for ₱{totalSpent:F2}");
 
-            // Reset
+           
+            
+            purchasedPosters.MarkAsPurchased(singleItemToBuy);
+           
+
             singleItemToBuy = null;
-            isItemMode = true; // Switch back to item mode
-            UpdateTotalCost(); // This will reset the total to ₱0
+            isItemMode = true; 
+            UpdateTotalCost(); 
         }
-        // --- END MODIFIED ---
     }
 
     private void UpdateText(int index)
@@ -163,10 +164,8 @@ public class ItemCounter : MonoBehaviour
 
         float total = 0f;
 
-        // --- MODIFIED ---
         if (isItemMode)
         {
-            // Original logic for item list
             for (int i = 0; i < counts.Length; i++)
             {
                 if (itemsForSale[i] != null)
@@ -175,13 +174,11 @@ public class ItemCounter : MonoBehaviour
         }
         else
         {
-            // New logic for single selected item
             if (singleItemToBuy != null)
             {
                 total = singleItemToBuy.buyPrice;
             }
         }
-        // --- END MODIFIED ---
 
         totalCostText.text = $"Total: ₱{total:F2}";
     }
