@@ -4,6 +4,8 @@ public class NPC : MonoBehaviour
 {
     [SerializeField] float LifeSpan = 0f;
     [SerializeField] float MaxLifeSpan = 298f;
+    public static bool StoreClosed = false;
+
     void Update()
     {
         LifeSpan += Time.deltaTime;
@@ -11,17 +13,18 @@ public class NPC : MonoBehaviour
         if (LifeSpan >= MaxLifeSpan)
         {
             LifeSpan = MaxLifeSpan;
-            Destroy(gameObject);
-            //There should be a code here to kill all current alive NPC
+            StoreClosed = true; // Close store globally
+            KillNPCs();
         }
     }
 
     public static void KillNPCs()
     {
-        NPC[] allNPCs = FindObjectsOfType<NPC>();
-        foreach (NPC npc in allNPCs)
+        NPCMovement[] npcs = FindObjectsOfType<NPCMovement>();
+
+        foreach (NPCMovement npc in npcs)
         {
-            Destroy(npc.gameObject);
+            npc.isClosed = true;     // Force them to go to checkout/exit
         }
     }
 }
