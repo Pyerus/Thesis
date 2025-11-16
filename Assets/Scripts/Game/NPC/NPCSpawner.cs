@@ -42,23 +42,19 @@ public class NPCSpawner : MonoBehaviour
         }
         else
         {
-            // --- MODIFIED ---
             // Logic to CLOSE the store (now uses the public function)
             CloseStore();
-            // --- END MODIFIED ---
         }
     }
 
-    // --- NEW PUBLIC FUNCTION ---
     // This can be called from other scripts (like GameTimer)
     public void CloseStore()
     {
         storeOpen = false;
         buttonText.text = "Open";
         StopAllCoroutines(); 
-        NPC.KillNPCs(); // Assuming this is a static function you have
+        NPC.KillNPCs(); // Assuming you have this static function
     }
-    // --- END NEW FUNCTION ---
 
     public IEnumerator SpawnNPC(float interval, GameObject[] npcPrefabs)
     {

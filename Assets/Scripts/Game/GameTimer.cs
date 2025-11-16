@@ -24,6 +24,13 @@ public class GameTimer : MonoBehaviour
 
     [SerializeField] private NPCSpawner npcSpawner;
 
+    // --- NEW REFERENCES ---
+    [Header("Daily Results UI")]
+    public MoneyManager moneyManager;       // Drag your MoneyManager object here
+    public TMP_Text itemsSoldText;    // Drag your "ITEMS SOLD:" text here
+    public TMP_Text totalEarnedText;  // Drag your "TOTAL EARNED:" text here
+    // --- END NEW REFERENCES ---
+
     private readonly string[] daysOfWeek = 
     { 
         "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" 
@@ -84,7 +91,16 @@ public class GameTimer : MonoBehaviour
         gamePaused = true;
 
         if (nextDayWindow != null)
+        {
             nextDayWindow.SetActive(true);
+
+            // --- NEW: Populate the results window ---
+            if (moneyManager != null)
+            {
+                itemsSoldText.text = $"ITEMS SOLD: {moneyManager.GetItemsSoldToday()}";
+                totalEarnedText.text = $"TOTAL EARNED: ₱{moneyManager.GetEarnedToday():F2}";
+            }
+        }
     }
 
     public void StartNextDay()
@@ -101,17 +117,17 @@ public class GameTimer : MonoBehaviour
 
         if (nextDayWindow != null)
             nextDayWindow.SetActive(false);
-        
-        //Time.timeScale = 1f;
 
         if (npcSpawner != null)
         {
-            // --- MODIFIED ---
-            // This will close the store and stop all spawns
             npcSpawner.CloseStore();
-            // --- END MODIFIED ---
-            
             npcSpawner.spawnLimit = 10;
+        }
+
+        // --- NEW: Reset the daily stats for the new day ---
+        if (moneyManager != null)
+        {
+            moneyManager.ResetDailyStats();
         }
 
         MoveLegendToNextDay();
