@@ -24,6 +24,9 @@ public class ShoppingList : MonoBehaviour
     [Header("Items in Cart")]
     public List<ProductEntry> cart = new List<ProductEntry>();
 
+    [Header("NPC Budget")]
+    public float npcMoney;
+
 
     private GameObject[] shelves;
     private GameObject[] waypoints;
@@ -40,6 +43,10 @@ public class ShoppingList : MonoBehaviour
 
     public void GenerateRandomList()
     {
+        npcMoney = Random.Range(500, 2000);   // 500 – 1000
+        float remainingMoney = npcMoney;
+        Debug.Log($"NPC Budget: {npcMoney}");
+        
         // Boost item chance automatically on Day 4
         if (GameTimer.Instance != null && GameTimer.Instance.CurrentDay == 4)
         {
@@ -70,12 +77,29 @@ public class ShoppingList : MonoBehaviour
                 continue;
 
             int randomQuantity = Random.Range(minQuantity, maxQuantity + 1);
+            float cost = randomProduct.sellPrice * randomQuantity;
+
+            if (cost > remainingMoney)
+            {
+                continue;
+            }
+            remainingMoney -= cost;
 
             generatedList.Add(new ProductEntry(randomProduct, randomQuantity));
 
             // Remove already picked products
             tempPool.RemoveAll(p => p.product == randomProduct);
+
+            if (remainingMoney <= 0)
+                break;
         }
+        
+        Debug.Log("Generated Shopping List:");
+        foreach (var entry in generatedList)
+        {
+            Debug.Log($" - {entry.product.name} x{entry.quantity}");
+        }
+        Debug.Log($"NPC Remaining Money After List: {remainingMoney}");
     }
 
 
@@ -133,21 +157,21 @@ public class ShoppingList : MonoBehaviour
     }
 
     public void ApplyDay4ItemBoost()
-{
-    foreach (var wp in products)
     {
-        if (wp.product == null) continue;
-
-        if (wp.product.name == "Bear" ||
-            wp.product.name == "Chocolate Heart" ||
-            wp.product.name == "Chocolate Bar")
+        foreach (var wp in products)
         {
-            wp.weight = 1f; 
-        }
-    }
+            if (wp.product == null) continue;
 
-    Debug.Log("[Day 4] Boost applied to NPC Shopping List!");
-}
+            if (wp.product.name == "Bear" ||
+                wp.product.name == "Chocolate Heart" ||
+                wp.product.name == "Chocolate Bar")
+            {
+                wp.weight = 0.8f; 
+            }
+        }
+
+        Debug.Log("[Day 4] Boost applied to NPC Shopping List!");
+    }
 
 
 
