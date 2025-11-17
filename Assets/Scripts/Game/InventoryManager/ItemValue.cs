@@ -48,4 +48,20 @@ public class ItemValue : MonoBehaviour
         else
             totalValue = baseValue;
     }
+
+    public ItemObject GetBestIdealItem()
+    {
+        if (inventory == null || idealItems == null) 
+            return null;
+
+        foreach (var ideal in idealItems)
+        {
+            if (ideal != null && inventory.HasItem(ideal))
+            {
+                return ideal;      
+            }
+        }
+
+        return null;              
+    }
 }

@@ -52,12 +52,16 @@ public class PathfindDijkstra : MonoBehaviour
 
             if (currentNode == targetNode)
             {      
+                // Detect shelf
+                ShelfInventory shelf = target.GetComponent<ShelfInventory>();
+                if (shelf != null)
+                {
+                    Debug.Log("WEEEEE NIGGA");
+                    HandleImpulseBuying(shelf);
+                } 
+                
                 RetracePath(startNode, targetNode);
 
-                if (impulsiveBuying.TryImpulseBuy())
-                {
-                    Debug.Log("Impulsive buying");
-                }  
                 return;
             }
 
@@ -114,4 +118,33 @@ public class PathfindDijkstra : MonoBehaviour
         }
     }
 
+    private void HandleImpulseBuying(ShelfInventory shelf)
+    {
+        // Get shelf ideal item evaluator
+        ItemValue itemValue = shelf.GetComponent<ItemValue>();
+
+        if (itemValue == null)
+        {
+            Debug.LogWarning("Shelf has no ItemValue component!");
+            return;
+        }
+
+        // Check if the shelf contains ANY ideal item
+        ItemObject idealItem = itemValue.GetBestIdealItem();
+
+        if (idealItem != null)
+        {
+            // Boost the multiplier for this specific ideal item
+            impulsiveBuying.AddImpulseFactor(idealItem, 0.5f);
+            Debug.Log($"Ideal item found! Boosting impulse factor for {idealItem.name}");
+        }
+
+        // Now attempt impulse buy for THAT item
+        bool bought = impulsiveBuying.TryImpulseBuy(idealItem);
+
+        if (bought)
+        {
+            Debug.Log($"NPC impulse bought {idealItem?.name ?? "something"}!");
+        }
+    }
 }
