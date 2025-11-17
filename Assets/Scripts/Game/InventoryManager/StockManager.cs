@@ -6,6 +6,9 @@ public class StockManager : MonoBehaviour
     [Header("References")]
     public InventoryObject stockInventory;
 
+    [Header("Products")] // Should be in order
+    public ItemObject[] items;
+
     [Header("TMP Counters")]
     public TextMeshProUGUI[] counterTexts; // Must match order of items in stockInventory
 

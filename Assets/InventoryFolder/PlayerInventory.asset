@@ -16,44 +16,44 @@ MonoBehaviour:
   - item: {fileID: 11400000, guid: d3ca3f784c2e31048a49c183189b0b9a, type: 2}
     amount: 0
   - item: {fileID: 11400000, guid: 180086c9474e81243b3eedf6c72eb304, type: 2}
-    amount: 100
+    amount: 0
   - item: {fileID: 11400000, guid: 05d9a5a14f2f3bf41952e11db52a1043, type: 2}
-    amount: 100
+    amount: 0
   - item: {fileID: 11400000, guid: 80f8236decf4262468ab31b9f1907c37, type: 2}
     amount: 0
   - item: {fileID: 11400000, guid: 0c36802abdeb77844977451064fa9890, type: 2}
-    amount: 100
+    amount: 0
   - item: {fileID: 11400000, guid: 6e2bbe257743fe249be406772376d20c, type: 2}
-    amount: 50
+    amount: 0
   - item: {fileID: 11400000, guid: a54baabe31c539c45a25590055ae2827, type: 2}
-    amount: 50
+    amount: 0
   - item: {fileID: 11400000, guid: 2719d55bc08a5a1429e41983f44940a5, type: 2}
-    amount: 150
+    amount: 0
   - item: {fileID: 11400000, guid: fb97b28f58234774092a1c81d17f0547, type: 2}
-    amount: 100
+    amount: 0
   - item: {fileID: 11400000, guid: 8964474926ac2624297593eea538b677, type: 2}
     amount: 0
   - item: {fileID: 11400000, guid: 19c25f425d0e88a41812de229e6cdc98, type: 2}
     amount: 0
   - item: {fileID: 11400000, guid: 1dcda153808b6774b8c8e0d7a779388c, type: 2}
     amount: 0
-  - item: {fileID: 11400000, guid: 474bceaec9a3efd4d8df7c16fdd38805, type: 2}
+  - item: {fileID: 0}
     amount: 0
   - item: {fileID: 11400000, guid: a9debba54510a8e41a14a843f4aee08c, type: 2}
     amount: 0
   - item: {fileID: 11400000, guid: 3f38e6c9ff367ba41b941d6869de81e7, type: 2}
     amount: 0
   - item: {fileID: 11400000, guid: bf39761e93db10f4ea6690ab66889c38, type: 2}
-    amount: 5
+    amount: 0
   - item: {fileID: 11400000, guid: edd684d1af48bdd4e94e0afd14e398e2, type: 2}
     amount: 0
-  - item: {fileID: 11400000, guid: 807d35df0f6466646aba396c56a50773, type: 2}
+  - item: {fileID: 11400000, guid: eff38140462ac914aa29db7b7cbd91f0, type: 2}
     amount: 0
   - item: {fileID: 11400000, guid: 924baf10ffc7de44dbedd64eb7e0562c, type: 2}
     amount: 0
   - item: {fileID: 11400000, guid: 0ac0eff8ce084314e8054588fe0bbccb, type: 2}
     amount: 0
-  - item: {fileID: 11400000, guid: eff38140462ac914aa29db7b7cbd91f0, type: 2}
+  - item: {fileID: 11400000, guid: 807d35df0f6466646aba396c56a50773, type: 2}
     amount: 0
   - item: {fileID: 11400000, guid: d98b2e0b701597944a45958994de84f5, type: 2}
     amount: 0
