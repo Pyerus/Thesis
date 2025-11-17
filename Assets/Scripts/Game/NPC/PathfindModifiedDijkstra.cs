@@ -1,14 +1,25 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
 public class PathfindModifiedDijkstra : MonoBehaviour
 {
+    [Header("Pathfinder")]
     public Transform seeker, target;
-
     public List<Node> path;
-
     private WorldGrid grid;
+
+    [Header("Weighted Probability")]
+    public int newRandomTarget;
+    public int newNeighbor;
+    public int continuePath;
+
+    [Header("Decision")]
+    [SerializeField] Decision decision;
+    bool isCoroutineRunning = false;
+
+    public bool checkedOut = false;
 
 
 
@@ -23,6 +34,9 @@ public class PathfindModifiedDijkstra : MonoBehaviour
         FindPath(seeker.position, target.position);
     }
 
+    // -----------------------------
+    // MAIN MODIFIED DIJKSTRA
+    // -----------------------------
     void FindPath(Vector3 startPos, Vector3 targetPos)
     {
         Node startNode = grid.NodeFromWorldPoint(startPos);
@@ -37,6 +51,7 @@ public class PathfindModifiedDijkstra : MonoBehaviour
         {
             Node currentNode = openSet[0];
 
+            // Get the unvisited node with smallest distance 
             for (int i = 1; i < openSet.Count; i++)
             {
                 if (openSet[i].gCost < currentNode.gCost)
@@ -48,29 +63,51 @@ public class PathfindModifiedDijkstra : MonoBehaviour
             openSet.Remove(currentNode);
             closedSet.Add(currentNode);
 
+            // ----------------------------------------------------
+            //  If current node is the destination
+            // ----------------------------------------------------
             if (currentNode == targetNode)
             {
-                RetracePath(startNode, targetNode);
-                return;
+                if (!isCoroutineRunning)
+                    StartCoroutine(MakeDecision(0.7f));
+
+                if (decision == Decision.NewDestination)
+                {
+                    // pick a new random destination
+                    targetNode = grid.GetWeightedRandomWalkableNode();
+                    continue;
+                }
+                else if (decision == Decision.CheckDifferentNeighbor)
+                {
+                    // go to a nearby neighbor node
+                    targetNode = grid.GetRandomNearbyNode(currentNode, radius: 5);
+                    continue;
+                }
+                else if (decision == Decision.Continue)
+                {
+                    // finish pathfinding normally
+                    RetracePath(startNode, targetNode);
+                    return;
+                }
             }
 
+            // ----------------------------------------------------
+            //  Standard Dijkstra neighbor checking
+            // ----------------------------------------------------
             foreach (Node neighbour in grid.GetNeighbors(currentNode))
             {
                 if (!neighbour.walkable || closedSet.Contains(neighbour))
-                { continue; }
+                    continue;
 
-                int newMoveCost = currentNode.gCost + GetDistance(currentNode, neighbour);
-                if (newMoveCost < neighbour.gCost || !openSet.Contains(neighbour))
+                int newCost = currentNode.gCost + GetDistance(currentNode, neighbour) + neighbour.addedWeight;
+
+                if (newCost < neighbour.gCost || !openSet.Contains(neighbour))
                 {
-                    neighbour.gCost = newMoveCost;
-                    //neighbour.hCost = GetDistance(neighbour, targetNode);
-
+                    neighbour.gCost = newCost;
                     neighbour.parent = currentNode;
 
                     if (!openSet.Contains(neighbour))
-                    {
                         openSet.Add(neighbour);
-                    }
                 }
             }
         }
@@ -107,4 +144,38 @@ public class PathfindModifiedDijkstra : MonoBehaviour
         }
     }
 
+    IEnumerator MakeDecision(float interval)
+    {
+        isCoroutineRunning = true;
+
+        int total = newRandomTarget + newNeighbor + continuePath;
+        int n = Random.Range(0, total);
+
+        if (checkedOut)
+        {
+            decision = Decision.Continue;
+        }
+        else if (n < newRandomTarget)
+        {
+            decision = Decision.NewDestination;
+        }
+        else if (n < newRandomTarget + newNeighbor)
+        {
+            decision = Decision.CheckDifferentNeighbor;
+        }
+        else
+        {
+            decision = Decision.Continue;
+        }
+
+        yield return new WaitForSeconds(interval);
+        isCoroutineRunning = false;
+    }
+
+    enum Decision
+    {
+        NewDestination,
+        CheckDifferentNeighbor,
+        Continue
+    }
 }

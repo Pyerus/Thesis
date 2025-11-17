@@ -144,4 +144,68 @@ public class WorldGrid : MonoBehaviour
             n.addedWeight = newValue;     // Set cost directly
         }
     }
+
+    public Node GetWeightedRandomWalkableNode()
+    {
+        List<Node> candidates = new List<Node>();
+        int totalWeight = 0;
+
+        foreach (Node n in grid)
+        {
+            if (!n.walkable) continue;
+
+            int weight = Mathf.Max(1, n.addedWeight);
+            totalWeight += weight;
+            candidates.Add(n);
+        }
+
+        int r = Random.Range(0, totalWeight);
+
+        foreach (Node n in candidates)
+        {
+            int weight = Mathf.Max(1, n.addedWeight);
+            if (r < weight)
+                return n;
+            r -= weight;
+        }
+
+        return null;
+    }
+
+    public Node GetRandomNearbyNode(Node centerNode, int radius)
+    {
+        List<Node> candidates = new List<Node>();
+
+        // Search within radius
+        for (int x = -radius; x <= radius; x++)
+        {
+            for (int y = -radius; y <= radius; y++)
+            {
+                int checkX = centerNode.gridX + x;
+                int checkY = centerNode.gridY + y;
+
+                // Skip if out of bounds
+                if (checkX < 0 || checkX >= gridSizeX || checkY < 0 || checkY >= gridSizeY)
+                    continue;
+
+                Node node = grid[checkX, checkY];
+
+                // Must be walkable, not the same node, and within circle distance
+                if (node.walkable && node != centerNode)
+                {
+                    // Optional: enforce circular radius instead of square
+                    if (x * x + y * y <= radius * radius)
+                        candidates.Add(node);
+                }
+            }
+        }
+
+        // If nothing found, fallback to current node
+        if (candidates.Count == 0)
+            return centerNode;
+
+        // Return a random nearby node
+        return candidates[Random.Range(0, candidates.Count)];
+    }
+
 }

@@ -11097,7 +11097,7 @@ GameObject:
   - component: {fileID: 339303234}
   - component: {fileID: 339303233}
   - component: {fileID: 339303232}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Pillar (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11480,7 +11480,7 @@ GameObject:
   - component: {fileID: 340862986}
   - component: {fileID: 340862985}
   - component: {fileID: 340862984}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Pillar (11)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15315,7 +15315,7 @@ GameObject:
   - component: {fileID: 442940292}
   - component: {fileID: 442940291}
   - component: {fileID: 442940290}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Pillar (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19396,7 +19396,7 @@ GameObject:
   - component: {fileID: 555986372}
   - component: {fileID: 555986371}
   - component: {fileID: 555986370}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Pillar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20012,7 +20012,7 @@ GameObject:
   - component: {fileID: 565098123}
   - component: {fileID: 565098122}
   - component: {fileID: 565098121}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Glass
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24794,7 +24794,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0c2667e9f9a4534193583c632f8c5c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxTimePerDay: 20
+  maxTimePerDay: 300
   timerText: {fileID: 413900936}
   DayText: {fileID: 1488616634}
   nextDayWindow: {fileID: 2081544444}
@@ -29209,7 +29209,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 816478349}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Windows
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -31324,7 +31324,7 @@ GameObject:
   - component: {fileID: 878913687}
   - component: {fileID: 878913686}
   - component: {fileID: 878913685}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Pillar (8)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -35504,7 +35504,7 @@ GameObject:
   - component: {fileID: 1001150598}
   - component: {fileID: 1001150597}
   - component: {fileID: 1001150596}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Pillar (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40281,7 +40281,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1794856225}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.35276267
+  m_Size: 0.3527627
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -44640,7 +44640,7 @@ GameObject:
   - component: {fileID: 1266451928}
   - component: {fileID: 1266451927}
   - component: {fileID: 1266451926}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Pillar (9)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -45332,8 +45332,8 @@ MonoBehaviour:
   unwalkableMask:
     serializedVersion: 2
     m_Bits: 64
-  gridWorldSize: {x: 60, y: 40}
-  nodeRadius: 0.5
+  gridWorldSize: {x: 50, y: 35}
+  nodeRadius: 0.25
 --- !u!4 &1282256653
 Transform:
   m_ObjectHideFlags: 0
@@ -47514,7 +47514,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1799403747}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.35276267
+  m_Size: 0.3527627
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -49071,7 +49071,7 @@ GameObject:
   - component: {fileID: 1376095995}
   - component: {fileID: 1376095994}
   - component: {fileID: 1376095993}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Pillar (8)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -51705,7 +51705,7 @@ GameObject:
   - component: {fileID: 1430494906}
   - component: {fileID: 1430494905}
   - component: {fileID: 1430494904}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Glass
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -53301,7 +53301,7 @@ GameObject:
   - component: {fileID: 1477778298}
   - component: {fileID: 1477778297}
   - component: {fileID: 1477778296}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Glass
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -56681,7 +56681,7 @@ GameObject:
   - component: {fileID: 1559897136}
   - component: {fileID: 1559897135}
   - component: {fileID: 1559897134}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Pillar (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -59121,7 +59121,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1677381020}
   m_HandleRect: {fileID: 1677381019}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -62073,7 +62073,7 @@ GameObject:
   - component: {fileID: 1692725277}
   - component: {fileID: 1692725276}
   - component: {fileID: 1692725275}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Glass
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -65639,7 +65639,7 @@ GameObject:
   - component: {fileID: 1784512081}
   - component: {fileID: 1784512080}
   - component: {fileID: 1784512079}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Pillar (9)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -67190,7 +67190,7 @@ GameObject:
   - component: {fileID: 1834094297}
   - component: {fileID: 1834094296}
   - component: {fileID: 1834094295}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Pillar (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -68994,7 +68994,7 @@ GameObject:
   - component: {fileID: 1885211237}
   - component: {fileID: 1885211236}
   - component: {fileID: 1885211235}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Pillar (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -70082,7 +70082,7 @@ GameObject:
   - component: {fileID: 1911602485}
   - component: {fileID: 1911602484}
   - component: {fileID: 1911602483}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Pillar (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -70862,7 +70862,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -70875,7 +70875,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1936077364}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -74582,7 +74582,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2044065282}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Walls
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -79091,6 +79091,7 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 575696534}
+  - {fileID: 1936457689}
   - {fileID: 105142508}
   - {fileID: 2138185957}
   - {fileID: 700558889}
@@ -79099,7 +79100,6 @@ SceneRoots:
   - {fileID: 416241250}
   - {fileID: 997952547}
   - {fileID: 1847188104}
-  - {fileID: 1936457689}
   - {fileID: 1175603241}
   - {fileID: 1311701422}
   - {fileID: 1282256653}
