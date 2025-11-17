@@ -10,12 +10,14 @@ public class PathfindDijkstra : MonoBehaviour
 
     private WorldGrid grid;
 
+    public ImpulsiveBuying impulsiveBuying;
 
 
     private void Start()
     {
         GameObject gridObj = GameObject.FindGameObjectWithTag("Grid");
         grid = gridObj.GetComponent<WorldGrid>();
+        impulsiveBuying = new ImpulsiveBuying();
     }
 
     private void Update()
@@ -49,8 +51,13 @@ public class PathfindDijkstra : MonoBehaviour
             closedSet.Add(currentNode);
 
             if (currentNode == targetNode)
-            {
+            {      
                 RetracePath(startNode, targetNode);
+
+                if (impulsiveBuying.TryImpulseBuy())
+                {
+                    Debug.Log("Impulsive buying");
+                }  
                 return;
             }
 

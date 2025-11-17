@@ -21,12 +21,15 @@ public class PathfindModifiedDijkstra : MonoBehaviour
 
     public bool checkedOut = false;
 
+    public ImpulsiveBuying impulsiveBuying;
+
 
 
     private void Start()
     {
         GameObject gridObj = GameObject.FindGameObjectWithTag("Grid");
         grid = gridObj.GetComponent<WorldGrid>();
+        impulsiveBuying = new ImpulsiveBuying();
     }
 
     private void Update()
@@ -69,24 +72,47 @@ public class PathfindModifiedDijkstra : MonoBehaviour
             if (currentNode == targetNode)
             {
                 if (!isCoroutineRunning)
+                {
                     StartCoroutine(MakeDecision(0.7f));
+                }
 
                 if (decision == Decision.NewDestination)
                 {
                     // pick a new random destination
                     targetNode = grid.GetWeightedRandomWalkableNode();
+
+                    //Impulsive buy
+                    if (impulsiveBuying.TryImpulseBuy())
+                    {
+                        Debug.Log("Impulsive buying");
+                    }
+
                     continue;
                 }
                 else if (decision == Decision.CheckDifferentNeighbor)
                 {
                     // go to a nearby neighbor node
                     targetNode = grid.GetRandomNearbyNode(currentNode, radius: 5);
+
+                    //Impulsive buy
+                    if (impulsiveBuying.TryImpulseBuy())
+                    {
+                        Debug.Log("Impulsive buying");
+                    }
+
                     continue;
                 }
                 else if (decision == Decision.Continue)
                 {
                     // finish pathfinding normally
                     RetracePath(startNode, targetNode);
+
+                    //Impulsive buy
+                    if (impulsiveBuying.TryImpulseBuy())
+                    {
+                        Debug.Log("Impulsive buying");
+                    }
+                    
                     return;
                 }
             }
