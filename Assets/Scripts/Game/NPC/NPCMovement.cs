@@ -136,8 +136,8 @@ public class NPCMovement : MonoBehaviour
         // If we've reached the end of the shopping list or the store is closed, go to checkout
         if (currentIndex >= waypoints.Length || NPC.StoreClosed || isClosed)
         {
-            return GetCheckoutWaypoint();
             isClosed = false;
+            return GetCheckoutWaypoint();
         }
 
         // Otherwise, continue through the waypoints list

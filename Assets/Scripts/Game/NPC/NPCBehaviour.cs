@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-// This script connects everything together.
 public class NPCBehaviour : MonoBehaviour
 {
     ShoppingList shoppingList;
@@ -10,19 +9,15 @@ public class NPCBehaviour : MonoBehaviour
     private void Start()
     {
         shoppingList = gameObject.GetComponent<ShoppingList>();
-
         moneyManager = GameObject.FindGameObjectWithTag("MoneyManager").GetComponent<MoneyManager>();
     }
-
-
-
+    
     // When the NPC reaches the target waypoint (shelf), remove the product from the shelf and add to cart.
     public void AddToCart(ShelfInventory shelfInventory, ItemObject itemObject, int amount)
     {
         // Take the shelf components associated with the waypoint.
         InventoryObject inventory = shelfInventory.GetInventoryObject();
         TierManager tierManager = shelfInventory.GetTierManager();
-
         
         // Remove product from inventory and take return variables (itemObject, amount, slotIndex).
         var product = inventory.RemoveItem(itemObject, amount);
@@ -33,13 +28,10 @@ public class NPCBehaviour : MonoBehaviour
         // Take the returned amount from the shelf.
         tierManager.TakeItemsFromShelf(product.slotIndex, product.amount);
 
-
         // Add the removed items to cart.
         shoppingList.AddToCart(itemObject, product.amount);
     }
-
-
-
+    
     // When the NPC reaches the counter, check out.
     public void CheckOut()
     {
@@ -52,14 +44,18 @@ public class NPCBehaviour : MonoBehaviour
         }
 
         float totalCost = 0;
+        int totalItems = 0; // --- NEW ---
 
         foreach (var entry in shoppingList.cart)
         {
             Debug.Log($"{entry.quantity}x {entry.product.itemName}: ${entry.product.sellPrice} each.");
             totalCost += entry.product.sellPrice * entry.quantity;
+            totalItems += entry.quantity; // --- NEW: Add item quantity to total
         }
 
-        Debug.Log($"Bought {shoppingList.cart.Count} products for ${totalCost}");
-        moneyManager.AddMoney(totalCost);
+        Debug.Log($"Bought {totalItems} products for ${totalCost}");
+        
+        // Report the sale to the MoneyManager
+        moneyManager.AddSale(totalCost, totalItems);
     }
 }
