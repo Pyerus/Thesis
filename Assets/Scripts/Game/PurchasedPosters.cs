@@ -6,9 +6,15 @@ public class PurchasedPosters : ScriptableObject
 {
     
     public event System.Action<ItemObject> OnPosterPurchased;
-    
+    private ImpulsiveBuying impulsiveBuying;
    
     public List<ItemObject> boughtPosters = new List<ItemObject>();
+
+    private void OnEnable()
+    {
+        if (impulsiveBuying == null)
+            impulsiveBuying = new ImpulsiveBuying();
+    }
 
     public void MarkAsPurchased(ItemObject poster)
     {
@@ -17,6 +23,14 @@ public class PurchasedPosters : ScriptableObject
             boughtPosters.Add(poster);
             
             OnPosterPurchased?.Invoke(poster);
+
+            if (impulsiveBuying != null)
+            {
+                Debug.Log("In MarkAsPurchased impulsiveBuying IF");
+                impulsiveBuying.HasPosters = true;
+
+                impulsiveBuying.ReduceNullChance(boughtPosters.Count);
+            }
         }
     }
 

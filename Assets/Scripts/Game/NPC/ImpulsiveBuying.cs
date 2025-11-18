@@ -6,9 +6,8 @@ public class ImpulsiveBuying
 {
     [Header("Impulse Settings")]
     [Range(0f, 1f)]
-    public float baseImpulseChance = 0.05f;      // 5% default
     public float maxImpulseChance = 0.75f;       // To prevent 100%
-
+    public bool HasPosters = false;
     public float nullChance = 0.3f;
 
     [Header("Cooldown")]
@@ -108,5 +107,22 @@ public class ImpulsiveBuying
             itemMultipliers[item] = 1f;
 
         itemMultipliers[item] += amount;
+    }
+
+    public void ReduceNullChance(int postersBought)
+    {
+        if (!HasPosters)
+            return;
+
+        // Base start value
+        float baseNullChance = 0.30f;
+
+        // Reduce by 0.05 for each purchased poster
+        nullChance = baseNullChance - (postersBought * 0.05f);
+
+        // Clamp so that we never go below 0.05
+        nullChance = Mathf.Clamp(nullChance, 0.05f, baseNullChance);
+
+        Debug.Log($"[Impulse] Posters bought: {postersBought} | nullChance is now {nullChance}");
     }
 }
