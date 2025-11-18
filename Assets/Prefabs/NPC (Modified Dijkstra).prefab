@@ -113,9 +113,9 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
-  m_Height: 2
+  m_Height: 1
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!54 &3006149662447217808
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -276,7 +276,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 318020355348019168}
-  - component: {fileID: 1754046568091109594}
+  - component: {fileID: 6462775509202801088}
   - component: {fileID: 3473537007164329348}
   - component: {fileID: 774743574798843364}
   - component: {fileID: 5988642089911812076}
@@ -304,7 +304,7 @@ Transform:
   - {fileID: 8409919623625568995}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1754046568091109594
+--- !u!114 &6462775509202801088
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -313,18 +313,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 8622626352161326856}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 73dfbd484bd8f7d429479f3640a0ed03, type: 3}
+  m_Script: {fileID: 11500000, guid: cf40652ea7046cd4b9fdc4eba439dcba, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PathfindModifiedDijkstra
+  m_EditorClassIdentifier: Assembly-CSharp::PathfindModified
   seeker: {fileID: 4455167432338267119}
   target: {fileID: 8409919623625568995}
+  moveSpeed: 10
+  searchRadius: 3
   newRandomTarget: 20
   newNeighbor: 20
-  continuePath: 20
+  continuePath: 50
   decision: 0
-  checkedOut: 0
-  shelvesManager: {fileID: 0}
-  searchRadius: 3
 --- !u!114 &3473537007164329348
 MonoBehaviour:
   m_ObjectHideFlags: 0

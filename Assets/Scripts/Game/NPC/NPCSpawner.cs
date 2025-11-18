@@ -52,8 +52,7 @@ public class NPCSpawner : MonoBehaviour
     {
         storeOpen = false;
         buttonText.text = "Open";
-        StopAllCoroutines(); 
-        NPC.KillNPCs(); // Assuming you have this static function
+        StopAllCoroutines();
     }
 
     public IEnumerator SpawnNPC(float interval, GameObject[] npcPrefabs)

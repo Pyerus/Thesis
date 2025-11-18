@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class PathfindDijkstra : MonoBehaviour
 {
-    public Transform seeker, target;
+    [Header("NPC")]
+    public Transform seeker;
+    public Transform target;
     public float moveSpeed = 10f;
     public float searchRadius = 3f;
 
     private WorldGrid grid;
-    public List<Node> path;
+    private List<Node> path;
     
     private NPCBehaviour npcBehaviour;
     private ShoppingList shoppingList;
