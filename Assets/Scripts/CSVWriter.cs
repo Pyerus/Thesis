@@ -9,6 +9,13 @@ public class CSVWriter : MonoBehaviour
     private void Awake()
     {
         filePath = Path.Combine(Application.persistentDataPath, "GrocerRizz.csv");
+
+        List<string[]> rows = new List<string[]>
+        {
+            new string[] { "Algorithm", "NPC", "Item", "Quantity", "Listed or Impulsive", "Item Value", "Position Multiplier", "Promotion Multiplier", "Visibility", "Layout", "Number of Posters", "Promotional Score" }
+        };
+
+        WriteCSV(rows);
     }
 
     // Overwrites file and writes header + rows

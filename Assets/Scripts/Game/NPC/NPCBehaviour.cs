@@ -6,16 +6,21 @@ public class NPCBehaviour : MonoBehaviour
     ShoppingList shoppingList;
     MoneyManager moneyManager;
 
+    NPCData npcData;
+
     private void Start()
     {
         shoppingList = gameObject.GetComponent<ShoppingList>();
         moneyManager = GameObject.FindGameObjectWithTag("MoneyManager").GetComponent<MoneyManager>();
+
+        npcData = GetComponent<NPCData>();
     }
     
     // When the NPC reaches the target waypoint (shelf), remove the product from the shelf and add to cart.
-    public void AddToCart(ShelfInventory shelfInventory, ItemObject itemObject, int amount)
+    public void AddToCart(GameObject shelf, ItemObject itemObject, int amount, ListOrImpulse listOrImpulse)
     {
         // Take the shelf components associated with the waypoint.
+        ShelfInventory shelfInventory = shelf.GetComponent<ShelfInventory>();
         InventoryObject inventory = shelfInventory.GetInventoryObject();
         TierManager tierManager = shelfInventory.GetTierManager();
         
@@ -33,6 +38,12 @@ public class NPCBehaviour : MonoBehaviour
 
         if (item != null)
             Debug.Log($"{product.amount}x {item.name} added to cart.");
+
+
+
+        // Record item data.
+        ItemValue value = shelf.GetComponent<ItemValue>();
+        npcData.NewItem(new ProductEntry(itemObject, product.amount), listOrImpulse, value.baseValue, value.multiplier);
     }
     
     // When the NPC reaches the counter, check out.

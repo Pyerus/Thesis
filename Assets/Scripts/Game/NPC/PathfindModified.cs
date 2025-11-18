@@ -33,6 +33,7 @@ public class PathfindModified : MonoBehaviour
 
     private bool goingToCheckout = false;
     private bool checkedOut = false;
+    private ListOrImpulse listOrImpulse = ListOrImpulse.List;
 
     void Start()
     {
@@ -40,7 +41,7 @@ public class PathfindModified : MonoBehaviour
         shelvesManager = GameObject.FindFirstObjectByType<ShelvesManager>();
         npcBehaviour = GetComponent<NPCBehaviour>();
         shoppingList = GetComponent<ShoppingList>();
-        impulsiveBuying = new ImpulsiveBuying();
+        impulsiveBuying = FindFirstObjectByType<ImpulsiveBuying>();
         itemList = shoppingList.generatedList;
 
         StartCoroutine(BehaviourLoop());
@@ -64,14 +65,15 @@ public class PathfindModified : MonoBehaviour
             {
                 // Normal waypoint logic
                 GameObject randomShelf = shelvesManager.GetRandomShelfGOInRadius(seeker.position, searchRadius);
-
                 if (HandleImpulseBuying(randomShelf) && !goingToCheckout)
                 {
+                    listOrImpulse = ListOrImpulse.Impulse;
                     waypoint = randomShelf.transform.Find("Waypoint").gameObject;
                     Debug.Log($"NPC is buying {currentItem.product?.name ?? "something"}!");
                 }
                 else
                 {
+                    listOrImpulse = ListOrImpulse.List;
                     waypoint = GetNextWaypoint();
                 }
 
@@ -297,9 +299,9 @@ public class PathfindModified : MonoBehaviour
 
         if (waypoint.CompareTag("Waypoint"))
         {
-            ShelfInventory shelfInv = currentShelf.GetComponent<ShelfInventory>();
             ProductEntry entry = currentItem;
-            npcBehaviour.AddToCart(shelfInv, entry.product, entry.quantity);
+
+            npcBehaviour.AddToCart(currentShelf, entry.product, entry.quantity, listOrImpulse);
         }
         else if (waypoint.CompareTag("Checkout"))
         {
@@ -332,4 +334,10 @@ public class PathfindModified : MonoBehaviour
 
         return true;
     }
+}
+
+public enum ListOrImpulse
+{
+    List,
+    Impulse
 }

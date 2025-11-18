@@ -3072,8 +3072,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ItemValue
   idealItems: []
-  baseValue: 10
-  additionalValue: 10
+  baseValue: 1
+  multiplier: 5
 --- !u!114 &6739077672284218484
 MonoBehaviour:
   m_ObjectHideFlags: 0

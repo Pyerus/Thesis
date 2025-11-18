@@ -6229,8 +6229,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   idealItems: []
-  baseValue: 10
-  additionalValue: 10
+  baseValue: 1
+  multiplier: 5
 --- !u!114 &3677370470587054647
 MonoBehaviour:
   m_ObjectHideFlags: 0

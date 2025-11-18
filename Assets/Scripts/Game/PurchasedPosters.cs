@@ -13,7 +13,7 @@ public class PurchasedPosters : ScriptableObject
     private void OnEnable()
     {
         if (impulsiveBuying == null)
-            impulsiveBuying = new ImpulsiveBuying();
+            impulsiveBuying = FindFirstObjectByType<ImpulsiveBuying>();
     }
 
     public void MarkAsPurchased(ItemObject poster)

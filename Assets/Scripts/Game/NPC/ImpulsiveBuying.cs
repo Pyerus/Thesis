@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class ImpulsiveBuying
+public class ImpulsiveBuying : MonoBehaviour
 {
     [Header("Impulse Settings")]
     [Range(0f, 1f)]
@@ -15,6 +15,8 @@ public class ImpulsiveBuying
     public float impulseCooldown = 1f;
 
     private Dictionary<ItemObject, float> itemMultipliers = new();
+
+    public int noOfPosters = 0;
 
 
     /// Call this method to check if the NPC decides to buy impulsively.
@@ -38,11 +40,11 @@ public class ImpulsiveBuying
 
         // ideal items definition
         ItemObject[] idealItems = shelf.GetComponent<ItemValue>().idealItems;
-        float idealItemMultiplier = 5f;
+        float idealItemMultiplier = shelf.GetComponent<ItemValue>().multiplier;
 
         // items currently on the shelf
         List<ItemObject> shelfItems = inventory.GetItemsInShelf();
-        float normalMultiplier = 1f;
+        float normalMultiplier = shelf.GetComponent<ItemValue>().baseValue;
 
         // --- chance to return null ---
         if (Random.value < nullChance)
@@ -113,6 +115,8 @@ public class ImpulsiveBuying
     {
         if (!HasPosters)
             return;
+
+        noOfPosters = postersBought;
 
         // Base start value
         float baseNullChance = 0.30f;

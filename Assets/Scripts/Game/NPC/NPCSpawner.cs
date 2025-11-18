@@ -5,6 +5,7 @@ using TMPro;
 
 public class NPCSpawner : MonoBehaviour
 {
+    public string algorithm;
     public TextMeshProUGUI npcCounter;
     public GameObject spawnPoint;
     public GameObject[] npcPrefabs;
@@ -16,6 +17,8 @@ public class NPCSpawner : MonoBehaviour
     bool storeOpen = false;
 
     private Vector3 spawnLocation;
+
+    public int npcNo = 0;
 
     private void Start()
     {
@@ -63,6 +66,7 @@ public class NPCSpawner : MonoBehaviour
 
             if (spawnCount < spawnLimit)
             {
+                npcNo++;
                 GameObject npc = npcPrefabs[Random.Range(0, npcPrefabs.Length)];
                 Instantiate(npc, spawnLocation, Quaternion.identity);
             }

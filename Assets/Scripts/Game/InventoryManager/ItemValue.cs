@@ -4,12 +4,14 @@ using UnityEngine;
 public class ItemValue : MonoBehaviour
 {
     InventoryObject inventory;
-    int totalValue = 0;
     
     //public TMP_Text displayText;
     public ItemObject[] idealItems;
-    public int baseValue = 10;
-    public int additionalValue = 10;
+
+    public int baseValue = 1;
+    public int multiplier = 5;
+
+    public float totalValue;
 
 
 
@@ -44,7 +46,7 @@ public class ItemValue : MonoBehaviour
         }
 
         if (hasAnyIdealItem)
-            totalValue = baseValue + additionalValue;
+            totalValue = baseValue * multiplier;
         else
             totalValue = baseValue;
     }

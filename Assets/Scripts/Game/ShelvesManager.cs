@@ -4,17 +4,25 @@ using UnityEngine;
 
 public class ShelvesManager : MonoBehaviour
 {
+    GameObject[] shelves;
     List<ShelfInventory> shelfInventories = new List<ShelfInventory>();
     List<InventoryObject> inventoryObjects = new List<InventoryObject>();
 
+    ImpulsiveBuying impulsiveBuying;
+
     private void Start()
     {
-        foreach (GameObject shelf in GameObject.FindGameObjectsWithTag("Shelf"))
+        impulsiveBuying = FindFirstObjectByType<ImpulsiveBuying>();
+        shelves = GameObject.FindGameObjectsWithTag("Shelf");
+        
+        foreach (GameObject shelf in shelves)
         {
             if (shelf.TryGetComponent(out ShelfInventory inv))
             {
                 shelfInventories.Add(inv);
             }
+
+            Debug.Log(shelf.name);
         }
 
         foreach (ShelfInventory shelfInventory in shelfInventories)
@@ -64,4 +72,36 @@ public class ShelvesManager : MonoBehaviour
         return shelvesInRange[Random.Range(0, shelvesInRange.Count)];
     }
 
+
+
+    public float CalculatePromotionScore()
+    {
+        float total = 0f;
+
+        int noOfShelves = shelfInventories.Count; // number of shelves
+
+        foreach (GameObject shelf in shelves)
+        {
+            ItemValue itemValue = shelf.GetComponent<ItemValue>();
+            total += itemValue.totalValue;
+        }
+
+        return total;
+    }
+
+    public float CalculateLayoutScore()
+    {
+        float total = 0f;
+
+        int noOfShelves = shelfInventories.Count;
+
+        foreach (GameObject shelf in shelves)
+        {
+            ItemValue itemValue = shelf.GetComponent<ItemValue>();
+            float visibility = itemValue.totalValue * impulsiveBuying.noOfPosters;
+            total += visibility;
+        }
+
+        return total;
+    }
 }

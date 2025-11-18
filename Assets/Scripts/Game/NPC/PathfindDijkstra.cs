@@ -26,6 +26,8 @@ public class PathfindDijkstra : MonoBehaviour
     private ProductEntry currentItem;
     private bool goingToCheckout = false;
 
+    private ListOrImpulse listOrImpulse = ListOrImpulse.List;
+
 
 
     void Start()
@@ -35,7 +37,7 @@ public class PathfindDijkstra : MonoBehaviour
 
         npcBehaviour = GetComponent<NPCBehaviour>();
         shoppingList = GetComponent<ShoppingList>();
-        impulsiveBuying = new ImpulsiveBuying();
+        impulsiveBuying = FindFirstObjectByType<ImpulsiveBuying>();
 
         itemList = shoppingList.generatedList;
 
@@ -55,11 +57,15 @@ public class PathfindDijkstra : MonoBehaviour
             GameObject randomShelf = shelvesManager.GetRandomShelfGOInRadius(seeker.position, searchRadius);
             if (HandleImpulseBuying(randomShelf) && !goingToCheckout)
             {
+                listOrImpulse = ListOrImpulse.Impulse;
                 waypoint = randomShelf.transform.Find("Waypoint").gameObject; // get random shelf's waypoint
                 Debug.Log($"NPC is buying {currentItem.product?.name ?? "something"}!");
             }
             else
+            {
+                listOrImpulse = ListOrImpulse.List;
                 waypoint = GetNextWaypoint(); // get next waypoint on the list
+            }
 
             if (waypoint == null)
             {
@@ -240,10 +246,9 @@ public class PathfindDijkstra : MonoBehaviour
         // At a shelf waypoint
         if (waypoint.CompareTag("Waypoint"))
         {
-            ShelfInventory shelfInv = currentShelf.GetComponent<ShelfInventory>();
             ProductEntry entry = currentItem;
 
-            npcBehaviour.AddToCart(shelfInv, entry.product, entry.quantity);
+            npcBehaviour.AddToCart(currentShelf, entry.product, entry.quantity, listOrImpulse);
         }
         // Checkout
         else if (waypoint.CompareTag("Checkout"))
