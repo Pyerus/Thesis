@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c36dfadbc2819884097089f072e2b63a, type: 3}
+  m_Name: Produce 6
+  m_EditorClassIdentifier: 
+  Container:
+  - item: {fileID: 11400000, guid: d3ca3f784c2e31048a49c183189b0b9a, type: 2}
+    amount: 0
+  - item: {fileID: 11400000, guid: 180086c9474e81243b3eedf6c72eb304, type: 2}
+    amount: 0
+  - item: {fileID: 11400000, guid: 80f8236decf4262468ab31b9f1907c37, type: 2}
+    amount: 0
+  - item: {fileID: 11400000, guid: 8964474926ac2624297593eea538b677, type: 2}
+    amount: 0
+  maxSlots: 4
+  maxCapacity: 10
