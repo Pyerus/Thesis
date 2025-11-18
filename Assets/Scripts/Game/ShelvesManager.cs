@@ -27,14 +27,14 @@ public class ShelvesManager : MonoBehaviour
         Debug.Log($"ShelvesManager: Cached {shelfInventories.Count}/{inventoryObjects.Count} shelves.");
     }
 
-    public ShelfInventory SearchShelvesForProduct(ItemObject item)
+    public GameObject SearchShelvesWithProduct(ItemObject item)
     {
         if (item == null) return null;
 
         for (int i = 0; i < inventoryObjects.Count; i++)
         {
             if (inventoryObjects[i].HasItem(item))
-                return shelfInventories[i];
+                return shelfInventories[i].gameObject; // return the GameObject
         }
 
         return null;

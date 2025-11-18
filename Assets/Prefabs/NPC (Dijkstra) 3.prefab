@@ -277,7 +277,6 @@ GameObject:
   m_Component:
   - component: {fileID: 318020355348019168}
   - component: {fileID: 4397968998994292462}
-  - component: {fileID: 338198267905982793}
   - component: {fileID: 3473537007164329348}
   - component: {fileID: 774743574798843364}
   - component: {fileID: 5988642089911812076}
@@ -319,23 +318,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   seeker: {fileID: 4455167432338267119}
   target: {fileID: 8409919623625568995}
---- !u!114 &338198267905982793
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8622626352161326856}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c0e261ce424628498ed118e7ad82e54, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  movementSpeed: 8
-  seeker: {fileID: 4455167432338267119}
-  target: {fileID: 8409919623625568995}
-  hopHeight: 0.2
-  hopSpeed: 15
+  moveSpeed: 10
+  searchRadius: 3
 --- !u!114 &3473537007164329348
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -426,6 +410,7 @@ MonoBehaviour:
     weight: 0.5
   generatedList: []
   cart: []
+  npcMoney: 0
 --- !u!1001 &1672909565262768209
 PrefabInstance:
   m_ObjectHideFlags: 0

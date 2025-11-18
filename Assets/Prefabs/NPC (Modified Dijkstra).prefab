@@ -277,7 +277,6 @@ GameObject:
   m_Component:
   - component: {fileID: 318020355348019168}
   - component: {fileID: 1754046568091109594}
-  - component: {fileID: 2554899987363489771}
   - component: {fileID: 3473537007164329348}
   - component: {fileID: 774743574798843364}
   - component: {fileID: 5988642089911812076}
@@ -324,24 +323,8 @@ MonoBehaviour:
   continuePath: 20
   decision: 0
   checkedOut: 0
---- !u!114 &2554899987363489771
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8622626352161326856}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8fd981c660d995c418df6d9c1dc46478, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::NPCMovementModified
-  movementSpeed: 10
-  seeker: {fileID: 4455167432338267119}
-  target: {fileID: 8409919623625568995}
-  isClosed: 0
-  hopHeight: 0
-  hopSpeed: 0
+  shelvesManager: {fileID: 0}
+  searchRadius: 3
 --- !u!114 &3473537007164329348
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -432,6 +415,7 @@ MonoBehaviour:
     weight: 0.5
   generatedList: []
   cart: []
+  npcMoney: 0
 --- !u!1001 &7126783273152244684
 PrefabInstance:
   m_ObjectHideFlags: 0
