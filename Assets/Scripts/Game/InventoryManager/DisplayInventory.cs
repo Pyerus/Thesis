@@ -12,7 +12,7 @@ public class DisplayInventory : MonoBehaviour
     public InventoryObject inventory;
     private InventoryObject previousInventory;
     private Dictionary<int, GameObject> itemsDisplayed = new Dictionary<int, GameObject>();
-
+    private TierManager.ShelfType currentShelfType;
     void Start()
     {
         CreateDisplay();
@@ -22,12 +22,23 @@ public class DisplayInventory : MonoBehaviour
     {
         if (cursor.GetShelfInventory() != null)
         {
-            var newInventory = cursor.GetShelfInventory().GetInventoryObject();
-
+            var shelfInventoryComponent = cursor.GetShelfInventory(); // Get the component
+            var newInventory = shelfInventoryComponent.GetInventoryObject();
             if (newInventory != inventory)
             {
                 previousInventory = inventory;
                 inventory = newInventory;
+
+                TierManager tierManager = shelfInventoryComponent.GetComponent<TierManager>();
+                if (tierManager != null)
+                {
+                    currentShelfType = tierManager.shelfType;
+                }
+                else
+                {
+                    // Default to 'Shelf' if no TierManager is found
+                    currentShelfType = TierManager.ShelfType.Shelf; 
+                }
 
                 ClearDisplay();
                 CreateDisplay();
@@ -41,7 +52,10 @@ public class DisplayInventory : MonoBehaviour
 
     public void CreateDisplay()
     {
-        for (int i = 0; i < inventory.Container.Count; i++)
+        int slotsToDisplay = (currentShelfType == TierManager.ShelfType.Produce) ? 3 : inventory.Container.Count;
+        slotsToDisplay = Mathf.Min(slotsToDisplay, inventory.Container.Count);
+
+        for (int i = 0; i < slotsToDisplay; i++)
         {
             var slot = inventory.Container[i];
             GameObject obj;
@@ -63,7 +77,12 @@ public class DisplayInventory : MonoBehaviour
 
     public void UpdateDisplay()
     {
-        for (int i = 0; i < inventory.Container.Count; i++)
+        int slotsToDisplay = (currentShelfType == TierManager.ShelfType.Produce) ? 3 : inventory.Container.Count;
+        
+        // Ensure we don't try to display more slots than the inventory actually has
+        slotsToDisplay = Mathf.Min(slotsToDisplay, inventory.Container.Count);
+
+        for (int i = 0; i < slotsToDisplay; i++)        
         {
             var slot = inventory.Container[i];
 
