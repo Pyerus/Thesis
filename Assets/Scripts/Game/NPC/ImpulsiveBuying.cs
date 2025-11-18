@@ -5,8 +5,8 @@ public class ImpulsiveBuying
 {
     [Header("Impulse Settings")]
     [Range(0f, 1f)]
-    public float baseImpulseChance = 1f;      // 5% default
-    public float maxImpulseChance = 1f;       // To prevent 100%
+    public float baseImpulseChance = 0.05f;      // 5% default
+    public float maxImpulseChance = 0.75f;       // To prevent 100%
 
     [Header("Cooldown")]
     private float nextAllowedTime = 0f;
