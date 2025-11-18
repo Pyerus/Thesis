@@ -64,7 +64,12 @@ public class NPCMovement : MonoBehaviour
 
     private void Update()
     {
-        // Continuously goes to the target
+        FollowPath();
+    }
+
+    private void FollowPath()
+    {
+        // Continuously goes to the target following the path
         if (pathfinder.path != null && pathfinder.path.Count > 0)
         {
             path = pathfinder.path;
@@ -73,12 +78,12 @@ public class NPCMovement : MonoBehaviour
 
             float distanceToTarget = Vector3.Distance(seeker.position, target.position);
 
-            
-            if (distanceToTarget > 1.0f) 
+
+            if (distanceToTarget > 1.0f)
             {
                 isHopping = true;
             }
-            else 
+            else
             {
                 isHopping = false;
                 seeker.position = new Vector3(seeker.position.x, baseY, seeker.position.z); // reset Y

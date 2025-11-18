@@ -26004,6 +26004,7 @@ GameObject:
   - component: {fileID: 657182325}
   - component: {fileID: 657182324}
   - component: {fileID: 657182326}
+  - component: {fileID: 657182327}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -26055,7 +26056,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   inventory: {fileID: 11400000, guid: 151a8b9badefef243b86cedc03f30591, type: 2}
-  defaultQuantity: 100
+  defaultQuantity: 0
+--- !u!114 &657182327
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 657182323}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66fcde5e5f130af4a8c0b1f973b37e8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ShelvesManager
 --- !u!1 &657869847
 GameObject:
   m_ObjectHideFlags: 0
@@ -30624,7 +30637,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 291582876}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.25763494
+  m_Size: 0.3527627
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -70798,7 +70811,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3

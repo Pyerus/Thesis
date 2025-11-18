@@ -5,19 +5,23 @@ using UnityEngine;
 public class PathfindDijkstra : MonoBehaviour
 {
     public Transform seeker, target;
-
     public List<Node> path;
-
     private WorldGrid grid;
 
+    private NPCMove npcMovement;
     public ImpulsiveBuying impulsiveBuying;
+    public ShelvesManager shelvesManager;
+
+    public float searchRadius = 3;
 
 
     private void Start()
     {
         GameObject gridObj = GameObject.FindGameObjectWithTag("Grid");
         grid = gridObj.GetComponent<WorldGrid>();
+        npcMovement = gameObject.GetComponent<NPCMove>();
         impulsiveBuying = new ImpulsiveBuying();
+        shelvesManager = GameObject.FindFirstObjectByType<ShelvesManager>();
     }
 
     private void Update()
@@ -51,17 +55,16 @@ public class PathfindDijkstra : MonoBehaviour
             closedSet.Add(currentNode);
 
             if (currentNode == targetNode)
-            {      
-                // Detect shelf
-                ShelfInventory shelf = target.GetComponent<ShelfInventory>();
+            {
+                // Detect random nearby shelf
+                GameObject shelf = shelvesManager.GetRandomShelfGOInRadius(targetNode.worldPosition, searchRadius);
                 if (shelf != null)
                 {
-                    Debug.Log("WEEEEE NIGGA");
-                    HandleImpulseBuying(shelf);
+                    Debug.Log("ImpulseBuying: method called.");
+                    HandleImpulseBuying(shelf.GetComponent<ShelfInventory>());
                 } 
                 
                 RetracePath(startNode, targetNode);
-
                 return;
             }
 

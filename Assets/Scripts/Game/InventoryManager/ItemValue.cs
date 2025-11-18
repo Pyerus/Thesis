@@ -54,14 +54,8 @@ public class ItemValue : MonoBehaviour
         if (inventory == null || idealItems == null) 
             return null;
 
-        foreach (var ideal in idealItems)
-        {
-            if (ideal != null && inventory.HasItem(ideal))
-            {
-                return ideal;      
-            }
-        }
-
-        return null;              
+        int i = Random.Range(0, idealItems.Length);
+        
+        return idealItems[i];
     }
 }
