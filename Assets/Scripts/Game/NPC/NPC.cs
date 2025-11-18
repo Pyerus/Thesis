@@ -14,17 +14,16 @@ public class NPC : MonoBehaviour
         {
             LifeSpan = MaxLifeSpan;
             StoreClosed = true; // Close store globally
-            KillNPCs();
         }
     }
 
-    public static void KillNPCs()
-    {
-        NPCMovement[] npcs = FindObjectsOfType<NPCMovement>();
+    //public static void KillNPCs()
+    //{
+    //    NPCMovement[] npcs = FindObjectsOfType<NPCMovement>();
 
-        foreach (NPCMovement npc in npcs)
-        {
-            npc.isClosed = true;     // Force them to go to checkout/exit
-        }
-    }
+    //    foreach (NPCMovement npc in npcs)
+    //    {
+    //        npc.isClosed = true;     // Force them to go to checkout/exit
+    //    }
+    //}
 }

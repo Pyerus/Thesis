@@ -17,11 +17,14 @@ public class PathfindModifiedDijkstra : MonoBehaviour
 
     [Header("Decision")]
     [SerializeField] Decision decision;
-    bool isCoroutineRunning = false;
+    bool isCoroutine1Running = false;
+    bool isCoroutine2Running = false;
 
     public bool checkedOut = false;
 
     public ImpulsiveBuying impulsiveBuying;
+    public ShelvesManager shelvesManager;
+    public float searchRadius = 3;
 
 
 
@@ -30,11 +33,13 @@ public class PathfindModifiedDijkstra : MonoBehaviour
         GameObject gridObj = GameObject.FindGameObjectWithTag("Grid");
         grid = gridObj.GetComponent<WorldGrid>();
         impulsiveBuying = new ImpulsiveBuying();
+        shelvesManager = GameObject.FindFirstObjectByType<ShelvesManager>();
     }
 
     private void Update()
     {
-        FindPath(seeker.position, target.position);
+        if (!isCoroutine1Running)
+            StartCoroutine(RunAlgorithm(0.1f));
     }
 
     // -----------------------------
@@ -71,7 +76,9 @@ public class PathfindModifiedDijkstra : MonoBehaviour
             // ----------------------------------------------------
             if (currentNode == targetNode)
             {
-                if (!isCoroutineRunning)
+                RetracePath(startNode, targetNode);
+
+                if (!isCoroutine2Running)
                 {
                     StartCoroutine(MakeDecision(0.7f));
                 }
@@ -109,11 +116,12 @@ public class PathfindModifiedDijkstra : MonoBehaviour
                     // finish pathfinding normally
                     RetracePath(startNode, targetNode);
 
-                    // Detect shelf
-                    ShelfInventory shelf = target.GetComponent<ShelfInventory>();
+                    // Detect random nearby shelf
+                    GameObject shelf = shelvesManager.GetRandomShelfGOInRadius(targetNode.worldPosition, searchRadius);
                     if (shelf != null)
                     {
-                        HandleImpulseBuying(shelf);
+                        Debug.Log("ImpulseBuying: method called.");
+                        HandleImpulseBuying(shelf.GetComponent<ShelfInventory>());
                     }
 
                     return;
@@ -175,7 +183,7 @@ public class PathfindModifiedDijkstra : MonoBehaviour
 
     IEnumerator MakeDecision(float interval)
     {
-        isCoroutineRunning = true;
+        isCoroutine2Running = true;
 
         int total = newRandomTarget + newNeighbor + continuePath;
         int n = Random.Range(0, total);
@@ -198,7 +206,7 @@ public class PathfindModifiedDijkstra : MonoBehaviour
         }
 
         yield return new WaitForSeconds(interval);
-        isCoroutineRunning = false;
+        isCoroutine2Running = false;
     }
 
     enum Decision
@@ -236,5 +244,16 @@ public class PathfindModifiedDijkstra : MonoBehaviour
         {
             Debug.Log($"NPC impulse bought {idealItem?.name ?? "something"}!");
         }
+    }
+
+    IEnumerator RunAlgorithm(float interval)
+    {
+        isCoroutine1Running = true;
+
+        FindPath(seeker.position, target.position);
+
+        yield return new WaitForSeconds(interval);
+
+        isCoroutine1Running = false;
     }
 }

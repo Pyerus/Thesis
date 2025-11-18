@@ -276,8 +276,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 318020355348019168}
-  - component: {fileID: 1754046568091109594}
-  - component: {fileID: 2554899987363489771}
+  - component: {fileID: 6462775509202801088}
   - component: {fileID: 3473537007164329348}
   - component: {fileID: 774743574798843364}
   - component: {fileID: 5988642089911812076}
@@ -305,7 +304,7 @@ Transform:
   - {fileID: 8409919623625568995}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1754046568091109594
+--- !u!114 &6462775509202801088
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -314,34 +313,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 8622626352161326856}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 73dfbd484bd8f7d429479f3640a0ed03, type: 3}
+  m_Script: {fileID: 11500000, guid: cf40652ea7046cd4b9fdc4eba439dcba, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PathfindModifiedDijkstra
+  m_EditorClassIdentifier: Assembly-CSharp::PathfindModified
   seeker: {fileID: 4455167432338267119}
   target: {fileID: 8409919623625568995}
+  moveSpeed: 10
+  searchRadius: 3
   newRandomTarget: 20
   newNeighbor: 20
-  continuePath: 20
+  continuePath: 50
   decision: 0
-  checkedOut: 0
---- !u!114 &2554899987363489771
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8622626352161326856}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8fd981c660d995c418df6d9c1dc46478, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::NPCMovementModified
-  movementSpeed: 10
-  seeker: {fileID: 4455167432338267119}
-  target: {fileID: 8409919623625568995}
-  isClosed: 0
-  hopHeight: 0
-  hopSpeed: 0
 --- !u!114 &3473537007164329348
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -432,6 +414,7 @@ MonoBehaviour:
     weight: 0.5
   generatedList: []
   cart: []
+  npcMoney: 0
 --- !u!1001 &7126783273152244684
 PrefabInstance:
   m_ObjectHideFlags: 0

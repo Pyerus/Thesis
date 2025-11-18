@@ -30,6 +30,9 @@ public class NPCBehaviour : MonoBehaviour
 
         // Add the removed items to cart.
         shoppingList.AddToCart(itemObject, product.amount);
+
+        if (item != null)
+            Debug.Log($"{product.amount}x {item.name} added to cart.");
     }
     
     // When the NPC reaches the counter, check out.

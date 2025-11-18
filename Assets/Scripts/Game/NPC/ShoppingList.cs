@@ -35,8 +35,6 @@ public class ShoppingList : MonoBehaviour
     private void Awake()
     {
         GenerateRandomList();
-        FindShelves();
-        FindWaypoints();
     }
 
 
