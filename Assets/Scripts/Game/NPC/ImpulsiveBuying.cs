@@ -1,5 +1,6 @@
-using UnityEngine;
 using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
 
 public class ImpulsiveBuying
 {
@@ -7,6 +8,8 @@ public class ImpulsiveBuying
     [Range(0f, 1f)]
     public float baseImpulseChance = 0.05f;      // 5% default
     public float maxImpulseChance = 0.75f;       // To prevent 100%
+
+    public float nullChance = 0.3f;
 
     [Header("Cooldown")]
     private float nextAllowedTime = 0f;
@@ -16,27 +19,77 @@ public class ImpulsiveBuying
 
 
     /// Call this method to check if the NPC decides to buy impulsively.
-    public bool TryImpulseBuy(ItemObject itemToBuy)
+    public ItemObject TryImpulseBuy(GameObject shelf)
     {
+        // cooldown check
         if (Time.time < nextAllowedTime)
-            return false;
+            return null;
 
-        float multiplier = GetMultiplier(itemToBuy);
+        // null safety
+        if (shelf == null)
+            return null;
 
-        float finalChance = Mathf.Clamp(baseImpulseChance * multiplier, 0f, maxImpulseChance);
+        ShelfInventory shelfInventory = shelf.GetComponent<ShelfInventory>();
+        if (shelfInventory == null)
+            return null;
 
-        float rng = Random.value;  // 0.0 to 1.0
-        bool result = rng < finalChance;
+        InventoryObject inventory = shelfInventory.GetInventoryObject();
+        if (inventory == null)
+            return null;
 
-        if (result)
+        // ideal items definition
+        ItemObject[] idealItems = shelf.GetComponent<ItemValue>().idealItems;
+        float idealItemMultiplier = 5f;
+
+        // items currently on the shelf
+        List<ItemObject> shelfItems = inventory.GetItemsInShelf();
+        float normalMultiplier = 1f;
+
+        // --- chance to return null ---
+        if (Random.value < nullChance)
         {
-            //buy something
-            Debug.Log($"[Impulse Buy Triggered] Chance: {finalChance}. RNG: {rng}");
+            nextAllowedTime = Time.time + impulseCooldown;
+            return null;
         }
 
+        // --- Build weighted list ---
+        List<(ItemObject item, float weight)> weightedItems = new List<(ItemObject, float)>();
+
+        foreach (var item in shelfItems)
+        {
+            float weight = normalMultiplier;
+            if (idealItems.Contains(item))
+                weight = idealItemMultiplier;
+
+            weightedItems.Add((item, weight));
+        }
+
+        // If shelf is empty
+        if (weightedItems.Count == 0)
+        {
+            nextAllowedTime = Time.time + impulseCooldown;
+            return null;
+        }
+
+        // --- Weighted random selection ---
+        float totalWeight = weightedItems.Sum(w => w.weight);
+        float roll = Random.value * totalWeight;
+
+        foreach (var entry in weightedItems)
+        {
+            if (roll < entry.weight)
+            {
+                nextAllowedTime = Time.time + impulseCooldown;
+                return entry.item;
+            }
+            roll -= entry.weight;
+        }
+
+        // safety fallback (should never happen)
         nextAllowedTime = Time.time + impulseCooldown;
-        return result;
-    }   
+        return null;
+    }
+
 
     public float GetMultiplier(ItemObject item)
     {

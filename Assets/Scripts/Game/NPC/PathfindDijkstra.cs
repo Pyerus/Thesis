@@ -257,32 +257,26 @@ public class PathfindDijkstra : MonoBehaviour
     // IMPULSE BUYING -----------------------------------------------------
     /////////////////////////////////////////////////////////////////////
 
-    bool HandleImpulseBuying(GameObject shelf)
+    bool HandleImpulseBuying(GameObject _shelf)
     {
-        if (shelf == null) return false;
-        
-        // Get shelf ideal item evaluator
-        ShelfInventory shelfInventory = shelf.GetComponent<ShelfInventory>();
-        ItemValue itemValue = shelfInventory.GetComponent<ItemValue>();
-        if (itemValue == null) return false;
+        if (_shelf == null) return false;
 
-        // Check if the shelf contains ANY ideal item
-        ItemObject ideal = itemValue.GetBestIdealItem();
-        if (ideal == null) return false;
-        
-        // Boost the multiplier for this specific ideal item
-        impulsiveBuying.AddImpulseFactor(ideal, 0.5f);
-        bool bought = impulsiveBuying.TryImpulseBuy(ideal);
+        ShelfInventory inventory = _shelf.GetComponent<ShelfInventory>();
 
-        if (bought)
-        {
-            currentShelf = shelf;
-            currentItem = new ProductEntry(ideal, Random.Range(0, 5)); // randomly assign number of items to buy
+        if (inventory == null) return false;
 
-            Debug.Log($"NPC wants {ideal?.name ?? "something"}!");
-        }
+        // Now attempt impulse buy from the items in the shelf
+        ItemObject itemBought = impulsiveBuying.TryImpulseBuy(_shelf);
 
-        return bought;
+        if (itemBought == null) return false;
+
+        // If NPC decides to buy
+        currentShelf = _shelf;
+        currentItem = new ProductEntry(itemBought, Random.Range(0, 5));
+
+        Debug.Log($"NPC impulse bought {itemBought?.name ?? "something"}!");
+
+        return true;
     }
 
 }

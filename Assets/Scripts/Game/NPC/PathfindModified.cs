@@ -54,7 +54,7 @@ public class PathfindModified : MonoBehaviour
     {
         while (true)
         {
-            // 1. Check if we have an extra waypoint from a decision
+            // Check if we have an extra waypoint from a decision
             if (nextExtraWaypoint.HasValue)
             {
                 target.position = nextExtraWaypoint.Value;
@@ -68,6 +68,7 @@ public class PathfindModified : MonoBehaviour
                 if (HandleImpulseBuying(randomShelf) && !goingToCheckout)
                 {
                     waypoint = randomShelf.transform.Find("Waypoint").gameObject;
+                    Debug.Log($"NPC is buying {currentItem.product?.name ?? "something"}!");
                 }
                 else
                 {
@@ -310,28 +311,25 @@ public class PathfindModified : MonoBehaviour
     // IMPULSE BUYING -----------------------------------------------------
     /////////////////////////////////////////////////////////////////////
 
-    bool HandleImpulseBuying(GameObject shelf)
+    bool HandleImpulseBuying(GameObject _shelf)
     {
-        if (shelf == null) return false;
+        if (_shelf == null) return false;
 
-        ShelfInventory shelfInventory = shelf.GetComponent<ShelfInventory>();
-        ItemValue itemValue = shelfInventory.GetComponent<ItemValue>();
-        if (itemValue == null) return false;
+        ShelfInventory inventory = _shelf.GetComponent<ShelfInventory>();
 
-        ItemObject ideal = itemValue.GetBestIdealItem();
-        if (ideal == null) return false;
+        if (inventory == null) return false;
 
-        impulsiveBuying.AddImpulseFactor(ideal, 0.5f);
+        // Now attempt impulse buy from the items in the shelf
+        ItemObject itemBought = impulsiveBuying.TryImpulseBuy(_shelf);
 
-        bool bought = impulsiveBuying.TryImpulseBuy(ideal);
+        if (itemBought == null) return false;
 
-        if (bought)
-        {
-            currentShelf = shelf;
-            currentItem = new ProductEntry(ideal, Random.Range(0, 5));
-            Debug.Log($"NPC wants {ideal?.name ?? "something"}!");
-        }
+        // If NPC decides to buy
+        currentShelf = _shelf;
+        currentItem = new ProductEntry(itemBought, Random.Range(0, 5));
 
-        return bought;
+        Debug.Log($"NPC impulse bought {itemBought?.name ?? "something"}!");
+
+        return true;
     }
 }

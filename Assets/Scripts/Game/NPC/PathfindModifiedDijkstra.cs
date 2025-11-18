@@ -78,54 +78,54 @@ public class PathfindModifiedDijkstra : MonoBehaviour
             {
                 RetracePath(startNode, targetNode);
 
-                if (!isCoroutine2Running)
-                {
-                    StartCoroutine(MakeDecision(0.7f));
-                }
+                //if (!isCoroutine2Running)
+                //{
+                //    StartCoroutine(MakeDecision(0.7f));
+                //}
 
-                if (decision == Decision.NewDestination)
-                {
-                    // pick a new random destination
-                    targetNode = grid.GetWeightedRandomWalkableNode();
+                //if (decision == Decision.NewDestination)
+                //{
+                //    // pick a new random destination
+                //    targetNode = grid.GetWeightedRandomWalkableNode();
 
-                    // Detect shelf
-                    ShelfInventory shelf = target.GetComponent<ShelfInventory>();
-                    if (shelf != null)
-                    {
-                        HandleImpulseBuying(shelf);
-                    }
+                //    // Detect shelf
+                //    ShelfInventory shelf = target.GetComponent<ShelfInventory>();
+                //    if (shelf != null)
+                //    {
+                //        HandleImpulseBuying(shelf);
+                //    }
 
-                    continue;
-                }
-                else if (decision == Decision.CheckDifferentNeighbor)
-                {
-                    // go to a nearby neighbor node
-                    targetNode = grid.GetRandomNearbyNode(currentNode, radius: 5);
+                //    continue;
+                //}
+                //else if (decision == Decision.CheckDifferentNeighbor)
+                //{
+                //    // go to a nearby neighbor node
+                //    targetNode = grid.GetRandomNearbyNode(currentNode, radius: 5);
 
-                    // Detect shelf
-                    ShelfInventory shelf = target.GetComponent<ShelfInventory>();
-                    if (shelf != null)
-                    {
-                        HandleImpulseBuying(shelf);
-                    }
+                //    // Detect shelf
+                //    ShelfInventory shelf = target.GetComponent<ShelfInventory>();
+                //    if (shelf != null)
+                //    {
+                //        HandleImpulseBuying(shelf);
+                //    }
 
-                    continue;
-                }
-                else if (decision == Decision.Continue)
-                {
-                    // finish pathfinding normally
-                    RetracePath(startNode, targetNode);
+                //    continue;
+                //}
+                //else if (decision == Decision.Continue)
+                //{
+                //    // finish pathfinding normally
+                //    RetracePath(startNode, targetNode);
 
-                    // Detect random nearby shelf
-                    GameObject shelf = shelvesManager.GetRandomShelfGOInRadius(targetNode.worldPosition, searchRadius);
-                    if (shelf != null)
-                    {
-                        Debug.Log("ImpulseBuying: method called.");
-                        HandleImpulseBuying(shelf.GetComponent<ShelfInventory>());
-                    }
+                //    // Detect random nearby shelf
+                //    GameObject shelf = shelvesManager.GetRandomShelfGOInRadius(targetNode.worldPosition, searchRadius);
+                //    if (shelf != null)
+                //    {
+                //        Debug.Log("ImpulseBuying: method called.");
+                //        HandleImpulseBuying(shelf.GetComponent<ShelfInventory>());
+                //    }
 
-                    return;
-                }
+                //    return;
+                //}
             }
 
             // ----------------------------------------------------
@@ -216,34 +216,23 @@ public class PathfindModifiedDijkstra : MonoBehaviour
         Continue
     }
 
-    private void HandleImpulseBuying(ShelfInventory shelf)
+    private void HandleImpulseBuying(GameObject shelf)
     {
-        // Get shelf ideal item evaluator
-        ItemValue itemValue = shelf.GetComponent<ItemValue>();
+        if (shelf == null) return;
+        
+        ShelfInventory inventory = shelf.GetComponent<ShelfInventory>();
+        
+        if (inventory == null) return;
 
-        if (itemValue == null)
+        // Now attempt impulse buy from the items in the shelf
+        ItemObject itemBought = impulsiveBuying.TryImpulseBuy(shelf);
+
+        if (itemBought != null)
         {
-            Debug.LogWarning("Shelf has no ItemValue component!");
-            return;
+            Debug.Log($"NPC impulse bought {itemBought?.name ?? "something"}!");
         }
-
-        // Check if the shelf contains ANY ideal item
-        ItemObject idealItem = itemValue.GetBestIdealItem();
-
-        if (idealItem != null)
-        {
-            // Boost the multiplier for this specific ideal item
-            impulsiveBuying.AddImpulseFactor(idealItem, 0.5f);
-            Debug.Log($"Ideal item found! Boosting impulse factor for {idealItem.name}");
-        }
-
-        // Now attempt impulse buy for THAT item
-        bool bought = impulsiveBuying.TryImpulseBuy(idealItem);
-
-        if (bought)
-        {
-            Debug.Log($"NPC impulse bought {idealItem?.name ?? "something"}!");
-        }
+        else
+            Debug.Log($"NPC chose not to buy impulsively.");
     }
 
     IEnumerator RunAlgorithm(float interval)

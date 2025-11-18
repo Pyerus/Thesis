@@ -137,6 +137,18 @@ public class InventoryObject : ScriptableObject
             Debug.Log($"Slot {i + 1}: {itemName} x{Container[i].amount}");
         }
     }
+
+    public List<ItemObject> GetItemsInShelf()
+    {
+        List<ItemObject> items = new List<ItemObject>();
+        
+        foreach(var item in Container)
+        {
+            items.Add(item.item);
+        }
+
+        return items;
+    }
 }
 
 [System.Serializable]
