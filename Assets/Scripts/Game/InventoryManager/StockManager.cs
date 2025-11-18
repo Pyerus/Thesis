@@ -25,22 +25,10 @@ public class StockManager : MonoBehaviour
     // Public method so other scripts can manually trigger an update
     public void UpdateCounters()
     {
-        for (int i = 0; i < counterTexts.Length; i++)
+        for (int i = 0; i < items.Length; i++)
         {
-            if (i < stockInventory.Container.Count)
-            {
-                var slot = stockInventory.Container[i];
-
-                // If the slot has an item, show the count; otherwise, show 0
-                string displayText = slot.item != null ? slot.amount.ToString() : "0";
-
-                counterTexts[i].text = displayText;
-            }
-            else
-            {
-                // In case there are more text fields than slots
-                counterTexts[i].text = "0";
-            }
+            int count = stockInventory.GetItemCount(items[i]);
+            counterTexts[i].text = count.ToString();
         }
     }
 }

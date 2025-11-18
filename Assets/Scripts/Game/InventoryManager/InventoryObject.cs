@@ -34,7 +34,8 @@ public class InventoryObject : ScriptableObject
             {
                 int spaceLeft = maxAmount - slot.amount;
                 int addAmount = Mathf.Min(remaining, spaceLeft);
-                slot.AddAmount(addAmount);
+
+                slot.amount += addAmount;
                 remaining -= addAmount;
                 itemsAdded += addAmount;
                 slotIndex = i;
@@ -51,6 +52,7 @@ public class InventoryObject : ScriptableObject
             if (slot.item == null)
             {
                 int addAmount = Mathf.Min(remaining, maxAmount);
+
                 slot.item = _item;
                 slot.amount = addAmount;
                 remaining -= addAmount;
@@ -62,11 +64,7 @@ public class InventoryObject : ScriptableObject
             }
         }
 
-        if (remaining > 0)
-        {
-            Debug.Log("No empty slots left in inventory!");
-        }
-
+        Debug.Log("No empty slots left in inventory!");
         return (_item, itemsAdded, slotIndex);
     }
 
@@ -109,8 +107,8 @@ public class InventoryObject : ScriptableObject
 
                 if (slot.amount <= 0)
                 {
-                    slot.item = null;
                     slot.amount = 0;
+                    slot.item = null;
                 }
 
                 return (_item, removedAmount, i);
@@ -124,9 +122,10 @@ public class InventoryObject : ScriptableObject
 
     public void ClearInventory()
     {
-        for (int i = 0; i < Container.Count; i++)
+        foreach (var slot in Container)
         {
-            Container[i].amount = 0;
+            slot.item = null;
+            slot.amount = 0;
         }
     }
 
