@@ -28,8 +28,8 @@ public class ShoppingList : MonoBehaviour
     public float npcMoney;
 
 
-    private GameObject[] shelves;
-    private GameObject[] waypoints;
+    //private GameObject[] shelves;
+    //private GameObject[] waypoints;
 
 
     private void Awake()
@@ -174,100 +174,100 @@ public class ShoppingList : MonoBehaviour
 
 
 
-    private void FindShelves()
-    {
-        if (generatedList == null || generatedList.Count == 0)
-        {
-            Debug.LogWarning("Shopping generatedList is empty � no shelves to find.");
-            return;
-        }
+    //private void FindShelves()
+    //{
+    //    if (generatedList == null || generatedList.Count == 0)
+    //    {
+    //        Debug.LogWarning("Shopping generatedList is empty � no shelves to find.");
+    //        return;
+    //    }
 
-        shelves = new GameObject[generatedList.Count];
+    //    shelves = new GameObject[generatedList.Count];
 
-        for (int i = 0; i < generatedList.Count; i++)
-        {
-            ProductEntry entry = generatedList[i];
-            GameObject shelf = FindItemShelf(entry.product);
+    //    for (int i = 0; i < generatedList.Count; i++)
+    //    {
+    //        ProductEntry entry = generatedList[i];
+    //        GameObject shelf = FindItemShelf(entry.product);
 
-            if (shelf != null)
-            {
-                shelves[i] = shelf;
-                //Debug.Log($"Shelf {i + 1}: Found for {entry.product.name}");
-            }
-            else
-            {
-                shelves[i] = null;
-                //Debug.LogWarning($"No shelf found for {entry.product.name}");
-            }
-        }
-    }
-
-
-    public GameObject[] GetShelves()
-    {
-        return shelves;
-    }
+    //        if (shelf != null)
+    //        {
+    //            shelves[i] = shelf;
+    //            //Debug.Log($"Shelf {i + 1}: Found for {entry.product.name}");
+    //        }
+    //        else
+    //        {
+    //            shelves[i] = null;
+    //            //Debug.LogWarning($"No shelf found for {entry.product.name}");
+    //        }
+    //    }
+    //}
 
 
-    private GameObject FindItemShelf(ItemObject item)
-    {
-        // Find all GameObjects tagged as "Shelf"
-        GameObject[] allShelves = GameObject.FindGameObjectsWithTag("Shelf");
-
-        foreach (GameObject shelf in allShelves)
-        {
-            // Try to get the InventoryObject reference from the shelf
-            ShelfInventory shelfInventory = shelf.GetComponent<ShelfInventory>();
-            if (shelfInventory == null || shelfInventory.inventory == null)
-                continue;
-
-            // Check if this shelf's inventory has the item
-            if (shelfInventory.inventory.HasItem(item))
-            {
-                Debug.Log($"Found {item.name} on shelf '{shelf.name}'.");
-                return shelf; // Return the shelf itself
-            }
-        }
-
-        Debug.LogWarning($"No shelf found for item: {item.name}");
-        return null;
-    }
+    //public GameObject[] GetShelves()
+    //{
+    //    return shelves;
+    //}
 
 
+    //private GameObject FindItemShelf(ItemObject item)
+    //{
+    //    // Find all GameObjects tagged as "Shelf"
+    //    GameObject[] allShelves = GameObject.FindGameObjectsWithTag("Shelf");
 
-    private void FindWaypoints()
-    {
-        // Make sure the waypoints array matches the number of shelves
-        waypoints = new GameObject[shelves.Length];
+    //    foreach (GameObject shelf in allShelves)
+    //    {
+    //        // Try to get the InventoryObject reference from the shelf
+    //        ShelfInventory shelfInventory = shelf.GetComponent<ShelfInventory>();
+    //        if (shelfInventory == null || shelfInventory.inventory == null)
+    //            continue;
 
-        for (int i = 0; i < shelves.Length; i++)
-        {
-            if (shelves[i] != null)
-            {
-                // Find the child named "Waypoint" under the current shelf
-                Transform waypointTransform = shelves[i].transform.Find("Waypoint");
+    //        // Check if this shelf's inventory has the item
+    //        if (shelfInventory.inventory.HasItem(item))
+    //        {
+    //            Debug.Log($"Found {item.name} on shelf '{shelf.name}'.");
+    //            return shelf; // Return the shelf itself
+    //        }
+    //    }
 
-                if (waypointTransform != null)
-                {
-                    waypoints[i] = waypointTransform.gameObject;
-                }
-                else
-                {
-                    Debug.LogWarning($"Shelf '{shelves[i].name}' does not have a child named 'Waypoint'.");
-                }
-            }
-            else
-            {
-                Debug.LogWarning($"Shelf at index {i} is null.");
-            }
-        }
-    }
+    //    Debug.LogWarning($"No shelf found for item: {item.name}");
+    //    return null;
+    //}
 
 
-    public GameObject[] GetWaypoints()
-    {
-        return waypoints;
-    }
+
+    //private void FindWaypoints()
+    //{
+    //    // Make sure the waypoints array matches the number of shelves
+    //    waypoints = new GameObject[shelves.Length];
+
+    //    for (int i = 0; i < shelves.Length; i++)
+    //    {
+    //        if (shelves[i] != null)
+    //        {
+    //            // Find the child named "Waypoint" under the current shelf
+    //            Transform waypointTransform = shelves[i].transform.Find("Waypoint");
+
+    //            if (waypointTransform != null)
+    //            {
+    //                waypoints[i] = waypointTransform.gameObject;
+    //            }
+    //            else
+    //            {
+    //                Debug.LogWarning($"Shelf '{shelves[i].name}' does not have a child named 'Waypoint'.");
+    //            }
+    //        }
+    //        else
+    //        {
+    //            Debug.LogWarning($"Shelf at index {i} is null.");
+    //        }
+    //    }
+    //}
+
+
+    //public GameObject[] GetWaypoints()
+    //{
+    //    return waypoints;
+    //}
 
 
 
