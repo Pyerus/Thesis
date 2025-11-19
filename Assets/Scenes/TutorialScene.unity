@@ -524,7 +524,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "You can also speed up time as you wish, but be careful making it too quick
-    as you might not be able to keep up with the customers Nya! (\xB4\u03C9 ' *)"
+    or you might not be able to keep up with the customers Nya! (\xB4\u03C9 ' *)"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1265,8 +1265,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: All the products wou have bought will appear on the STOCK INVENTORY shown
-    in the arrow.
+  m_text: All the products you have bought will appear on the STOCK INVENTORY down
+    below. Just click the arrow to view it!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -11164,8 +11164,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: You can make use of this to keep tract of the date as well as check for
-    EVENTS by CLICKING THE CALENDAR ICON.
+  m_text: You can make use of this to keep track of the date and check for EVENTS
+    by CLICKING THE CALENDAR ICON.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -11302,7 +11302,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: Be sure to place your products wisely as it can affect how the CUSTOMERS
-    WILL ACT Nya!
+    WILL ACT, nya!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -12574,8 +12574,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Each item has its own SELLING and BUYING PRICE located on the other tab
-    of the STOCK INVENTORY so be sure to keep those in mind!
+  m_text: Each item has its own SELLING and BUYING PRICE shown on the other tab of
+    the STOCK INVENTORY so be sure to keep those in mind!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -15094,8 +15094,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: First, On the BOTTOM RIGHT of your screen you will see the timer that counts
-    down your shift. Each day is 5 mins each.
+  m_text: On the BOTTOM RIGHT of your screen you will see the timer that counts down
+    your shift. Each day is 5 mins each.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -15307,7 +15307,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: You can also CLOSE up shop using the same button Nya!
+  m_text: You can also CLOSE the shop using the same button, nya!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -28068,8 +28068,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "On the left of your screen you will see an ARROW. You can click it to
-    open the SHOP, where you can buy items to sell as well as posters. \u0424\u03C9\u0424"
+  m_text: "On the left, you will see an ARROW. You can click it to open the SHOP
+    where you can buy items in bulk and posters for advertising! \u0424\u03C9\u0424"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -31541,7 +31541,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 291582877}
   m_HandleRect: {fileID: 291582876}
   m_Direction: 2
-  m_Value: 0.9999999
+  m_Value: 0.9999997
   m_Size: 0.3527627
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -50846,7 +50846,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: But of course you'll need some products for the customers to buy Nya!
+  m_text: But of course, you'll need some products for the customers to buy, nya!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -54041,8 +54041,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: You can switch tabs to the ITEMS and  POSTERS here too nya. The POSTERS
-    do affect the CUSTOMERS as well so make sure to buy some!
+  m_text: You can switch tabs to the ITEMS and POSTERS here too nya. The POSTERS
+    do affect the CUSTOMERS as well, so make sure to buy some!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -55748,7 +55748,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 239036253}
   m_HandleRect: {fileID: 239036252}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -57522,8 +57522,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: And that's it for the tutorial Nya! Good luck on your shifts and lead our
-    supermarket to new hightsss!
+  m_text: And that's it for the tutorial. Nya! Good luck on your shifts and lead
+    our supermarket to new heightsss!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -60770,7 +60770,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: You might also notice the lack of customers nya! And thats because the
+  m_text: You might also notice the lack of customers, nya! And thats because the
     store isnt open yet. Click the OPEN button above to open the store ^-^.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -67420,8 +67420,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: If you ever need to INCREASE or DECREASE the volume and PAUSE the game.
-    Just press the ESC button!
+  m_text: If you ever need to INCREASE or DECREASE the volume or PAUSE the game,
+    just press the ESC button!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -68543,8 +68543,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: You'll see the total money you have at the top and wait and see that number
-    riseeee!
+  m_text: Your total money is displayed at the top. Wait and see that number riseeee!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -71901,7 +71900,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 368982260}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.5430132
+  m_Size: 0.54301333
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -77292,8 +77291,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: You can CLICK ON A SHELF you want to access their inventory and ADD THE
-    ITEMS you want.  ^-^
+  m_text: You can CLICK ON A SHELF you want and ADD THE ITEMS by clicking on the
+    product icons.  ^-^
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
