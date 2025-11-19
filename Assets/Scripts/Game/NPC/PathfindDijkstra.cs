@@ -79,7 +79,7 @@ public class PathfindDijkstra : MonoBehaviour
             FindPath(seeker.position, target.position);
 
             // 3. Move along the computed path
-            yield return StartCoroutine(MoveAlongPath(moveSpeed));
+            yield return StartCoroutine(MoveAlongPathWithHop(moveSpeed, 0.5f, 1f));
 
             // 4. Execute arrival behavior (buy item / checkout)
             yield return StartCoroutine(HandleArrival(0.5f));
@@ -211,25 +211,45 @@ public class PathfindDijkstra : MonoBehaviour
     // MOVEMENT -----------------------------------------------------------
     /////////////////////////////////////////////////////////////////////
 
-    IEnumerator MoveAlongPath(float speed)
+    IEnumerator MoveAlongPathWithHop(float speed, float hopHeight, float hopFrequency)
     {
-        if (path == null || path.Count == 0)
-            yield break;
+        if (path == null || path.Count == 0) yield break;
 
         foreach (Node node in path)
         {
+            Vector3 startPos = seeker.position;
             Vector3 targetPos = node.worldPosition;
 
-            while (Vector3.Distance(seeker.position, targetPos) > 0.05f)
-            {
-                seeker.position = Vector3.MoveTowards(
-                    seeker.position,
-                    targetPos,
-                    speed * Time.deltaTime
-                );
+            float journeyLength = Vector3.Distance(startPos, targetPos);
+            float traveled = 0f;
 
+            while (traveled < journeyLength)
+            {
+                // Step distance
+                float step = speed * Time.deltaTime;
+
+                // Move horizontally toward the target
+                seeker.position = Vector3.MoveTowards(seeker.position, targetPos, step);
+
+                // Hopping effect
+                float t = traveled / journeyLength;  // 0 → 1
+                float yOffset = Mathf.Sin(t * Mathf.PI * hopFrequency) * hopHeight;
+                seeker.position = new Vector3(seeker.position.x, startPos.y + yOffset, seeker.position.z);
+
+                // Face the direction of movement
+                Vector3 direction = (targetPos - seeker.position);
+                direction.y = 0f; // Keep rotation horizontal
+                if (direction.sqrMagnitude > 0.001f)
+                {
+                    seeker.rotation = Quaternion.Slerp(seeker.rotation, Quaternion.LookRotation(direction), 10f * Time.deltaTime);
+                }
+
+                traveled += step;
                 yield return null;
             }
+
+            // Snap to exact node position and reset vertical
+            seeker.position = new Vector3(targetPos.x, startPos.y, targetPos.z);
         }
     }
 
