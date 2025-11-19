@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameTimer : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class GameTimer : MonoBehaviour
     public TMP_Text timerText;      // Timer display
     public TMP_Text DayText;
     public GameObject nextDayWindow;     // Window that appears when day ends
+    public GameObject EndGameWindow;  
     public GameObject Calendar;
     public Button nextDayButton;         // Button inside that window
     public Button CalendarButton; 
@@ -29,6 +31,13 @@ public class GameTimer : MonoBehaviour
     public MoneyManager moneyManager;       // Drag your MoneyManager object here
     public TMP_Text itemsSoldText;    // Drag your "ITEMS SOLD:" text here
     public TMP_Text totalEarnedText;  // Drag your "TOTAL EARNED:" text here
+    private int totalItemsSoldOverall = 0;
+    private float totalEarnedOverall = 0f;
+
+    [Header("End Game Results UI")]
+    public TMP_Text finalItemsSoldText;
+    public TMP_Text finalTotalEarnedText;
+    public Button returnToMenuButton;
     // --- END NEW REFERENCES ---
 
     private readonly string[] daysOfWeek = 
@@ -48,6 +57,9 @@ public class GameTimer : MonoBehaviour
     {
         if (nextDayWindow != null)
             nextDayWindow.SetActive(false);
+
+        if (EndGameWindow != null)
+            EndGameWindow.SetActive(false);
         
         if (Calendar != null)
             Calendar.SetActive(false);
@@ -107,6 +119,8 @@ public class GameTimer : MonoBehaviour
             {
                 itemsSoldText.text = $"ITEMS SOLD: {moneyManager.GetItemsSoldToday()}";
                 totalEarnedText.text = $"TOTAL EARNED: ₱{moneyManager.GetEarnedToday():F2}";
+                totalItemsSoldOverall += moneyManager.GetItemsSoldToday();
+                totalEarnedOverall += moneyManager.GetEarnedToday();
             }
         }
     }
@@ -147,16 +161,29 @@ public class GameTimer : MonoBehaviour
         gamePaused = true;
         Time.timeScale = 0f;
 
+        // Hide next-day window if it’s still active
         if (nextDayWindow != null)
-        {
-            nextDayWindow.SetActive(true);
-            TMP_Text text = nextDayWindow.GetComponentInChildren<TMP_Text>();
-            if (text != null)
-                text.text = "Game Over!\nYou survived all 7 days!";
-        }
+            nextDayWindow.SetActive(false);
 
-        if (nextDayButton != null)
-            nextDayButton.gameObject.SetActive(false);
+        // Show final END GAME window
+        if (EndGameWindow != null)
+        {
+            EndGameWindow.SetActive(true);
+
+            // Populate final summary text
+            if (finalItemsSoldText != null)
+                finalItemsSoldText.text = $"TOTAL ITEMS SOLD: {totalItemsSoldOverall}";
+
+            if (finalTotalEarnedText != null)
+                finalTotalEarnedText.text = $"TOTAL EARNED: ₱{totalEarnedOverall:F2}";
+        }
+    }
+
+    public void ReturnToMainMenu()
+    {
+        Debug.Log("Back to main menu");
+        Time.timeScale = 1f;
+        CircleTransition.Instance.TransitionToScene("MainMenuScene");
     }
 
     private void ShowCalendar()
