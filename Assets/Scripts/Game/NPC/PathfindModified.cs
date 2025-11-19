@@ -103,23 +103,24 @@ public class PathfindModified : MonoBehaviour
 
     GameObject GetNextWaypoint()
     {
-        // Store is closed OR list finished → go checkout/exit
-        if (listIndex >= itemList.Count || NPC.StoreClosed)
-            return GetCheckoutOrExitWaypoint();
-
-        // Otherwise go to next shelf
-        currentItem = itemList[listIndex];
-        ItemObject item = currentItem.product;
-        currentShelf = shelvesManager.SearchShelvesWithProduct(item);
-        listIndex++;
-
-        if (currentShelf == null)
+        while (listIndex < itemList.Count && !NPC.StoreClosed)
         {
-            Debug.LogWarning("No shelf found for product: " + item.name);
-            return null;
+            currentItem = itemList[listIndex];
+            ItemObject item = currentItem.product;
+
+            currentShelf = shelvesManager.SearchShelvesWithProduct(item);
+            listIndex++;
+
+            if (currentShelf != null)
+            {
+                return currentShelf.transform.Find("Waypoint").gameObject;
+            }
+
+            Debug.LogWarning("No shelf found for product: " + item.name + ", skipping to next item.");
         }
 
-        return currentShelf.transform.Find("Waypoint").gameObject;
+        // If we exit the loop, either list is finished or store closed → go checkout/exit
+        return GetCheckoutOrExitWaypoint();
     }
 
     GameObject GetCheckoutOrExitWaypoint()
