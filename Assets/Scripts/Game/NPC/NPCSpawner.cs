@@ -5,7 +5,7 @@ using TMPro;
 
 public class NPCSpawner : MonoBehaviour
 {
-    public string algorithm;
+    public Algo algorithm;
     public TextMeshProUGUI npcCounter;
     public GameObject spawnPoint;
     public GameObject[] npcPrefabs;
@@ -74,4 +74,10 @@ public class NPCSpawner : MonoBehaviour
             yield return new WaitForSeconds(interval);
         }
     }
+}
+
+public enum Algo
+{
+    Dijkstra,
+    Modified
 }

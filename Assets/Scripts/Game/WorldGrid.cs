@@ -11,6 +11,7 @@ public class WorldGrid : MonoBehaviour
     float nodeDiameter;
     int gridSizeX, gridSizeY;
     int defaultCost = 10;
+    int idealCost = 7;
 
     private void Awake()
     {
@@ -28,15 +29,26 @@ public class WorldGrid : MonoBehaviour
         {
             foreach (Node n in grid)
             {
+                Color c;
+
                 if (!n.walkable)
                 {
-                    Gizmos.color = Color.red;
+                    c = Color.red;
+                }
+                else if (n.addedWeight < idealCost)
+                {
+                    c = Color.green;
+                }
+                else if (n.addedWeight < defaultCost)
+                {
+                    c = Color.yellow;
                 }
                 else
                 {
-                    Gizmos.color = (n.addedWeight < defaultCost) ? Color.green : Color.white;
+                    c = Color.white;
                 }
 
+                Gizmos.color = c;
                 Gizmos.DrawCube(n.worldPosition, Vector3.one * (nodeDiameter - 0.1f));
             }
         }
@@ -140,7 +152,6 @@ public class WorldGrid : MonoBehaviour
 
         foreach (Node n in nodes)
         {
-            //n.gCost += costIncrease;      // Add penalty
             n.addedWeight = newValue;     // Set cost directly
         }
     }

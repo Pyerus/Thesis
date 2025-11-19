@@ -12,7 +12,7 @@ public class CSVWriter : MonoBehaviour
 
         List<string[]> rows = new List<string[]>
         {
-            new string[] { "Algorithm", "NPC", "Item", "Quantity", "Listed or Impulsive", "Item Value", "Position Multiplier", "Promotion Multiplier", "Visibility", "Layout", "Number of Posters", "Promotional Score" }
+            new string[] { "Algorithm", "NPC", "Item", "Quantity", "Listed or Impulsive", "Item Value", "Base Value", "Position Multiplier", "Promotion Multiplier", "Visibility", "Layout", "Number of Posters", "Promotional Score" }
         };
 
         WriteCSV(rows);

@@ -4,12 +4,13 @@ using UnityEngine;
 public class ItemValue : MonoBehaviour
 {
     InventoryObject inventory;
-    
-    //public TMP_Text displayText;
+    ImpulsiveBuying impulsiveBuying;
+
+    public Waypoint waypoint;
     public ItemObject[] idealItems;
 
-    public int baseValue = 1;
-    public int multiplier = 5;
+    public float baseValue = 10;
+    public float multiplier = 2;
 
     public float totalValue;
 
@@ -18,6 +19,7 @@ public class ItemValue : MonoBehaviour
     private void Start()
     {
         inventory = GetComponent<ShelfInventory>().GetInventoryObject();
+        impulsiveBuying = FindFirstObjectByType<ImpulsiveBuying>();
     }
 
     private void Update()
@@ -34,6 +36,7 @@ public class ItemValue : MonoBehaviour
         }
         
         bool hasAnyIdealItem = false;
+        float posterMultiplier = impulsiveBuying.posterMultiplier;
 
         // Check if inventory contains ANY ideal item
         foreach (var item in idealItems)
@@ -46,9 +49,15 @@ public class ItemValue : MonoBehaviour
         }
 
         if (hasAnyIdealItem)
-            totalValue = baseValue * multiplier;
+        {
+            waypoint.IncreaseVisibility();
+            totalValue = baseValue * multiplier * posterMultiplier;
+        }
         else
-            totalValue = baseValue;
+        {
+            waypoint.SetDefaultVisibility();
+            totalValue = baseValue * posterMultiplier;
+        }
     }
 
     public ItemObject GetBestIdealItem()
@@ -59,5 +68,23 @@ public class ItemValue : MonoBehaviour
         int i = Random.Range(0, idealItems.Length);
         
         return idealItems[i];
+    }
+
+    public float GetItemValue(ItemObject givenItem)
+    {
+        if (givenItem == null) return 0f;
+
+        // Check if item is an ideal item
+        foreach (var item in idealItems)
+        {
+            if (item == null) break;
+
+            if (item == givenItem)
+            {
+                return baseValue * multiplier;
+            }
+        }
+
+        return baseValue;
     }
 }

@@ -32,7 +32,7 @@ public class ShelvesManager : MonoBehaviour
             inventoryObjects.Add(shelfInventory.GetInventoryObject());
         }
 
-        Debug.Log($"ShelvesManager: Cached {shelfInventories.Count}/{inventoryObjects.Count} shelves.");
+        Debug.Log($"ShelvesManager: Cached {shelves.Length}/{shelfInventories.Count}/{inventoryObjects.Count} shelves.");
     }
 
     public GameObject SearchShelvesWithProduct(ItemObject item)
@@ -83,6 +83,7 @@ public class ShelvesManager : MonoBehaviour
         foreach (GameObject shelf in shelves)
         {
             ItemValue itemValue = shelf.GetComponent<ItemValue>();
+            float score = itemValue.baseValue * impulsiveBuying.posterMultiplier;
             total += itemValue.totalValue;
         }
 
@@ -98,7 +99,7 @@ public class ShelvesManager : MonoBehaviour
         foreach (GameObject shelf in shelves)
         {
             ItemValue itemValue = shelf.GetComponent<ItemValue>();
-            float visibility = itemValue.totalValue * impulsiveBuying.noOfPosters;
+            float visibility = itemValue.totalValue;
             total += visibility;
         }
 

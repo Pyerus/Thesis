@@ -2,17 +2,18 @@ using UnityEngine;
 
 public class NPCData : MonoBehaviour
 {
-    // new string[] { "Algorithm", "NPC", "Item", "Quantity", "Listed or Impulsive", "Item Value", "Position Multiplier", "Promotion Multiplier", "Visibility", "Layout", "Number of Posters", "Promotional Score" }
-    public string algorithm; //
+    // new string[] { "Algorithm", "NPC", "Item", "Quantity", "Listed or Impulsive", "Item Value", "Base Value", "Position Multiplier", "Promotion Multiplier", "Visibility", "Layout", "Number of Posters", "Promotional Score" }
+    public Algo algorithm; //
     public int npc; //
     public ItemObject item; //
     public int quantity; //
     public ListOrImpulse listOrImpulse; //
     public float itemValue; //
+    public float baseValue; //
     public float positionMultiplier; //
     public float promotionMultiplier; //
-    public float visibilityScore; //
-    public float layoutScore; //
+    public float visibilityScore; 
+    public float layoutScore; 
     public int numOfPosters;
     public float promoScore;
 
@@ -33,15 +34,16 @@ public class NPCData : MonoBehaviour
     }
 
     // Called everytime the NPC takes an item.
-    public void NewItem(ProductEntry entry, ListOrImpulse _listOrImpulse, float _itemValue, float _positionMultiplier)
+    public void NewItem(ProductEntry entry, ListOrImpulse _listOrImpulse, float _itemValue, float _baseValue, float _positionMultiplier)
     {
         item = entry.product;
         quantity = entry.quantity;
         listOrImpulse = _listOrImpulse;
         itemValue = _itemValue;
+        baseValue = _baseValue;
         positionMultiplier = _positionMultiplier;
-        promotionMultiplier = 1f + (0.05f * impulsiveBuying.noOfPosters);
-        visibilityScore = _itemValue * _positionMultiplier * (1 - impulsiveBuying.nullChance);
+        promotionMultiplier = impulsiveBuying.posterMultiplier;
+        visibilityScore = _itemValue * impulsiveBuying.posterMultiplier;
         layoutScore = shelvesManager.CalculateLayoutScore();
         numOfPosters = impulsiveBuying.noOfPosters;
         promoScore = shelvesManager.CalculatePromotionScore();
@@ -54,17 +56,18 @@ public class NPCData : MonoBehaviour
     {
         writer.AppendRow(
             algorithm,
-            npc.ToString(),
+            npc,
             item.name,
-            quantity.ToString(),
-            listOrImpulse.ToString(),
-            itemValue.ToString(),
-            positionMultiplier.ToString(),
-            promotionMultiplier.ToString(),
-            visibilityScore.ToString(),
-            layoutScore.ToString(),
-            numOfPosters.ToString(),
-            promoScore.ToString()
+            quantity,
+            listOrImpulse,
+            itemValue,
+            baseValue,
+            positionMultiplier,
+            promotionMultiplier,
+            visibilityScore,
+            layoutScore,
+            numOfPosters,
+            promoScore
             );
     }
 }

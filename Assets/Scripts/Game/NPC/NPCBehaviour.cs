@@ -43,7 +43,8 @@ public class NPCBehaviour : MonoBehaviour
 
         // Record item data.
         ItemValue value = shelf.GetComponent<ItemValue>();
-        npcData.NewItem(new ProductEntry(itemObject, product.amount), listOrImpulse, value.baseValue, value.multiplier);
+        float itemValue = value.GetItemValue(itemObject);
+        npcData.NewItem(new ProductEntry(itemObject, product.amount), listOrImpulse, itemValue, value.baseValue, value.multiplier);
     }
     
     // When the NPC reaches the counter, check out.

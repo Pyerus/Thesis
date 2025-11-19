@@ -12,7 +12,10 @@ public class Waypoint : MonoBehaviour
         grid = GameObject.FindGameObjectWithTag("Grid").GetComponent<WorldGrid>();
         position = transform.position;
 
+        grid.UpdateCostsAround(position, 3, 8);
+
         SetToUnoccupied();
+        SetDefaultVisibility();
     }
 
     public void SetToOccupied()
@@ -23,7 +26,15 @@ public class Waypoint : MonoBehaviour
     public void SetToUnoccupied()
     {
         isOccupied = false;
+    }
 
+    public void SetDefaultVisibility()
+    {
+        grid.UpdateCostsAround(position, 2, 7);
+    }
+
+    public void IncreaseVisibility()
+    {
         grid.UpdateCostsAround(position, 2, 5);
     }
 }

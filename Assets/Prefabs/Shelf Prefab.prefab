@@ -6228,9 +6228,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1fffb0288546e842bf4a2297579324b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  waypoint: {fileID: 7306176287079822383}
   idealItems: []
-  baseValue: 1
-  multiplier: 5
+  baseValue: 10
+  multiplier: 3
+  totalValue: 0
 --- !u!114 &3677370470587054647
 MonoBehaviour:
   m_ObjectHideFlags: 0

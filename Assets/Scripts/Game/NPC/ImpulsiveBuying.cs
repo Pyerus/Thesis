@@ -17,6 +17,7 @@ public class ImpulsiveBuying : MonoBehaviour
     private Dictionary<ItemObject, float> itemMultipliers = new();
 
     public int noOfPosters = 0;
+    public float posterMultiplier = 1;
 
 
     /// Call this method to check if the NPC decides to buy impulsively.
@@ -38,14 +39,6 @@ public class ImpulsiveBuying : MonoBehaviour
         if (inventory == null)
             return null;
 
-        // ideal items definition
-        ItemObject[] idealItems = shelf.GetComponent<ItemValue>().idealItems;
-        float idealItemMultiplier = shelf.GetComponent<ItemValue>().multiplier;
-
-        // items currently on the shelf
-        List<ItemObject> shelfItems = inventory.GetItemsInShelf();
-        float normalMultiplier = shelf.GetComponent<ItemValue>().baseValue;
-
         // --- chance to return null ---
         if (Random.value < nullChance)
         {
@@ -53,14 +46,16 @@ public class ImpulsiveBuying : MonoBehaviour
             return null;
         }
 
+        // items currently on the shelf
+        ItemValue itemValue = shelf.GetComponent<ItemValue>();
+        List<ItemObject> shelfItems = inventory.GetItemsInShelf();
+
         // --- Build weighted list ---
         List<(ItemObject item, float weight)> weightedItems = new List<(ItemObject, float)>();
 
         foreach (var item in shelfItems)
         {
-            float weight = normalMultiplier;
-            if (idealItems.Contains(item))
-                weight = idealItemMultiplier;
+            float weight = itemValue.GetItemValue(item);
 
             weightedItems.Add((item, weight));
         }
@@ -117,6 +112,7 @@ public class ImpulsiveBuying : MonoBehaviour
             return;
 
         noOfPosters = postersBought;
+        posterMultiplier = 1 + (postersBought * 0.05f);
 
         // Base start value
         float baseNullChance = 0.30f;
