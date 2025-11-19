@@ -142,4 +142,14 @@ public class MenuButtons : MonoBehaviour
         mainCamera.transform.position = targetPos;
         mainCamera.fieldOfView = targetFOV;
     }
+
+
+    /////////////////////////////////////////////////////////////////////
+    // BUG FIX ----------------------------------------------------------
+    /////////////////////////////////////////////////////////////////////
+
+    private void OnDisable()
+    {
+        StopAllCoroutines();
+    }
 }

@@ -76,6 +76,16 @@ public class NPCSpawner : MonoBehaviour
             yield return new WaitForSeconds(interval);
         }
     }
+
+
+    /////////////////////////////////////////////////////////////////////
+    // BUG FIX ----------------------------------------------------------
+    /////////////////////////////////////////////////////////////////////
+
+    private void OnDisable()
+    {
+        StopAllCoroutines();
+    }
 }
 
 public enum Algo

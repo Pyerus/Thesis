@@ -50,6 +50,7 @@ public class PopInAnimation : MonoBehaviour
     
     private void OnDisable()
     {
+        StopAllCoroutines();
         Debug.Log($"{gameObject.name} - OnDisable called at time: {Time.time}");
     }
 
@@ -96,4 +97,5 @@ public class PopInAnimation : MonoBehaviour
         transform.localScale = targetScale;
         Debug.Log($"{gameObject.name} - PopIn complete, FINAL scale: {transform.localScale}");
     }
+
 }

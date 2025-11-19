@@ -360,6 +360,16 @@ public class PathfindModified : MonoBehaviour
 
         return true;
     }
+
+
+    /////////////////////////////////////////////////////////////////////
+    // BUG FIX ----------------------------------------------------------
+    /////////////////////////////////////////////////////////////////////
+
+    private void OnDisable()
+    {
+        StopAllCoroutines();
+    }
 }
 
 public enum ListOrImpulse

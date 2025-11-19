@@ -10,7 +10,7 @@ public class CamDragRotate : MonoBehaviour
     Vector2 rotation;
     float speed = 0.5f;
 
-    private void Awake()
+    private void OnEnable()
     {
         pressed.Enable();
         axis.Enable();
@@ -30,5 +30,16 @@ public class CamDragRotate : MonoBehaviour
             transform.Rotate(Vector3.up, rotation.x, Space.World);
             yield return null;
         }
+    }
+
+    /////////////////////////////////////////////////////////////////////
+    // BUG FIX ----------------------------------------------------------
+    /////////////////////////////////////////////////////////////////////
+
+    private void OnDisable()
+    {
+        pressed?.Disable();
+        axis?.Disable();
+        StopAllCoroutines();
     }
 }

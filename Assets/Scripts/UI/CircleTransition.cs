@@ -47,4 +47,9 @@ public class CircleTransition : MonoBehaviour
     {
         StartCoroutine(FillCircle(0f));
     }
+
+    private void OnDisable()
+    {
+        StopAllCoroutines();
+    }
 }

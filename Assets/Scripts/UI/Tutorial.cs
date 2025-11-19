@@ -104,4 +104,14 @@ public class Tutorial : MonoBehaviour
             Debug.Log("Teleporting to MainMenuScene");
         }
     }
+
+
+    /////////////////////////////////////////////////////////////////////
+    // BUG FIX ----------------------------------------------------------
+    /////////////////////////////////////////////////////////////////////
+
+    private void OnDisable()
+    {
+        StopAllCoroutines();
+    }
 }
