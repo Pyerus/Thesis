@@ -9,11 +9,11 @@ EditorBuildSettings:
     path: Assets/Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 1
-    path: Assets/Scenes/TutorialScene.unity
-    guid: 02006770a59e3804fbb0e40398b1ae89
-  - enabled: 1
     path: Assets/Scenes/MainMenuScene.unity
     guid: 5a2d0d0e4951ae543b2c08d9caf61862
+  - enabled: 1
+    path: Assets/Scenes/TutorialScene.unity
+    guid: 02006770a59e3804fbb0e40398b1ae89
   - enabled: 1
     path: Assets/Scenes/StandardDijkstra.unity
     guid: 2fbfe350301e87d47946af3f7e934b20

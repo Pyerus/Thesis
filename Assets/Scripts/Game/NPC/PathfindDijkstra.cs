@@ -107,7 +107,7 @@ public class PathfindDijkstra : MonoBehaviour
         if (currentShelf == null)
         {
             Debug.LogWarning("No shelf found for product: " + item.name);
-            return GetCheckoutOrExitWaypoint();
+            return null;
         }
 
         return currentShelf.transform.Find("Waypoint").gameObject;
