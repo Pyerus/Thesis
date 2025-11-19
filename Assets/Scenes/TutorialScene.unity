@@ -3852,7 +3852,7 @@ Transform:
   m_GameObject: {fileID: 105778371}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.95, y: 0.99, z: -17.73}
+  m_LocalPosition: {x: -3.95, y: 0.99, z: -21.23072}
   m_LocalScale: {x: 3.48, y: 2, z: 1.32}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -22782,7 +22782,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d8fa644b8f894f04981b93c90926af4c, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -8.566969
+      value: -12.06769
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d8fa644b8f894f04981b93c90926af4c, type: 3}
       propertyPath: m_LocalRotation.w
@@ -23822,7 +23822,7 @@ Transform:
   m_GameObject: {fileID: 593177519}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.441, y: 1.995, z: -17.73}
+  m_LocalPosition: {x: -4.441, y: 1.995, z: -21.23072}
   m_LocalScale: {x: 2.5, y: 0.01, z: 1.32}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -26299,7 +26299,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &667210129
 RectTransform:
   m_ObjectHideFlags: 0
@@ -53676,7 +53676,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 6fe97056ec246344e8de44f05a534f1c, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -9.6439705
+      value: -13.144691
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 6fe97056ec246344e8de44f05a534f1c, type: 3}
       propertyPath: m_LocalRotation.w
@@ -57868,6 +57868,7 @@ MonoBehaviour:
   timerText: {fileID: 371207094}
   DayText: {fileID: 1528689230}
   nextDayWindow: {fileID: 943139925}
+  EndGameWindow: {fileID: 0}
   Calendar: {fileID: 324473851}
   nextDayButton: {fileID: 812898640}
   CalendarButton: {fileID: 2082894784}
@@ -57876,6 +57877,9 @@ MonoBehaviour:
   moneyManager: {fileID: 1515530485}
   itemsSoldText: {fileID: 794812705}
   totalEarnedText: {fileID: 441755211}
+  finalItemsSoldText: {fileID: 0}
+  finalTotalEarnedText: {fileID: 0}
+  returnToMenuButton: {fileID: 0}
 --- !u!114 &1556143117
 MonoBehaviour:
   m_ObjectHideFlags: 0
