@@ -6,7 +6,6 @@ using TMPro;
 public class NPCSpawner : MonoBehaviour
 {
     public Algo algorithm;
-    public TextMeshProUGUI npcCounter;
     public GameObject spawnPoint;
     public GameObject[] npcPrefabs;
     float spawnInterval = 1f;
@@ -26,11 +25,6 @@ public class NPCSpawner : MonoBehaviour
 
         if (OpenStore != null)
             OpenStore.onClick.AddListener(OnOpenStoreClicked);
-    }
-
-    private void Update()
-    {
-        npcCounter.text = "NPC: " + spawnCount;
     }
 
     private void OnOpenStoreClicked()
