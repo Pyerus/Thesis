@@ -41,7 +41,7 @@ public class NPCSpawner : MonoBehaviour
         {
             // Logic to OPEN the store
             buttonText.text = "Close";
-            StartCoroutine(SpawnNPC(spawnInterval, npcPrefabs));
+            StartCoroutine(SpawnNPC(npcPrefabs));
         }
         else
         {
@@ -58,10 +58,12 @@ public class NPCSpawner : MonoBehaviour
         StopAllCoroutines();
     }
 
-    public IEnumerator SpawnNPC(float interval, GameObject[] npcPrefabs)
+    public IEnumerator SpawnNPC(GameObject[] npcPrefabs)
     {
         while (storeOpen)
         {
+            float interval = Random.Range(1f, 5f);
+            
             spawnCount = GameObject.FindGameObjectsWithTag("NPC").Length;
 
             if (spawnCount < spawnLimit)

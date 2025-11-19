@@ -319,7 +319,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   seeker: {fileID: 4455167432338267119}
   target: {fileID: 8409919623625568995}
-  moveSpeed: 10
+  moveSpeed: 8
   searchRadius: 3
 --- !u!114 &3473537007164329348
 MonoBehaviour:
@@ -424,6 +424,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfc5d768eef67af4c83f448e550e5134, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NPCData
+  algorithm: 0
+  npc: 0
+  item: {fileID: 0}
+  quantity: 0
+  listOrImpulse: 0
+  itemValue: 0
+  baseValue: 0
+  positionMultiplier: 0
+  promotionMultiplier: 0
+  visibilityScore: 0
+  layoutScore: 0
+  numOfPosters: 0
+  promoScore: 0
 --- !u!1001 &7809781130431113500
 PrefabInstance:
   m_ObjectHideFlags: 0

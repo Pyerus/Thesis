@@ -318,7 +318,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PathfindModified
   seeker: {fileID: 4455167432338267119}
   target: {fileID: 8409919623625568995}
-  moveSpeed: 10
+  moveSpeed: 8
   searchRadius: 3
   newRandomTarget: 20
   newNeighbor: 20
