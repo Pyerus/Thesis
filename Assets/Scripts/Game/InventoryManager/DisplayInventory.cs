@@ -15,7 +15,7 @@ public class DisplayInventory : MonoBehaviour
     private TierManager.ShelfType currentShelfType;
     void Start()
     {
-        CreateDisplay();
+        //CreateDisplay();
     }
 
     void Update()

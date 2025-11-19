@@ -16,18 +16,16 @@ public class PosterShopButton : MonoBehaviour
     {
         button = GetComponent<Button>();
     }
-
-    void Start()
-    {
-        purchasedPosters = FindFirstObjectByType<PurchasedPosters>();
-        CheckIfPurchased();
-    }
     
     void OnEnable()
     {
+        purchasedPosters = FindFirstObjectByType<PurchasedPosters>();
+
         if (purchasedPosters != null)
         {
             purchasedPosters.OnPosterPurchased += HandlePosterPurchase;
+
+            CheckIfPurchased();
         }
     }
 
