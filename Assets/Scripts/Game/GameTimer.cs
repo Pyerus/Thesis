@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameTimer : MonoBehaviour
 {
@@ -177,10 +178,11 @@ public class GameTimer : MonoBehaviour
                 finalTotalEarnedText.text = $"TOTAL EARNED: ₱{totalEarnedOverall:F2}";
         }
     }
-    
+
     public void ReturnToMainMenu()
     {
-        Debug.Log("Play Tutorial.");
+        Debug.Log("Back to main menu");
+        Time.timeScale = 1f;
         CircleTransition.Instance.TransitionToScene("MainMenuScene");
     }
 
