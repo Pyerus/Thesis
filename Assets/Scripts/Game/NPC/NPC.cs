@@ -3,7 +3,7 @@ using UnityEngine;
 public class NPC : MonoBehaviour
 {
     [SerializeField] float LifeSpan = 0f;
-    [SerializeField] float MaxLifeSpan = 298f;
+    [SerializeField] float MaxLifeSpan = 15f;
     public static bool StoreClosed = false;
 
     void Update()
