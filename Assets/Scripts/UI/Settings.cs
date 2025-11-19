@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class Settings : MonoBehaviour
 {
@@ -76,6 +77,25 @@ public class Settings : MonoBehaviour
         isMenuOpen = true;
     }
 
+    public void ReconnectMainMenuButtons()
+    {
+        // Find the button again inside the Main Menu scene
+        var FindButton = GameObject.Find("SettingsBut"); // exact GameObject name
+        if (FindButton == null)
+        {
+            Debug.LogWarning("Settings Button not found in Main Menu.");
+            return;
+        }
+
+        settingsButton = FindButton;
+
+        var button = settingsButton.GetComponent<UnityEngine.UI.Button>();
+        button.onClick.RemoveAllListeners();
+        button.onClick.AddListener(SettingsMenu);
+
+        Debug.Log("Settings Button in Main Menu reconnected.");
+    }
+
     public void SettingsBack()
     {
         if (settingsPanel == null || settingsBackButton == null)
@@ -115,5 +135,23 @@ public class Settings : MonoBehaviour
             creditsImage.SetActive(false);
             isCreditsOpen = false;
         Time.timeScale = 1f;
+    }
+
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (scene.name == "MainMenuScene")
+        {
+            ReconnectMainMenuButtons();
+        }
     }
 }
