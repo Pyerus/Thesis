@@ -24,6 +24,8 @@ public class ItemCounter : MonoBehaviour
 
     void Start()
     {
+        purchasedPosters = FindFirstObjectByType<PurchasedPosters>();
+
         counts = new int[countTexts.Length];
         UpdateAllTexts();
     }

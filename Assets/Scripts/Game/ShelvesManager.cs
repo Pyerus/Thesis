@@ -84,7 +84,7 @@ public class ShelvesManager : MonoBehaviour
         {
             ItemValue itemValue = shelf.GetComponent<ItemValue>();
             float score = itemValue.baseValue * impulsiveBuying.posterMultiplier;
-            total += itemValue.totalValue;
+            total += score;
         }
 
         return total;

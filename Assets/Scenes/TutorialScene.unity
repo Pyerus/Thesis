@@ -26004,6 +26004,7 @@ GameObject:
   - component: {fileID: 657182325}
   - component: {fileID: 657182324}
   - component: {fileID: 657182326}
+  - component: {fileID: 657182330}
   - component: {fileID: 657182327}
   - component: {fileID: 657182328}
   - component: {fileID: 657182329}
@@ -26088,6 +26089,7 @@ MonoBehaviour:
   nullChance: 0.3
   impulseCooldown: 1
   noOfPosters: 0
+  posterMultiplier: 1
 --- !u!114 &657182329
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26100,6 +26102,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df14ec0eb938a504f8796322c426d10c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CSVWriter
+--- !u!114 &657182330
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 657182323}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecbdeacf4a6fffa44a245d5fd1161db8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PurchasedPosters
+  boughtPosters: []
 --- !u!1 &657869847
 GameObject:
   m_ObjectHideFlags: 0
@@ -64320,7 +64335,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e57264141f7fd74459875557f8b25ee9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  algorithm: Dijkstra
+  algorithm: 0
   npcCounter: {fileID: 870331583}
   spawnPoint: {fileID: 2095468927}
   npcPrefabs:

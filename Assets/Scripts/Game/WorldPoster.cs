@@ -14,7 +14,8 @@ public class WorldPoster : MonoBehaviour
 
     void Start()
     {
-       
+        purchasedPosters = FindFirstObjectByType<PurchasedPosters>();
+
         if (purchasedPosters.IsPurchased(posterID))
         {
             posterVisuals.SetActive(true);

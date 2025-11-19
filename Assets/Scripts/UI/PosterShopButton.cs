@@ -19,7 +19,7 @@ public class PosterShopButton : MonoBehaviour
 
     void Start()
     {
-        
+        purchasedPosters = FindFirstObjectByType<PurchasedPosters>();
         CheckIfPurchased();
     }
     

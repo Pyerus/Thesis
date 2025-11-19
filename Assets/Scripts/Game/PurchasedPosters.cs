@@ -1,8 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "PurchasedPosters", menuName = "Inventory/Purchased Posters List")]
-public class PurchasedPosters : ScriptableObject
+public class PurchasedPosters : MonoBehaviour
 {
     
     public event System.Action<ItemObject> OnPosterPurchased;
@@ -10,10 +9,9 @@ public class PurchasedPosters : ScriptableObject
    
     public List<ItemObject> boughtPosters = new List<ItemObject>();
 
-    private void OnEnable()
+    private void Start()
     {
-        if (impulsiveBuying == null)
-            impulsiveBuying = FindFirstObjectByType<ImpulsiveBuying>();
+        impulsiveBuying = FindFirstObjectByType<ImpulsiveBuying>();
     }
 
     public void MarkAsPurchased(ItemObject poster)
@@ -26,9 +24,8 @@ public class PurchasedPosters : ScriptableObject
 
             if (impulsiveBuying != null)
             {
-                Debug.Log("In MarkAsPurchased impulsiveBuying IF");
+                Debug.Log($"Poster Count: {boughtPosters.Count}");
                 impulsiveBuying.HasPosters = true;
-
                 impulsiveBuying.ReduceNullChance(boughtPosters.Count);
             }
         }

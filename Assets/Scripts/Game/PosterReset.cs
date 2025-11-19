@@ -8,6 +8,8 @@ public class PosterReset : MonoBehaviour
     
     void Awake()
     {
+        postersToReset = FindFirstObjectByType<PurchasedPosters>();
+
         #if UNITY_EDITOR
         if (postersToReset != null)
         {
